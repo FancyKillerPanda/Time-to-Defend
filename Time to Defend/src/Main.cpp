@@ -1,17 +1,21 @@
-#include <iostream>
-
 #include <SDL/SDL.h>
+
+#include "utils/Log.h"
 
 
 int main(int argc, char *argv[])
 {
+	Log::init();
+
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
-		std::cout << "Could not initialise SDL." << std::endl;
+		LOG_FATAL("Could not initialise SDL.");
 		return 1;
 	}
 
-	std::cin.get();
+	LOG_INFO("SDL initialised.");
+
+	system("PAUSE");
 
 	return 0;
 }
