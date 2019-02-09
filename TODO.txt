@@ -1,0 +1,27 @@
+----- GAME IDEAS -----
+Enemies travel along different paths.
+You can place towers on the map to shoot at them.
+Manual shooting, switch tower by pressing a key.
+Arrow keys to rotate the tower's gun.
+Potentially a low-framerate game where everything (incl. arrows) moves an integer number of tiles each frame.
+
+----- TODO -----
+- [PENDING] Link SDL2
+- [PENDING] Create window
+- [PENDING] Create state machine
+- [PENDING] Create state for gameplay
+- [PENDING] Draw out first map with paths for the enemies
+- [PENDING] Create a reader for map data
+- [PENDING] Draw different map tiles differently (probably colours)
+- [PENDING] Create enemy class that moves only on path tiles
+- [PENDING] Create player towers
+- [PENDING] Create arrow object
+- [PENDING] Implement using arrow keys to rotate tower
+- [PENDING] Implement using space to shoot an arrow
+- [PENDING] Implement arrow collision detection
+- [PENDING] Remove enemy when arrow collides with it
+- [PENDING] Add game over screen
+- [PENDING] Add completed level screen
+- [PENDING] Add start menu
+- [PENDING] Add second level
+- [PENDING] Transition to second level if first passed
