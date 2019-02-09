@@ -1,0 +1,9 @@
+# Visual Studio Files
+.vs/
+
+# Build Output
+bin-int/
+
+# Debugging Files
+*.ilk
+*.pdb
