@@ -1,6 +1,11 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
 #include <SDL/SDL.h>
+
+#include "state/BaseGameState.h"
 
 
 class Game
@@ -15,6 +20,8 @@ private:
 	SDL_Window *m_Window = nullptr;
 	SDL_Renderer *m_Renderer = nullptr;
 
+	std::vector<std::unique_ptr<GameState>> m_GameStates;
+
 private:
 	void handleEvents();
 	void update();
@@ -25,4 +32,7 @@ public:
 	~Game();
 
 	void run();
+
+	void pushState(std::unique_ptr<GameState> state);
+	void popState();
 };

@@ -83,17 +83,71 @@ void Game::handleEvents()
 		{
 		case SDL_QUIT:
 			m_Running = false;
+			break;
+
+		default:
+			if (m_GameStates.empty())
+			{
+				LOG_WARNING("Could not handle events for game state (empty stack).");
+			}
+
+			else
+			{
+				m_GameStates.back()->handleEvent(event);
+			}
+
+			break;
 		}
 	}
 }
 
 void Game::update()
 {
+	if (m_GameStates.empty())
+	{
+		LOG_WARNING("Could not update game state (empty stack).");
+	}
+
+	else
+	{
+		m_GameStates.back()->update();
+	}
 }
 
 void Game::draw()
 {
 	SDL_RenderClear(m_Renderer);
 
+	if (m_GameStates.empty())
+	{
+		LOG_WARNING("Could not draw game state (empty stack).");
+	}
+
+	else
+	{
+		m_GameStates.back()->draw();
+	}
+
 	SDL_RenderPresent(m_Renderer);
+}
+
+
+void Game::pushState(std::unique_ptr<GameState> state)
+{
+	m_GameStates.emplace_back(std::move(state));
+	m_GameStates.back()->onEnter();
+}
+
+void Game::popState()
+{
+	if (m_GameStates.empty())
+	{
+		LOG_WARNING("Tried to pop GameState off empty stack.");
+	}
+
+	else
+	{
+		m_GameStates.back()->onExit();
+		m_GameStates.pop_back();
+	}
 }
