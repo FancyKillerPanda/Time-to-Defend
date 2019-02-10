@@ -11,6 +11,7 @@ Game::Game()
 	{
 		LOG_FATAL("Could not initialise SDL.");
 		m_Running = false;
+		return;
 	}
 
 	LOG_INFO("SDL initialised.");
@@ -21,7 +22,10 @@ Game::Game()
 	{
 		LOG_FATAL("Could not create SDL window.");
 		m_Running = false;
+		return;
 	}
+
+	LOG_INFO("Created SDL window.");
 
 	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -29,7 +33,10 @@ Game::Game()
 	{
 		LOG_FATAL("Could not create SDL renderer.");
 		m_Running = false;
+		return;
 	}
+
+	LOG_INFO("Created SDL renderer.");
 }
 
 Game::~Game()
