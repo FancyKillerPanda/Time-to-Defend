@@ -1,6 +1,8 @@
 #include "Game.h"
 
 #include "utils/Log.h"
+#include "state/BaseGameState.h"
+#include "state/GameplayState.h"
 
 
 Game::Game()
@@ -37,6 +39,9 @@ Game::Game()
 	}
 
 	LOG_INFO("Created SDL renderer.");
+
+	std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
+	pushState(std::move(gameplayState));
 }
 
 Game::~Game()
