@@ -1,21 +1,15 @@
-#include <SDL/SDL.h>
-
-#include "utils/Log.h"
+#include "Game.h"
 
 
 int main(int argc, char *argv[])
 {
-	Log::init();
+	Game *timeToDefend = new Game();
+	timeToDefend->run();
+	delete timeToDefend;
 
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
-	{
-		LOG_FATAL("Could not initialise SDL.");
-		return 1;
-	}
-
-	LOG_INFO("SDL initialised.");
-
+#ifdef _DEBUG
 	system("PAUSE");
+#endif
 
 	return 0;
 }

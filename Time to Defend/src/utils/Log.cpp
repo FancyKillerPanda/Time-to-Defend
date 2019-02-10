@@ -10,5 +10,5 @@ void Log::init()
 	spdlog::set_pattern("%^[%T] %n: %v%$");
 	s_Logger->set_level(spdlog::level::trace);
 
-	LOG_TRACE("Logger initialised.");
+	LOG_INFO("Logger initialised.");
 }
