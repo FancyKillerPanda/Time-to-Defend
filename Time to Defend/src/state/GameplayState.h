@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseGameState.h"
+#include "gfx/Map.h"
 
 
 enum class GameLevel
@@ -13,6 +14,8 @@ class GameplayState : public GameState
 {
 private:
 	GameLevel m_GameLevel;
+
+	Map m_CurrentMap;
 
 public:
 	void onEnter() override;

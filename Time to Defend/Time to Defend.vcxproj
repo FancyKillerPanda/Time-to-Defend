@@ -90,15 +90,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\gfx\Map.cpp" />
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\gfx\Map.h" />
+    <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\utils\Log.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\maps\Level_1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
