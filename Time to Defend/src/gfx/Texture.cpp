@@ -39,6 +39,8 @@ void Texture::load(const char* filepath, SDL_Renderer* const renderer)
 		return;
 	}
 
+	m_Loaded = true;
+
 	LOG_INFO("Created texture.");
 }
 

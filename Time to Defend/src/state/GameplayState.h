@@ -1,8 +1,10 @@
 #pragma once
 
+#include <vector>
+
 #include "BaseGameState.h"
 #include "gfx/Map.h"
-#include "gfx/Texture.h"
+#include "entities/Enemy.h"
 
 
 enum class GameLevel
@@ -17,7 +19,7 @@ private:
 	GameLevel m_GameLevel;
 
 	Map m_CurrentMap;
-	Texture m_TestTexture;
+	std::vector<Enemy> m_Enemies;
 
 public:
 	void onEnter() override;

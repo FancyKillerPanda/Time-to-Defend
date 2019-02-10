@@ -6,7 +6,7 @@
 void GameplayState::onEnter()
 {
 	m_CurrentMap.load("res/maps/Level_1.txt");
-	m_TestTexture.load("res/txrs/Test.png", s_Game->getRenderer());
+	m_Enemies.emplace_back(s_Game, 4, 0);
 }
 
 void GameplayState::onExit()
@@ -24,5 +24,9 @@ void GameplayState::update()
 void GameplayState::draw()
 {
 	m_CurrentMap.draw(s_Game->getRenderer());
-	SDL_RenderCopy(s_Game->getRenderer(), m_TestTexture.getTexture(), nullptr, &m_TestTexture.getRect());
+
+	for (Enemy& enemy : m_Enemies)
+	{
+		enemy.draw();
+	}
 }
