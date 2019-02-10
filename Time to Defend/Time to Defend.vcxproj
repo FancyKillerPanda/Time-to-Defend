@@ -63,7 +63,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -85,12 +85,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\gfx\Map.cpp" />
+    <ClCompile Include="src\gfx\Texture.cpp" />
     <ClCompile Include="src\state\BaseGameState.cpp" />
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
@@ -99,6 +100,7 @@
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\gfx\Map.h" />
+    <ClInclude Include="src\gfx\Texture.h" />
     <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\state\GameplayState.h" />

@@ -2,6 +2,7 @@
 
 #include "BaseGameState.h"
 #include "gfx/Map.h"
+#include "gfx/Texture.h"
 
 
 enum class GameLevel
@@ -16,6 +17,7 @@ private:
 	GameLevel m_GameLevel;
 
 	Map m_CurrentMap;
+	Texture m_TestTexture;
 
 public:
 	void onEnter() override;
