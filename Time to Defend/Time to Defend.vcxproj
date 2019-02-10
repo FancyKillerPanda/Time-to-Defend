@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\gfx\Map.cpp" />
+    <ClCompile Include="src\state\BaseGameState.cpp" />
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />

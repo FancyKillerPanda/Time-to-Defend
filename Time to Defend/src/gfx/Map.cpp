@@ -1,6 +1,5 @@
 #include "Map.h"
 
-#include <iostream>
 #include <fstream>
 
 #include "utils/Log.h"
@@ -52,14 +51,4 @@ void Map::load(const char *filepath)
 	}
 
 	LOG_INFO("Created map (filepath: {0}).", filepath);
-
-	for (unsigned int ro = 0; ro < NUM_OF_CELLS_Y; ro++)
-	{
-		for (unsigned int co = 0; co < NUM_OF_CELLS_X; co++)
-		{
-			std::cout << m_Data[ro][co];
-		}
-
-		std::cout << std::endl;
-	}
 }
