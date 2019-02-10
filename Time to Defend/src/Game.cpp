@@ -41,6 +41,11 @@ Game::Game()
 
 Game::~Game()
 {
+	for (unsigned int i = 0; i < m_GameStates.size(); i++)
+	{
+		popState();
+	}
+
 	if (m_Renderer != nullptr)
 	{
 		SDL_DestroyRenderer(m_Renderer);
