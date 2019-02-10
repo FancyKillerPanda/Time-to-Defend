@@ -7,10 +7,14 @@
 
 Map::Map()
 {
+	m_CellRect.w = CELL_SIZE;
+	m_CellRect.h = CELL_SIZE;
 }
 
 Map::Map(const char *filepath)
 {
+	m_CellRect.w = CELL_SIZE;
+	m_CellRect.h = CELL_SIZE;
 	load(filepath);
 }
 
@@ -51,4 +55,28 @@ void Map::load(const char *filepath)
 	}
 
 	LOG_INFO("Created map (filepath: {0}).", filepath);
+}
+
+void Map::draw(SDL_Renderer *renderer)
+{
+	for (unsigned int row = 0; row < NUM_OF_CELLS_Y; row++)
+	{
+		for (unsigned int col = 0; col < NUM_OF_CELLS_X; col++)
+		{
+			m_CellRect.x = col * CELL_SIZE;
+			m_CellRect.y = row * CELL_SIZE;
+
+			if (m_Data[row][col] == '.')
+			{
+				SDL_SetRenderDrawColor(renderer, 0, 127, 0, 255);
+			}
+
+			else
+			{
+				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+			}
+
+			SDL_RenderFillRect(renderer, &m_CellRect);
+		}
+	}
 }

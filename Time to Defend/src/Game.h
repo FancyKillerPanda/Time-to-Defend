@@ -35,4 +35,6 @@ public:
 
 	void pushState(std::unique_ptr<GameState> state);
 	void popState();
+
+	SDL_Renderer *getRenderer() { return m_Renderer; }
 };

@@ -1,5 +1,7 @@
 #include "GameplayState.h"
 
+#include "Game.h"
+
 
 void GameplayState::onEnter()
 {
@@ -20,4 +22,5 @@ void GameplayState::update()
 
 void GameplayState::draw()
 {
+	m_CurrentMap.draw(s_Game->getRenderer());
 }

@@ -127,6 +127,7 @@ void Game::update()
 
 void Game::draw()
 {
+	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
 	SDL_RenderClear(m_Renderer);
 
 	if (m_GameStates.empty())
