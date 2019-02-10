@@ -6,13 +6,13 @@ Arrow keys to rotate the tower's gun.
 Potentially a low-framerate game where everything (incl. arrows) moves an integer number of tiles each frame.
 
 ----- TODO -----
-- [PENDING] Link SDL2
-- [PENDING] Create window
-- [PENDING] Create state machine
-- [PENDING] Create state for gameplay
-- [PENDING] Draw out first map with paths for the enemies
-- [PENDING] Create a reader for map data
-- [PENDING] Draw different map tiles differently (probably colours)
+- [DONE] Link SDL2
+- [DONE] Create window
+- [DONE] Create state machine
+- [DONE] Create state for gameplay
+- [DONE] Draw out first map with paths for the enemies
+- [DONE] Create a reader for map data
+- [DONE] Draw different map tiles differently (probably colours)
 - [PENDING] Create enemy class that moves only on path tiles
 - [PENDING] Create player towers
 - [PENDING] Create arrow object
