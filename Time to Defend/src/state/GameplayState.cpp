@@ -12,7 +12,7 @@ void GameplayState::onExit()
 {
 }
 
-void GameplayState::handleEvent(SDL_Event &event)
+void GameplayState::handleEvent(SDL_Event& event)
 {
 }
 

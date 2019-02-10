@@ -11,7 +11,7 @@ Map::Map()
 	m_CellRect.h = CELL_SIZE;
 }
 
-Map::Map(const char *filepath)
+Map::Map(const char* filepath)
 {
 	m_CellRect.w = CELL_SIZE;
 	m_CellRect.h = CELL_SIZE;
@@ -19,7 +19,7 @@ Map::Map(const char *filepath)
 }
 
 
-void Map::load(const char *filepath)
+void Map::load(const char* filepath)
 {
 	unsigned int row = 0;
 	unsigned int col = 0;
@@ -57,7 +57,7 @@ void Map::load(const char *filepath)
 	LOG_INFO("Created map (filepath: {0}).", filepath);
 }
 
-void Map::draw(SDL_Renderer *renderer)
+void Map::draw(SDL_Renderer* renderer)
 {
 	for (unsigned int row = 0; row < NUM_OF_CELLS_Y; row++)
 	{

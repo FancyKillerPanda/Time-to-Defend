@@ -5,7 +5,7 @@
 
 Game *GameState::s_Game;
 
-void GameState::init(Game *const game)
+void GameState::init(Game* const game)
 {
 	s_Game = game;
 	LOG_INFO("Game state initialised.");

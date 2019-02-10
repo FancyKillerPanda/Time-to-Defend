@@ -21,7 +21,7 @@ public:
 	void onEnter() override;
 	void onExit() override;
 
-	void handleEvent(SDL_Event &event) override;
+	void handleEvent(SDL_Event& event) override;
 	void update() override;
 	void draw() override;
 };

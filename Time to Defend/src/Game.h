@@ -15,10 +15,10 @@ private:
 
 	unsigned int m_WindowWidth = 960;
 	unsigned int m_WindowHeight = 540;
-	const char *m_WindowTitle = "Time to Defend!";
+	const char* m_WindowTitle = "Time to Defend!";
 
-	SDL_Window *m_Window = nullptr;
-	SDL_Renderer *m_Renderer = nullptr;
+	SDL_Window* m_Window = nullptr;
+	SDL_Renderer* m_Renderer = nullptr;
 
 	std::vector<std::unique_ptr<GameState>> m_GameStates;
 
@@ -36,5 +36,5 @@ public:
 	void pushState(std::unique_ptr<GameState> state);
 	void popState();
 
-	inline SDL_Renderer *const getRenderer() { return m_Renderer; }
+	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
 };

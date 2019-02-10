@@ -15,8 +15,8 @@ private:
 
 public:
 	Map();
-	Map(const char *filepath);
+	Map(const char* filepath);
 
-	void load(const char *filepath);
-	void draw(SDL_Renderer *renderer);
+	void load(const char* filepath);
+	void draw(SDL_Renderer* renderer);
 };
