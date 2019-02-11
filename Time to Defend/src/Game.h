@@ -1,9 +1,6 @@
 #pragma once
 
-#include <memory>
-#include <vector>
-
-#include <SDL/SDL.h>
+#include "pch.h"
 
 #include "state/BaseGameState.h"
 

@@ -59,6 +59,8 @@
       <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\spdlog\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,6 +81,8 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -93,6 +97,10 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\gfx\Map.cpp" />
     <ClCompile Include="src\gfx\Texture.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\state\BaseGameState.cpp" />
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
@@ -103,6 +111,7 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\gfx\Map.h" />
     <ClInclude Include="src\gfx\Texture.h" />
+    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\state\GameplayState.h" />

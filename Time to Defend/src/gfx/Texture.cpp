@@ -1,7 +1,6 @@
-#include "Texture.h"
+#include "pch.h"
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include "Texture.h"
 
 #include "utils/Log.h"
 

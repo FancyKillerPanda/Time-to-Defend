@@ -1,8 +1,6 @@
 #pragma once
 
-#include <array>
-
-#include <SDL/SDL.h>
+#include "pch.h"
 
 #include "Settings.h"
 
