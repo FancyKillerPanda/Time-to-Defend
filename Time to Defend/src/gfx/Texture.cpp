@@ -17,13 +17,17 @@ Texture::~Texture()
 		SDL_DestroyTexture(m_Texture);
 		m_Texture = nullptr;
 
-		LOG_INFO("Destroyed texture.");
+		LOG_INFO("Destroyed texture (filepath: {0}).", m_Filepath);
 	}
 }
 
 
 void Texture::load(const char* filepath, SDL_Renderer* const renderer)
 {
+#ifdef _DEBUG
+	m_Filepath = filepath;
+#endif
+
 	m_Texture = IMG_LoadTexture(renderer, filepath);
 
 	if (m_Texture == nullptr)

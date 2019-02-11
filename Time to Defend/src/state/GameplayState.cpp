@@ -43,7 +43,7 @@ void GameplayState::draw()
 
 void GameplayState::spawnEnemy()
 {
-#pragma warning(suppress(4267))
+#pragma warning(suppress: 4267)
 	std::pair<unsigned int, unsigned int> spawnPos = m_CurrentMap.getSpawnCoords()[Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1)];
 	m_Enemies.emplace_back(new Enemy(s_Game, spawnPos.first, spawnPos.second));
 }

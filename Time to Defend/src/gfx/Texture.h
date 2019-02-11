@@ -11,6 +11,10 @@ private:
 
 	bool m_Loaded = false;
 
+#ifdef _DEBUG
+	const char* m_Filepath;
+#endif
+
 public:
 	Texture() = default;
 	Texture(const char* filepath, SDL_Renderer* const renderer);

@@ -18,9 +18,18 @@ Map::Map(const char* filepath)
 	load(filepath);
 }
 
+Map::~Map()
+{
+	LOG_INFO("Destroyed map (filepath: {0}).", m_Filepath);
+}
+
 
 void Map::load(const char* filepath)
 {
+#ifdef _DEBUG
+	m_Filepath = filepath;
+#endif
+
 	unsigned int row = 0;
 	unsigned int col = 0;
 
