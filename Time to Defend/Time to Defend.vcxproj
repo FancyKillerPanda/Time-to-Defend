@@ -105,6 +105,7 @@
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\utils\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\Enemy.h" />
@@ -116,6 +117,7 @@
     <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\utils\Log.h" />
+    <ClInclude Include="src\utils\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\maps\Level_1.txt" />

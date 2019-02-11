@@ -5,6 +5,7 @@
 #include <fstream>
 #include <memory>
 #include <utility>
+#include <random>
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>

@@ -3,6 +3,7 @@
 #include "Game.h"
 
 #include "utils/Log.h"
+#include "utils/Random.h"
 #include "state/BaseGameState.h"
 #include "state/GameplayState.h"
 
@@ -10,6 +11,7 @@
 Game::Game()
 {
 	Log::init();
+	Random::init();
 	GameState::init(this);
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
