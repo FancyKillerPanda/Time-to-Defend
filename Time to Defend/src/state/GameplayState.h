@@ -21,6 +21,9 @@ private:
 	Map m_CurrentMap;
 	std::vector<Enemy*> m_Enemies;
 
+private:
+	void spawnEnemy();
+
 public:
 	void onEnter() override;
 	void onExit() override;

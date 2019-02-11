@@ -9,17 +9,8 @@
 void GameplayState::onEnter()
 {
 	m_CurrentMap.load("res/maps/Level_1.txt");
-	m_Enemies.emplace_back(new Enemy(s_Game, 4, 0));
 
-	printf("Int: %d\n", Random::randint(2, 4));
-	printf("Int: %d\n", Random::randint(2, 4));
-	printf("Int: %d\n", Random::randint(2, 4));
-	printf("Int: %d\n", Random::randint(2, 4));
-	printf("\n");
-	printf("Double: %f\n", Random::randdouble(2.0, 4.0));
-	printf("Double: %f\n", Random::randdouble(2.0, 4.0));
-	printf("Double: %f\n", Random::randdouble(2.0, 4.0));
-	printf("Double: %f\n", Random::randdouble(2.0, 4.0));
+	spawnEnemy();
 }
 
 void GameplayState::onExit()
@@ -47,4 +38,12 @@ void GameplayState::draw()
 	{
 		enemy->draw();
 	}
+}
+
+
+void GameplayState::spawnEnemy()
+{
+#pragma warning(suppress(4267))
+	std::pair<unsigned int, unsigned int> spawnPos = m_CurrentMap.getSpawnCoords()[Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1)];
+	m_Enemies.emplace_back(new Enemy(s_Game, spawnPos.first, spawnPos.second));
 }

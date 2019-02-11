@@ -74,11 +74,6 @@ void Map::draw(SDL_Renderer* renderer)
 				SDL_SetRenderDrawColor(renderer, 0, 127, 0, 255);
 			}
 
-			else if (m_Data[row][col] == 'S')
-			{
-				SDL_SetRenderDrawColor(renderer, 0, 127, 255, 255);
-			}
-
 			else
 			{
 				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
