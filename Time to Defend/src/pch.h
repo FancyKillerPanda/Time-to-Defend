@@ -4,6 +4,7 @@
 #include <array>
 #include <fstream>
 #include <memory>
+#include <utility>
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>

@@ -46,6 +46,9 @@ void Map::load(const char* filepath)
 
 			break;
 
+		case 'S':
+			m_SpawnCoords.emplace_back(row, col);
+
 		default:
 			m_Data[row][col] = c;
 			col += 1;
@@ -69,6 +72,11 @@ void Map::draw(SDL_Renderer* renderer)
 			if (m_Data[row][col] == '.')
 			{
 				SDL_SetRenderDrawColor(renderer, 0, 127, 0, 255);
+			}
+
+			else if (m_Data[row][col] == 'S')
+			{
+				SDL_SetRenderDrawColor(renderer, 0, 127, 255, 255);
 			}
 
 			else
