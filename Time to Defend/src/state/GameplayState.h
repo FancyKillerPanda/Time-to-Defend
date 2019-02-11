@@ -19,7 +19,7 @@ private:
 	GameLevel m_GameLevel;
 
 	Map m_CurrentMap;
-	std::vector<Enemy> m_Enemies;
+	std::vector<Enemy*> m_Enemies;
 
 public:
 	void onEnter() override;
