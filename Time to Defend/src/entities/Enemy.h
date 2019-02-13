@@ -15,19 +15,19 @@ private:
 	static int s_InstanceCount;
 	static const Map* s_Map;
 
-	unsigned int m_Row = 0;
-	unsigned int m_Col = 0;
+	int m_Row = 0;
+	int m_Col = 0;
 
-	unsigned int m_LastRow = 0;
-	unsigned int m_LastCol = 0;
+	int m_LastRow = 0;
+	int m_LastCol = 0;
 
 public:
 	Enemy() = default;
-	Enemy(Game* const game, const Map* map, unsigned int row, unsigned int col);
+	Enemy(Game* const game, const Map* map, int row, int col);
 	~Enemy();
 
 	void draw();
 
-	std::pair<unsigned int, unsigned int> getNextPosition();
+	std::pair<int, int> getNextPosition();
 	void move();
 };

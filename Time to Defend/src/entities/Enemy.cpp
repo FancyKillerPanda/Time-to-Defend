@@ -13,7 +13,7 @@ int Enemy::s_InstanceCount = 0;
 const Map* Enemy::s_Map = nullptr;
 
 
-Enemy::Enemy(Game* const game, const Map* map, unsigned int row, unsigned int col)
+Enemy::Enemy(Game* const game, const Map* map, int row, int col)
 	: m_Row(row), m_Col(col)
 {
 	s_Game = game;
@@ -52,7 +52,7 @@ void Enemy::draw()
 
 void Enemy::move()
 {
-	const std::pair<unsigned int, unsigned int> nextPos = getNextPosition();
+	const std::pair<int, int> nextPos = getNextPosition();
 
 	m_LastRow = m_Row;
 	m_LastCol = m_Col;
@@ -61,9 +61,9 @@ void Enemy::move()
 	m_Col = nextPos.second;
 }
 
-std::pair<unsigned int, unsigned int> Enemy::getNextPosition()
+std::pair<int, int> Enemy::getNextPosition()
 {
-	std::vector<std::pair<unsigned int, unsigned int>> possibleMoves;
+	std::vector<std::pair<int, int>> possibleMoves;
 
 	for (int rowDiff = -1; rowDiff <= 1; rowDiff++)
 	{
@@ -93,7 +93,7 @@ std::pair<unsigned int, unsigned int> Enemy::getNextPosition()
 
 	bool shouldRemove = false;
 
-	for (std::pair<unsigned int, unsigned int> pos : possibleMoves)
+	for (std::pair<int, int> pos : possibleMoves)
 	{
 		if (pos.first - m_Row == 0 ||
 			pos.second - m_Col == 0)
@@ -106,7 +106,7 @@ std::pair<unsigned int, unsigned int> Enemy::getNextPosition()
 	{
 		for (unsigned int i = 0; i < possibleMoves.size(); i++)
 		{
-			std::pair<unsigned int, unsigned int> pos = possibleMoves[i];
+			std::pair<int, int> pos = possibleMoves[i];
 
 			if (pos.first - m_Row != 0 &&
 				pos.second - m_Col != 0)

@@ -30,8 +30,8 @@ void Map::load(const char* filepath)
 	m_Filepath = filepath;
 #endif
 
-	unsigned int row = 0;
-	unsigned int col = 0;
+	int row = 0;
+	int col = 0;
 
 	std::ifstream mapFile(filepath);
 
@@ -74,9 +74,9 @@ void Map::load(const char* filepath)
 
 void Map::draw(SDL_Renderer* renderer)
 {
-	for (unsigned int row = 0; row < NUM_OF_CELLS_Y; row++)
+	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
 	{
-		for (unsigned int col = 0; col < NUM_OF_CELLS_X; col++)
+		for (int col = 0; col < NUM_OF_CELLS_X; col++)
 		{
 			m_CellRect.x = col * CELL_SIZE;
 			m_CellRect.y = row * CELL_SIZE;
