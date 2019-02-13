@@ -18,6 +18,9 @@ private:
 	unsigned int m_Row = 0;
 	unsigned int m_Col = 0;
 
+	unsigned int m_LastRow = 0;
+	unsigned int m_LastCol = 0;
+
 public:
 	Enemy() = default;
 	Enemy(Game* const game, const Map* map, unsigned int row, unsigned int col);

@@ -70,6 +70,12 @@ std::pair<unsigned int, unsigned int> Enemy::getNextPosition()
 				continue;
 			}
 
+			if (m_Row + rowDiff == m_LastRow &&
+				m_Col + colDiff == m_LastCol)
+			{
+				continue;
+			}
+
 			if (m_Row + rowDiff >= 0 &&
 				m_Col + colDiff >= 0 &&
 				m_Row + rowDiff < NUM_OF_CELLS_Y &&
