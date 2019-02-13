@@ -5,6 +5,7 @@
 #include "BaseGameState.h"
 #include "gfx/Map.h"
 #include "entities/Enemy.h"
+#include "utils/Timer.h"
 
 
 enum class GameLevel
@@ -20,6 +21,8 @@ private:
 
 	Map m_CurrentMap;
 	std::vector<Enemy*> m_Enemies;
+
+	Timer m_EnemyMoveTimer;
 
 private:
 	void spawnEnemy();

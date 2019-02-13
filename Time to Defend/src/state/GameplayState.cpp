@@ -11,11 +11,6 @@ void GameplayState::onEnter()
 	m_CurrentMap.load("res/maps/Level_1.txt");
 
 	spawnEnemy();
-
-	for (Enemy* enemy : m_Enemies)
-	{
-		enemy->move();
-	}
 }
 
 void GameplayState::onExit()
@@ -33,6 +28,15 @@ void GameplayState::handleEvent(SDL_Event& event)
 
 void GameplayState::update()
 {
+	if (m_EnemyMoveTimer.getElapsed() >= 500)
+	{
+		for (Enemy* enemy : m_Enemies)
+		{
+			enemy->move();
+		}
+
+		m_EnemyMoveTimer.reset();
+	}
 }
 
 void GameplayState::draw()
