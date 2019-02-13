@@ -66,24 +66,27 @@ Position Enemy::getNextPosition()
 	{
 		for (int colDiff = -1; colDiff <= 1; colDiff++)
 		{
+			int newRow = m_Position.row + rowDiff;
+			int newCol = m_Position.col + colDiff;
+
 			if (rowDiff == 0 && colDiff == 0)
 			{
 				continue;
 			}
 
-			if (m_Position.row + rowDiff == m_LastPosition.row &&
-				m_Position.col + colDiff == m_LastPosition.col)
+			if (newRow == m_LastPosition.row &&
+				newCol == m_LastPosition.col)
 			{
 				continue;
 			}
 
-			if (m_Position.row + rowDiff >= 0 &&
-				m_Position.col + colDiff >= 0 &&
-				m_Position.row + rowDiff < NUM_OF_CELLS_Y &&
-				m_Position.col + colDiff < NUM_OF_CELLS_X &&
-				(s_Map->getCoords()[m_Position.row + rowDiff][m_Position.col + colDiff] == 'P' || s_Map->getCoords()[m_Position.row + rowDiff][m_Position.col + colDiff] == 'S'))
+			if (newRow >= 0 &&
+				newCol >= 0 &&
+				newRow < NUM_OF_CELLS_Y &&
+				newCol < NUM_OF_CELLS_X &&
+				(s_Map->getCoords()[newRow][newCol] == 'P' || s_Map->getCoords()[newRow][newCol] == 'S'))
 			{
-				possibleMoves.emplace_back(m_Position.row + rowDiff, m_Position.col + colDiff);
+				possibleMoves.emplace_back(newRow, newCol);
 			}
 		}
 	}
