@@ -91,5 +91,30 @@ std::pair<unsigned int, unsigned int> Enemy::getNextPosition()
 		}
 	}
 
-	return possibleMoves[Random::randint(0, possibleMoves.size() - 1)];
+	bool shouldRemove = false;
+
+	for (std::pair<unsigned int, unsigned int> pos : possibleMoves)
+	{
+		if (pos.first - m_Row == 0 ||
+			pos.second - m_Col == 0)
+		{
+			shouldRemove = true;
+		}
+	}
+
+	if (shouldRemove)
+	{
+		for (unsigned int i = 0; i < possibleMoves.size(); i++)
+		{
+			std::pair<unsigned int, unsigned int> pos = possibleMoves[i];
+
+			if (pos.first - m_Row != 0 &&
+				pos.second - m_Col != 0)
+			{
+				possibleMoves.erase(possibleMoves.begin() + i);
+			}
+		}
+	}
+
+	return possibleMoves[Random::randint(0, (int) possibleMoves.size() - 1)];
 }
