@@ -58,6 +58,9 @@ void Map::load(const char* filepath)
 		case 'S':
 			m_SpawnCoords.emplace_back(row, col);
 
+		case 'P':
+			m_PathCoords.emplace_back(row, col);
+
 		default:
 			m_Data[row][col] = c;
 			col += 1;

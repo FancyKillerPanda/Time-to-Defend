@@ -11,6 +11,11 @@ void GameplayState::onEnter()
 	m_CurrentMap.load("res/maps/Level_1.txt");
 
 	spawnEnemy();
+
+	for (Enemy* enemy : m_Enemies)
+	{
+		enemy->move();
+	}
 }
 
 void GameplayState::onExit()
@@ -45,5 +50,5 @@ void GameplayState::spawnEnemy()
 {
 #pragma warning(suppress: 4267)
 	std::pair<unsigned int, unsigned int> spawnPos = m_CurrentMap.getSpawnCoords()[Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1)];
-	m_Enemies.emplace_back(new Enemy(s_Game, spawnPos.first, spawnPos.second));
+	m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, spawnPos.first, spawnPos.second));
 }

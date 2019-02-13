@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gfx/Texture.h"
+#include "gfx/Map.h"
 
 
 class Game;
@@ -12,14 +13,18 @@ private:
 	static Game* s_Game;
 	static Texture* s_Texture;
 	static int s_InstanceCount;
+	static const Map* s_Map;
 
 	unsigned int m_Row = 0;
 	unsigned int m_Col = 0;
 
 public:
 	Enemy() = default;
-	Enemy(Game* const game, unsigned int row, unsigned int col);
+	Enemy(Game* const game, const Map* map, unsigned int row, unsigned int col);
 	~Enemy();
 
 	void draw();
+
+	std::pair<unsigned int, unsigned int> getNextPosition();
+	void move();
 };
