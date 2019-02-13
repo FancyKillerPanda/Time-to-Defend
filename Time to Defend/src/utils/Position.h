@@ -32,9 +32,19 @@ public:
 		return Position(row - other.row, col - other.col);
 	}
 
-	inline void operator-=(const Position & other)
+	inline void operator-=(const Position& other)
 	{
 		row -= other.row;
 		col -= other.col;
+	}
+
+	inline bool operator==(const Position& other) const
+	{
+		return (row == other.row) && (col == other.col);
+	}
+
+	inline bool operator!=(const Position& other) const
+	{
+		return !(*this == other);
 	}
 };

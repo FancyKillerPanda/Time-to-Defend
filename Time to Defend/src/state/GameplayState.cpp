@@ -31,9 +31,17 @@ void GameplayState::update()
 {
 	if (m_EnemyMoveTimer.getElapsed() >= 500)
 	{
-		for (Enemy* enemy : m_Enemies)
+		for (unsigned int i = 0; i < m_Enemies.size(); i++)
 		{
-			enemy->move();
+			Enemy* enemy = m_Enemies[i];
+
+			if (!enemy->move())
+			{
+				delete enemy;
+				enemy = nullptr;
+
+				m_Enemies.erase(m_Enemies.begin() + i);
+			}
 		}
 
 		m_EnemyMoveTimer.reset();

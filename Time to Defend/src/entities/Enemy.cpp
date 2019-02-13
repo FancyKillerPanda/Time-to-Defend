@@ -50,16 +50,31 @@ void Enemy::draw()
 	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
 }
 
-void Enemy::move()
+bool Enemy::move()
 {
 	const Position& nextPos = getNextPosition();
 
+	if (nextPos == Position(-1, -1))
+	{
+		return false;
+	}
+
 	m_LastPosition = m_Position;
 	m_Position = nextPos;
+
+	hasMoved = true;
+
+	return true;
 }
 
 Position Enemy::getNextPosition()
 {
+	if (hasMoved &&
+		s_Map->getCoords()[m_Position.row][m_Position.col] == 'S')
+	{
+		return Position(-1, -1);
+	}
+
 	std::vector<Position> possibleMoves;
 
 	for (int rowDiff = -1; rowDiff <= 1; rowDiff++)

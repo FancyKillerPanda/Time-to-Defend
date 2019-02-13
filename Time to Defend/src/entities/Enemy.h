@@ -19,6 +19,8 @@ private:
 	Position m_Position = { 0, 0 };
 	Position m_LastPosition = { 0, 0 };
 
+	bool hasMoved = false;
+
 public:
 	Enemy() = default;
 	Enemy(Game* const game, const Map* map, Position position);
@@ -27,5 +29,5 @@ public:
 	void draw();
 
 	Position getNextPosition();
-	void move();
+	bool move();
 };
