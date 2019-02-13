@@ -53,6 +53,10 @@ void Enemy::draw()
 void Enemy::move()
 {
 	const std::pair<unsigned int, unsigned int> nextPos = getNextPosition();
+
+	m_LastRow = m_Row;
+	m_LastCol = m_Col;
+
 	m_Row = nextPos.first;
 	m_Col = nextPos.second;
 }
