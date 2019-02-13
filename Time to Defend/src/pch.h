@@ -6,6 +6,7 @@
 #include <memory>
 #include <utility>
 #include <random>
+#include <chrono>
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>

@@ -118,6 +118,7 @@
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\utils\Log.h" />
     <ClInclude Include="src\utils\Random.h" />
+    <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\maps\Level_1.txt" />
