@@ -13,8 +13,8 @@ int Enemy::s_InstanceCount = 0;
 const Map* Enemy::s_Map = nullptr;
 
 
-Enemy::Enemy(Game* const game, const Map* map, int row, int col)
-	: m_Row(row), m_Col(col)
+Enemy::Enemy(Game* const game, const Map* map, Position position)
+	: m_Position(position)
 {
 	s_Game = game;
 	s_Map = map;
@@ -45,25 +45,22 @@ Enemy::~Enemy()
 
 void Enemy::draw()
 {
-	s_Texture->setRect(m_Col * CELL_SIZE, m_Row * CELL_SIZE);
+	s_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
 }
 
 void Enemy::move()
 {
-	const std::pair<int, int> nextPos = getNextPosition();
+	const Position& nextPos = getNextPosition();
 
-	m_LastRow = m_Row;
-	m_LastCol = m_Col;
-
-	m_Row = nextPos.first;
-	m_Col = nextPos.second;
+	m_LastPosition = m_Position;
+	m_Position = nextPos;
 }
 
-std::pair<int, int> Enemy::getNextPosition()
+Position Enemy::getNextPosition()
 {
-	std::vector<std::pair<int, int>> possibleMoves;
+	std::vector<Position> possibleMoves;
 
 	for (int rowDiff = -1; rowDiff <= 1; rowDiff++)
 	{
@@ -74,29 +71,29 @@ std::pair<int, int> Enemy::getNextPosition()
 				continue;
 			}
 
-			if (m_Row + rowDiff == m_LastRow &&
-				m_Col + colDiff == m_LastCol)
+			if (m_Position.row + rowDiff == m_LastPosition.row &&
+				m_Position.col + colDiff == m_LastPosition.col)
 			{
 				continue;
 			}
 
-			if (m_Row + rowDiff >= 0 &&
-				m_Col + colDiff >= 0 &&
-				m_Row + rowDiff < NUM_OF_CELLS_Y &&
-				m_Col + colDiff < NUM_OF_CELLS_X &&
-				(s_Map->getCoords()[m_Row + rowDiff][m_Col + colDiff] == 'P' || s_Map->getCoords()[m_Row + rowDiff][m_Col + colDiff] == 'S'))
+			if (m_Position.row + rowDiff >= 0 &&
+				m_Position.col + colDiff >= 0 &&
+				m_Position.row + rowDiff < NUM_OF_CELLS_Y &&
+				m_Position.col + colDiff < NUM_OF_CELLS_X &&
+				(s_Map->getCoords()[m_Position.row + rowDiff][m_Position.col + colDiff] == 'P' || s_Map->getCoords()[m_Position.row + rowDiff][m_Position.col + colDiff] == 'S'))
 			{
-				possibleMoves.emplace_back(m_Row + rowDiff, m_Col + colDiff);
+				possibleMoves.emplace_back(m_Position.row + rowDiff, m_Position.col + colDiff);
 			}
 		}
 	}
 
 	bool shouldRemove = false;
 
-	for (std::pair<int, int> pos : possibleMoves)
+	for (const Position& pos : possibleMoves)
 	{
-		if (pos.first - m_Row == 0 ||
-			pos.second - m_Col == 0)
+		if (pos.row - m_Position.row == 0 ||
+			pos.col - m_Position.col == 0)
 		{
 			shouldRemove = true;
 		}
@@ -106,10 +103,10 @@ std::pair<int, int> Enemy::getNextPosition()
 	{
 		for (unsigned int i = 0; i < possibleMoves.size(); i++)
 		{
-			std::pair<int, int> pos = possibleMoves[i];
+			const Position& pos = possibleMoves[i];
 
-			if (pos.first - m_Row != 0 &&
-				pos.second - m_Col != 0)
+			if (pos.row - m_Position.row != 0 &&
+				pos.col - m_Position.col != 0)
 			{
 				possibleMoves.erase(possibleMoves.begin() + i);
 			}

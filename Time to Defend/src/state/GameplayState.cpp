@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include "utils/Random.h"
+#include "utils/Position.h"
 
 
 void GameplayState::onEnter()
@@ -53,6 +54,6 @@ void GameplayState::draw()
 void GameplayState::spawnEnemy()
 {
 #pragma warning(suppress: 4267)
-	std::pair<int, int> spawnPos = m_CurrentMap.getSpawnCoords()[Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1)];
-	m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, spawnPos.first, spawnPos.second));
+	Position spawnPos = m_CurrentMap.getSpawnCoords()[Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1)];
+	m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, spawnPos));
 }
