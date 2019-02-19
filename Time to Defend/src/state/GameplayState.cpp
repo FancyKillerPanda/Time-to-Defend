@@ -11,8 +11,10 @@ void GameplayState::onEnter()
 {
 	m_CurrentMap.load("res/maps/Level_1.txt");
 
-	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 9 }));
 	m_Arrows.emplace_back(new Arrow(s_Game, 100.0f, 100.0f, 45));
+
+	m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
+	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
 
 	spawnEnemy();
 }
@@ -51,6 +53,11 @@ void GameplayState::handleEvent(SDL_Event& event)
 
 		case SDLK_RIGHT:
 			m_TowerRotationVelocity = TOWER_ROTATION_SPEED;
+			break;
+
+		case SDLK_t:
+			m_CurrentTowerIndex = (m_CurrentTowerIndex + 1) % m_Towers.size();
+
 			break;
 		}
 
@@ -92,7 +99,7 @@ void GameplayState::update()
 		m_EnemyMoveTimer.reset();
 	}
 
-	m_Towers.back()->rotate(m_TowerRotationVelocity);
+	m_Towers[m_CurrentTowerIndex]->rotate(m_TowerRotationVelocity);
 
 	for (unsigned int i = 0; i < m_Arrows.size(); i++)
 	{

@@ -28,6 +28,7 @@ private:
 
 	Timer m_EnemyMoveTimer;
 
+	int m_CurrentTowerIndex = 0;
 	int m_TowerRotationVelocity = 0;
 
 private:
