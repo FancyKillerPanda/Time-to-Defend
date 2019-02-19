@@ -25,5 +25,6 @@ public:
 	~Arrow();
 
 	void draw();
+	bool update();
 	void move();
 };

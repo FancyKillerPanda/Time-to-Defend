@@ -62,9 +62,17 @@ void GameplayState::update()
 		m_EnemyMoveTimer.reset();
 	}
 
-	for (Arrow* const arrow : m_Arrows)
+	for (unsigned int i = 0; i < m_Arrows.size(); i++)
 	{
-		arrow->move();
+		Arrow* arrow = m_Arrows[i];
+
+		if (!arrow->update())
+		{
+			delete arrow;
+			arrow = nullptr;
+
+			m_Arrows.erase(m_Arrows.begin() + i);
+		}
 	}
 }
 

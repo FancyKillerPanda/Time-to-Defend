@@ -50,6 +50,18 @@ void Arrow::draw()
 	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
 }
 
+bool Arrow::update()
+{
+	move();
+
+	return !(
+		m_PixXPos < 0 ||
+		m_PixYPos < 0 ||
+		m_PixXPos > NUM_OF_CELLS_X * CELL_SIZE ||
+		m_PixYPos > NUM_OF_CELLS_Y * CELL_SIZE
+	);
+}
+
 void Arrow::move()
 {
 	m_PixXPos += ARROW_SPEED * (float) std::sin(getRadians(m_Direction));
