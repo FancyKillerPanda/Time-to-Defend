@@ -4,6 +4,7 @@
 
 #include "utils/Position.h"
 #include "gfx/Texture.h"
+#include "Arrow.h"
 
 
 class Game;
@@ -26,4 +27,5 @@ public:
 
 	void draw();
 	void rotate(int amountDeg);
+	Arrow* shoot();
 };

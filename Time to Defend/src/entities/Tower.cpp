@@ -54,3 +54,13 @@ void Tower::rotate(int amountDeg)
 	m_Direction += amountDeg;
 	m_Direction %= 360;
 }
+
+Arrow* Tower::shoot()
+{
+	return new Arrow(
+		s_Game,
+		(m_Position.col + 1) * CELL_SIZE,
+		(m_Position.row + 1) * CELL_SIZE,
+		m_Direction
+	);
+}

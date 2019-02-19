@@ -15,7 +15,7 @@ int Arrow::s_InstanceCount = 0;
 
 
 Arrow::Arrow(Game* const game, float pixXPos, float pixYPos, unsigned int direction)
-	: m_Direction((direction + 270) % 360), m_PixXPos(pixYPos), m_PixYPos(pixYPos)
+	: m_Direction((direction + 270) % 360), m_PixXPos(pixXPos), m_PixYPos(pixYPos)
 {
 	s_Game = game;
 
@@ -45,7 +45,7 @@ Arrow::~Arrow()
 
 void Arrow::draw()
 {
-	s_Texture->setRect((unsigned int) m_PixYPos, (unsigned int) m_PixXPos);
+	s_Texture->setRect((unsigned int) m_PixXPos, (unsigned int) m_PixYPos);
 
 	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
 }
@@ -64,6 +64,6 @@ bool Arrow::update()
 
 void Arrow::move()
 {
-	m_PixXPos += ARROW_SPEED * (float) std::sin(getRadians(m_Direction));
-	m_PixYPos += ARROW_SPEED * (float) std::cos(getRadians(m_Direction));
+	m_PixYPos += ARROW_SPEED * (float) std::sin(getRadians(m_Direction));
+	m_PixXPos += ARROW_SPEED * (float) std::cos(getRadians(m_Direction));
 }

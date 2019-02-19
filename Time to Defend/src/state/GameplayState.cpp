@@ -11,8 +11,6 @@ void GameplayState::onEnter()
 {
 	m_CurrentMap.load("res/maps/Level_1.txt");
 
-	m_Arrows.emplace_back(new Arrow(s_Game, 100.0f, 100.0f, 45));
-
 	m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
 	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
 
@@ -57,7 +55,10 @@ void GameplayState::handleEvent(SDL_Event& event)
 
 		case SDLK_t:
 			m_CurrentTowerIndex = (m_CurrentTowerIndex + 1) % m_Towers.size();
+			break;
 
+		case SDLK_SPACE:
+			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
 			break;
 		}
 
