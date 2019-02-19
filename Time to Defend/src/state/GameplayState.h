@@ -5,6 +5,7 @@
 #include "BaseGameState.h"
 #include "gfx/Map.h"
 #include "entities/Enemy.h"
+#include "entities/Tower.h"
 #include "utils/Timer.h"
 
 
@@ -21,6 +22,7 @@ private:
 
 	Map m_CurrentMap;
 	std::vector<Enemy*> m_Enemies;
+	std::vector<Tower*> m_Towers;
 
 	Timer m_EnemyMoveTimer;
 

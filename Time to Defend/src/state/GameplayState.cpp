@@ -11,6 +11,8 @@ void GameplayState::onEnter()
 {
 	m_CurrentMap.load("res/maps/Level_1.txt");
 
+	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 9 }));
+
 	spawnEnemy();
 }
 
@@ -20,6 +22,12 @@ void GameplayState::onExit()
 	{
 		delete enemy;
 		enemy = nullptr;
+	}
+
+	for (Tower* tower : m_Towers)
+	{
+		delete tower;
+		tower = nullptr;
 	}
 }
 
@@ -55,6 +63,11 @@ void GameplayState::draw()
 	for (Enemy* enemy : m_Enemies)
 	{
 		enemy->draw();
+	}
+
+	for (Tower* tower : m_Towers)
+	{
+		tower->draw();
 	}
 }
 

@@ -94,6 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\entities\Enemy.cpp" />
+    <ClCompile Include="src\entities\Tower.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\gfx\Map.cpp" />
     <ClCompile Include="src\gfx\Texture.cpp" />
@@ -109,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\Enemy.h" />
+    <ClInclude Include="src\entities\Tower.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\gfx\Map.h" />
     <ClInclude Include="src\gfx\Texture.h" />
@@ -126,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\txrs\Enemy.png" />
+    <Image Include="res\txrs\Tower.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
