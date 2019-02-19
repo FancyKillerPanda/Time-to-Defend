@@ -6,6 +6,7 @@
 #include "gfx/Map.h"
 #include "entities/Enemy.h"
 #include "entities/Tower.h"
+#include "entities/Arrow.h"
 #include "utils/Timer.h"
 
 
@@ -23,6 +24,7 @@ private:
 	Map m_CurrentMap;
 	std::vector<Enemy*> m_Enemies;
 	std::vector<Tower*> m_Towers;
+	std::vector<Arrow*> m_Arrows;
 
 	Timer m_EnemyMoveTimer;
 

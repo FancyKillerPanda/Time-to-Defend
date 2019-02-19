@@ -48,6 +48,9 @@
     <ClCompile Include="src\entities\Tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\entities\Arrow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\utils\Log.h">
@@ -89,6 +92,9 @@
     <ClInclude Include="src\entities\Tower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\entities\Arrow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\maps\Level_1.txt" />
@@ -98,6 +104,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\txrs\Tower.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\txrs\Arrow.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -93,6 +93,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\entities\Arrow.cpp" />
     <ClCompile Include="src\entities\Enemy.cpp" />
     <ClCompile Include="src\entities\Tower.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -109,6 +110,7 @@
     <ClCompile Include="src\utils\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\Arrow.h" />
     <ClInclude Include="src\entities\Enemy.h" />
     <ClInclude Include="src\entities\Tower.h" />
     <ClInclude Include="src\Game.h" />
@@ -127,6 +129,7 @@
     <Text Include="res\maps\Level_1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\txrs\Arrow.png" />
     <Image Include="res\txrs\Enemy.png" />
     <Image Include="res\txrs\Tower.png" />
   </ItemGroup>

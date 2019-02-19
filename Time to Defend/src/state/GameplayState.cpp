@@ -12,6 +12,7 @@ void GameplayState::onEnter()
 	m_CurrentMap.load("res/maps/Level_1.txt");
 
 	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 9 }));
+	m_Arrows.emplace_back(new Arrow(s_Game, 100.0f, 100.0f, 45));
 
 	spawnEnemy();
 }
@@ -28,6 +29,12 @@ void GameplayState::onExit()
 	{
 		delete tower;
 		tower = nullptr;
+	}
+
+	for (Arrow* arrow : m_Arrows)
+	{
+		delete arrow;
+		arrow = nullptr;
 	}
 }
 
@@ -68,6 +75,11 @@ void GameplayState::draw()
 	for (Tower* tower : m_Towers)
 	{
 		tower->draw();
+	}
+
+	for (Arrow* arrow : m_Arrows)
+	{
+		arrow->draw();
 	}
 }
 
