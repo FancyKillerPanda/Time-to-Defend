@@ -28,6 +28,8 @@ private:
 
 	Timer m_EnemyMoveTimer;
 
+	int m_TowerRotationVelocity = 0;
+
 private:
 	void spawnEnemy();
 
