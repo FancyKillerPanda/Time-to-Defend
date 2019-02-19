@@ -14,6 +14,8 @@ void GameplayState::onEnter()
 	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 9 }));
 	m_Arrows.emplace_back(new Arrow(s_Game, 100.0f, 100.0f, 45));
 
+	m_Towers[0]->rotate(45);
+
 	spawnEnemy();
 }
 

@@ -16,7 +16,8 @@ private:
 	static Texture* s_Texture;
 	static int s_InstanceCount;
 
-	Position m_Position;
+	Position m_Position = { 0, 0 };
+	unsigned int m_Direction = 0;
 
 public:
 	Tower() = default;
@@ -24,4 +25,5 @@ public:
 	~Tower();
 
 	void draw();
+	void rotate(int amountDeg);
 };

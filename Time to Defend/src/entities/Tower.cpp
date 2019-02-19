@@ -45,5 +45,12 @@ void Tower::draw()
 {
 	s_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
-	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
+	SDL_RenderCopyEx(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
+}
+
+void Tower::rotate(int amountDeg)
+{
+	m_Direction += 360;
+	m_Direction += amountDeg;
+	m_Direction %= 360;
 }
