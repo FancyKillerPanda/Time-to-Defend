@@ -2,8 +2,11 @@
 
 #include "Arrow.h"
 
+#include <cmath>
+
 #include "Game.h"
 #include "Settings.h"
+#include "utils/Maths.h"
 
 
 Game* Arrow::s_Game = nullptr;
@@ -45,4 +48,10 @@ void Arrow::draw()
 	s_Texture->setRect((unsigned int) m_PixYPos, (unsigned int) m_PixXPos);
 
 	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
+}
+
+void Arrow::move()
+{
+	m_PixXPos += ARROW_SPEED * (float) std::sin(getRadians(m_Direction));
+	m_PixYPos += ARROW_SPEED * (float) std::cos(getRadians(m_Direction));
 }

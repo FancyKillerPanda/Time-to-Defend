@@ -61,6 +61,11 @@ void GameplayState::update()
 
 		m_EnemyMoveTimer.reset();
 	}
+
+	for (Arrow* const arrow : m_Arrows)
+	{
+		arrow->move();
+	}
 }
 
 void GameplayState::draw()
