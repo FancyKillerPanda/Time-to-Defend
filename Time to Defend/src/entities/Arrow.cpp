@@ -15,7 +15,7 @@ int Arrow::s_InstanceCount = 0;
 
 
 Arrow::Arrow(Game* const game, float pixXPos, float pixYPos, unsigned int direction)
-	: m_Direction(direction), m_PixXPos(pixYPos), m_PixYPos(pixYPos)
+	: m_Direction((direction + 270) % 360), m_PixXPos(pixYPos), m_PixYPos(pixYPos)
 {
 	s_Game = game;
 
