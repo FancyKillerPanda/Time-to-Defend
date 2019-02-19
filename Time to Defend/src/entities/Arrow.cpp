@@ -25,14 +25,10 @@ Arrow::Arrow(Game* const game, float pixXPos, float pixYPos, unsigned int direct
 	}
 
 	s_InstanceCount += 1;
-
-	LOG_INFO("Created arrow.");
 }
 
 Arrow::~Arrow()
 {
-	LOG_INFO("Destroyed arrow.");
-
 	s_InstanceCount -= 1;
 
 	if (s_InstanceCount == 0)

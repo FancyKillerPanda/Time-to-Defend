@@ -125,14 +125,14 @@ void GameplayState::draw()
 		enemy->draw();
 	}
 
-	for (Tower* tower : m_Towers)
-	{
-		tower->draw();
-	}
-
 	for (Arrow* arrow : m_Arrows)
 	{
 		arrow->draw();
+	}
+
+	for (Tower* tower : m_Towers)
+	{
+		tower->draw();
 	}
 }
 
