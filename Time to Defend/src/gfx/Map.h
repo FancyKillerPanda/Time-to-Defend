@@ -9,9 +9,15 @@
 class Map
 {
 private:
+	// The cell data
 	std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y> m_Data = {};
+
+	// A vector of where possible spawn coordinates are
 	std::vector<Position> m_SpawnCoords = {};
+	// A vector of where path coordinates are
 	std::vector<Position> m_PathCoords = {};
+
+	// Used for drawing each cell
 	SDL_Rect m_CellRect;
 
 #ifdef _DEBUG

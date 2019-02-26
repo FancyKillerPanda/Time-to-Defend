@@ -33,8 +33,10 @@ void Map::load(const char* filepath)
 	int row = 0;
 	int col = 0;
 
+	// Opens the file to read it
 	std::ifstream mapFile(filepath);
 
+	// Could not open file
 	if (!mapFile)
 	{
 		LOG_FATAL("Failed to load map (filepath: {0}).", filepath);
@@ -43,8 +45,10 @@ void Map::load(const char* filepath)
 
 	char c;
 
+	// Does not skip whitespace
 	mapFile >> std::noskipws;
 
+	// Runs through each character
 	while (mapFile >> c)
 	{
 		switch (c)
@@ -57,9 +61,11 @@ void Map::load(const char* filepath)
 
 		case 'S':
 			m_SpawnCoords.emplace_back(row, col);
+			// No break here, spawn coordinates are always also path coordinates
 
 		case 'P':
 			m_PathCoords.emplace_back(row, col);
+			// No break here, path coordinates also need to be in the final data
 
 		default:
 			m_Data[row][col] = c;
@@ -78,9 +84,11 @@ void Map::draw(SDL_Renderer* renderer)
 	{
 		for (int col = 0; col < NUM_OF_CELLS_X; col++)
 		{
+			// Sets the position of the cell
 			m_CellRect.x = col * CELL_SIZE;
 			m_CellRect.y = row * CELL_SIZE;
 
+			// Sets the appropriate drawing colour
 			if (m_Data[row][col] == '.')
 			{
 				SDL_SetRenderDrawColor(renderer, 0, 127, 0, 255);
@@ -91,6 +99,7 @@ void Map::draw(SDL_Renderer* renderer)
 				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			}
 
+			// Draws the rectangle
 			SDL_RenderFillRect(renderer, &m_CellRect);
 		}
 	}
