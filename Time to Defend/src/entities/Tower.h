@@ -25,6 +25,10 @@ public:
 	~Tower();
 
 	void draw();
+
+	// Rotates the tower, input in degrees
 	void rotate(int amountDeg);
+
+	// Creates a new arrow and returns it
 	Arrow* shoot();
 };

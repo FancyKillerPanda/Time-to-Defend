@@ -17,6 +17,7 @@ Enemy::Enemy(Game* const game, const Map* map, Position position)
 	s_Game = game;
 	s_Map = map;
 
+	// Creates the texture and sets its rect
 	m_Texture = new Texture("res/txrs/Enemy.png", s_Game->getRenderer());
 	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
@@ -33,21 +34,26 @@ Enemy::~Enemy()
 
 void Enemy::draw()
 {
+	// Draws the enemy's texture to the screen
 	SDL_RenderCopy(s_Game->getRenderer(), m_Texture->getTexture(), nullptr, &m_Texture->getRect());
 }
 
 bool Enemy::move()
 {
+	// Gets the next position to move to
 	const Position& nextPos = getNextPosition();
 
+	// Enemy has finished moving
 	if (nextPos == Position(-1, -1))
 	{
 		return false;
 	}
 
+	// Last position and current position is updated
 	m_LastPosition = m_Position;
 	m_Position = nextPos;
 
+	// Sets the texture rect
 	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	hasMoved = true;
@@ -57,6 +63,7 @@ bool Enemy::move()
 
 Position Enemy::getNextPosition()
 {
+	// If the current position is a spawn point after the first move, stop moving
 	if (hasMoved &&
 		s_Map->getCoords()[m_Position.row][m_Position.col] == 'S')
 	{
@@ -72,17 +79,20 @@ Position Enemy::getNextPosition()
 			int newRow = m_Position.row + rowDiff;
 			int newCol = m_Position.col + colDiff;
 
+			// Would be same as current position
 			if (rowDiff == 0 && colDiff == 0)
 			{
 				continue;
 			}
 
+			// Would be same as last position
 			if (newRow == m_LastPosition.row &&
 				newCol == m_LastPosition.col)
 			{
 				continue;
 			}
 
+			// If the position is in bounds
 			if (newRow >= 0 &&
 				newCol >= 0 &&
 				newRow < NUM_OF_CELLS_Y &&
@@ -105,6 +115,7 @@ Position Enemy::getNextPosition()
 		}
 	}
 
+	// If there is a possible straight move, remove the diagonals
 	if (shouldRemove)
 	{
 		for (unsigned int i = 0; i < possibleMoves.size(); i++)
@@ -119,5 +130,6 @@ Position Enemy::getNextPosition()
 		}
 	}
 
+	// Returns a random move from the possible ones
 	return possibleMoves[Random::randint(0, (int) possibleMoves.size() - 1)];
 }

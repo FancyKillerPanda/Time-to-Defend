@@ -11,10 +11,14 @@ class Game;
 class Enemy
 {
 private:
+	// Game and Map are same for all enemies
 	static Game* s_Game;
 	static const Map* s_Map;
 
+	// Texture
 	Texture* m_Texture;
+
+	// Position and previous position
 	Position m_Position = { 0, 0 };
 	Position m_LastPosition = { 0, 0 };
 
@@ -27,7 +31,9 @@ public:
 
 	void draw();
 
+	// Gets the next available position
 	Position getNextPosition();
+	// Moves the enemy
 	bool move();
 
 	Texture* const getTexture() { return m_Texture; }
