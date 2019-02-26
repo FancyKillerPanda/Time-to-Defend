@@ -9,11 +9,13 @@ private:
 	static std::shared_ptr<spdlog::logger> s_Logger;
 
 public:
+	// Initialises the logger
 	static void init();
 	inline static std::shared_ptr<spdlog::logger>& getLogger() { return s_Logger; }
 };
 
 
+// Macros only defined when debugging symbols are on
 #ifdef _DEBUG
 
 #define LOG_TRACE(...)		Log::getLogger()->trace(__VA_ARGS__)

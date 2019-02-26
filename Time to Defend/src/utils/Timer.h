@@ -5,15 +5,18 @@
 
 class Timer
 {
+	// Avoids having to type out long name
 	using Clock = std::chrono::high_resolution_clock;
 
 private:
+	// Start time or time of last reset
 	Clock::time_point m_Start;
 
 public:
 	Timer()
 	{
-		m_Start = Clock::now();
+		// Starts the clock
+		reset();
 	}
 
 	void reset()
@@ -23,7 +26,9 @@ public:
 
 	double getElapsed()
 	{
+		// Gets the time difference
 		std::chrono::duration<double, std::milli> diff = Clock::now() - m_Start;
+		// Returns the difference as a number
 		return diff.count();
 	}
 };
