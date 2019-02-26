@@ -10,6 +10,7 @@
 #include "utils/Timer.h"
 
 
+// Possible levels for the game
 enum class GameLevel
 {
 	_1,
@@ -19,19 +20,27 @@ enum class GameLevel
 class GameplayState : public GameState
 {
 private:
+	// Current game level
 	GameLevel m_GameLevel;
 
+	// Current map being used
 	Map m_CurrentMap;
+
+	// Containers for sprites
 	std::vector<Enemy*> m_Enemies;
 	std::vector<Tower*> m_Towers;
 	std::vector<Arrow*> m_Arrows;
 
+	// Tracks time since last enemy move
 	Timer m_EnemyMoveTimer;
 
+	// Current tower
 	int m_CurrentTowerIndex = 0;
+	// Whether the tower is rotating
 	int m_TowerRotationVelocity = 0;
 
 private:
+	// Spawns a new enemy
 	void spawnEnemy();
 
 public:
