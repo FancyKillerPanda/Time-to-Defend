@@ -10,40 +10,25 @@
 
 
 Game* Arrow::s_Game = nullptr;
-Texture* Arrow::s_Texture = nullptr;
-int Arrow::s_InstanceCount = 0;
 
 
 Arrow::Arrow(Game* const game, float pixXPos, float pixYPos, unsigned int direction)
 	: m_Direction((direction + 270) % 360), m_PixXPos(pixXPos), m_PixYPos(pixYPos)
 {
 	s_Game = game;
-
-	if (s_InstanceCount == 0)
-	{
-		s_Texture = new Texture("res/txrs/Arrow.png", s_Game->getRenderer());
-	}
-
-	s_InstanceCount += 1;
+	m_Texture = new Texture("res/txrs/Arrow.png", s_Game->getRenderer());
 }
 
 Arrow::~Arrow()
 {
-	s_InstanceCount -= 1;
-
-	if (s_InstanceCount == 0)
-	{
-		delete s_Texture;
-		s_Texture = nullptr;
-	}
+	delete m_Texture;
+	m_Texture = nullptr;
 }
 
 
 void Arrow::draw()
 {
-	s_Texture->setRect((unsigned int) m_PixXPos, (unsigned int) m_PixYPos);
-
-	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
+	SDL_RenderCopy(s_Game->getRenderer(), m_Texture->getTexture(), nullptr, &m_Texture->getRect());
 }
 
 bool Arrow::update()
@@ -62,4 +47,6 @@ void Arrow::move()
 {
 	m_PixYPos += ARROW_SPEED * (float) std::sin(getRadians(m_Direction));
 	m_PixXPos += ARROW_SPEED * (float) std::cos(getRadians(m_Direction));
+
+	m_Texture->setRect((unsigned int) m_PixXPos, (unsigned int) m_PixYPos);
 }

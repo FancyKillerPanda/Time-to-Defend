@@ -8,8 +8,6 @@
 
 
 Game* Enemy::s_Game = nullptr;
-Texture* Enemy::s_Texture = nullptr;
-int Enemy::s_InstanceCount = 0;
 const Map* Enemy::s_Map = nullptr;
 
 
@@ -19,12 +17,8 @@ Enemy::Enemy(Game* const game, const Map* map, Position position)
 	s_Game = game;
 	s_Map = map;
 
-	if (s_InstanceCount == 0)
-	{
-		s_Texture = new Texture("res/txrs/Enemy.png", s_Game->getRenderer());
-	}
-
-	s_InstanceCount += 1;
+	m_Texture = new Texture("res/txrs/Enemy.png", s_Game->getRenderer());
+	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	LOG_INFO("Created enemy.");
 }
@@ -33,21 +27,13 @@ Enemy::~Enemy()
 {
 	LOG_INFO("Destroyed enemy.");
 
-	s_InstanceCount -= 1;
-
-	if (s_InstanceCount == 0)
-	{
-		delete s_Texture;
-		s_Texture = nullptr;
-	}
+	delete m_Texture;
+	m_Texture = nullptr;
 }
-
 
 void Enemy::draw()
 {
-	s_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
-
-	SDL_RenderCopy(s_Game->getRenderer(), s_Texture->getTexture(), nullptr, &s_Texture->getRect());
+	SDL_RenderCopy(s_Game->getRenderer(), m_Texture->getTexture(), nullptr, &m_Texture->getRect());
 }
 
 bool Enemy::move()
@@ -61,6 +47,8 @@ bool Enemy::move()
 
 	m_LastPosition = m_Position;
 	m_Position = nextPos;
+
+	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	hasMoved = true;
 

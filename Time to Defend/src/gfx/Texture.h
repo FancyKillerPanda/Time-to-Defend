@@ -6,6 +6,8 @@
 class Texture
 {
 private:
+	static std::unordered_map<const char*, std::pair<SDL_Texture*, unsigned int>> s_TextureCache;
+
 	SDL_Texture* m_Texture = nullptr;
 	SDL_Rect m_Rect = {};
 

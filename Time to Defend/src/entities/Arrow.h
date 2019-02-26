@@ -12,9 +12,8 @@ class Arrow
 {
 private:
 	static Game* s_Game;
-	static Texture* s_Texture;
-	static int s_InstanceCount;
 
+	Texture* m_Texture;
 	unsigned int m_Direction = 0;
 	float m_PixXPos = 0.0f;
 	float m_PixYPos = 0.0f;

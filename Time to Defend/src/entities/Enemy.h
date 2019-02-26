@@ -12,10 +12,9 @@ class Enemy
 {
 private:
 	static Game* s_Game;
-	static Texture* s_Texture;
-	static int s_InstanceCount;
 	static const Map* s_Map;
 
+	Texture* m_Texture;
 	Position m_Position = { 0, 0 };
 	Position m_LastPosition = { 0, 0 };
 

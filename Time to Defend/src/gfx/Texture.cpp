@@ -5,6 +5,9 @@
 #include "utils/Log.h"
 
 
+std::unordered_map<const char*, std::pair<SDL_Texture*, unsigned int>> Texture::s_TextureCache = {};
+
+
 Texture::Texture(const char* filepath, SDL_Renderer* const renderer)
 {
 	load(filepath, renderer);
@@ -12,10 +15,14 @@ Texture::Texture(const char* filepath, SDL_Renderer* const renderer)
 
 Texture::~Texture()
 {
-	if (m_Texture != nullptr)
+	s_TextureCache.find(m_Filepath)->second.second -= 1;
+
+	if (s_TextureCache.find(m_Filepath)->second.second == 0)
 	{
 		SDL_DestroyTexture(m_Texture);
 		m_Texture = nullptr;
+
+		s_TextureCache.erase(m_Filepath);
 
 		LOG_INFO("Destroyed texture (filepath: {0}).", m_Filepath);
 	}
@@ -24,27 +31,38 @@ Texture::~Texture()
 
 void Texture::load(const char* filepath, SDL_Renderer* const renderer)
 {
-#ifdef _DEBUG
 	m_Filepath = filepath;
-#endif
 
-	m_Texture = IMG_LoadTexture(renderer, filepath);
-
-	if (m_Texture == nullptr)
+	if (s_TextureCache.find(m_Filepath) != s_TextureCache.end())
 	{
-		LOG_FATAL("Could not load texture (filepath: {0}).\nSDLError: {1}", filepath, SDL_GetError());
-		return;
+		m_Texture = s_TextureCache.find(m_Filepath)->second.first;
+		s_TextureCache.find(m_Filepath)->second.second += 1;
 	}
 
-	if (SDL_QueryTexture(m_Texture, nullptr, nullptr, &m_Rect.w, &m_Rect.h) == -1)
+	else
 	{
-		LOG_FATAL("Texture is invalid (filepath: {0}).\nSDLError: {1}", filepath, SDL_GetError());
-		return;
+		m_Texture = IMG_LoadTexture(renderer, filepath);
+
+		if (m_Texture == nullptr)
+		{
+			LOG_FATAL("Could not load texture (filepath: {0}).\nSDLError: {1}", filepath, SDL_GetError());
+			return;
+		}
+
+		if (SDL_QueryTexture(m_Texture, nullptr, nullptr, &m_Rect.w, &m_Rect.h) == -1)
+		{
+			LOG_FATAL("Texture is invalid (filepath: {0}).\nSDLError: {1}", filepath, SDL_GetError());
+			return;
+		}
+
+		s_TextureCache.insert(std::pair<const char*, std::pair<SDL_Texture*, unsigned int>>(
+			m_Filepath, std::pair<SDL_Texture*, unsigned int>(m_Texture, 1)
+		));
+
+		LOG_INFO("Created texture (filepath: {0}).", m_Filepath);
 	}
 
 	m_Loaded = true;
-
-	LOG_INFO("Created texture.");
 }
 
 void Texture::setRect(unsigned int x, unsigned int y)

@@ -14,9 +14,8 @@ class Tower
 {
 private:
 	static Game* s_Game;
-	static Texture* s_Texture;
-	static int s_InstanceCount;
 
+	Texture* m_Texture;
 	Position m_Position = { 0, 0 };
 	unsigned int m_Direction = 0;
 
