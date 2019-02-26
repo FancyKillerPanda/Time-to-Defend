@@ -12,10 +12,7 @@ private:
 	SDL_Rect m_Rect = {};
 
 	bool m_Loaded = false;
-
-#ifdef _DEBUG
 	const char* m_Filepath;
-#endif
 
 public:
 	Texture() = default;
