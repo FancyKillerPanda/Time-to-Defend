@@ -119,7 +119,7 @@ void GameplayState::update()
 	{
 		Arrow* arrow = m_Arrows[arrowIndex];
 
-		for (unsigned int enemyIndex = 0; enemyIndex < m_Arrows.size(); enemyIndex++)
+		for (unsigned int enemyIndex = 0; enemyIndex < m_Enemies.size(); enemyIndex++)
 		{
 			Enemy* enemy = m_Enemies[enemyIndex];
 
