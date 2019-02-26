@@ -50,8 +50,8 @@ Arrow* Tower::shoot()
 	// Creates an arrow at the center of the tower
 	return new Arrow(
 		s_Game,
-		(m_Position.col + 1) * CELL_SIZE,
-		(m_Position.row + 1) * CELL_SIZE,
+		(float) ((m_Position.col + 1) * CELL_SIZE),
+		(float) ((m_Position.row + 1) * CELL_SIZE),
 		m_Direction
 	);
 }
