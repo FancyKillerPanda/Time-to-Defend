@@ -6,6 +6,7 @@
 
 
 class Game;
+class Enemy;
 
 
 class Arrow
@@ -26,4 +27,6 @@ public:
 	void draw();
 	bool update();
 	void move();
+
+	bool collidesWithEnemy(Enemy* enemy);
 };

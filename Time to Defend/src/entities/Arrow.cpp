@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "Arrow.h"
+#include "Enemy.h"
 
 #include <cmath>
 
@@ -49,4 +50,9 @@ void Arrow::move()
 	m_PixXPos += ARROW_SPEED * (float) std::cos(getRadians(m_Direction));
 
 	m_Texture->setRect((unsigned int) m_PixXPos, (unsigned int) m_PixYPos);
+}
+
+bool Arrow::collidesWithEnemy(Enemy* enemy)
+{
+	return SDL_HasIntersection(&m_Texture->getRect(), &enemy->getTexture()->getRect());
 }

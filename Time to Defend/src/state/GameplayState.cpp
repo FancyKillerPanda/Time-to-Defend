@@ -114,6 +114,29 @@ void GameplayState::update()
 			m_Arrows.erase(m_Arrows.begin() + i);
 		}
 	}
+
+	for (unsigned int arrowIndex = 0; arrowIndex < m_Arrows.size(); arrowIndex++)
+	{
+		Arrow* arrow = m_Arrows[arrowIndex];
+
+		for (unsigned int enemyIndex = 0; enemyIndex < m_Arrows.size(); enemyIndex++)
+		{
+			Enemy* enemy = m_Enemies[enemyIndex];
+
+			if (arrow->collidesWithEnemy(enemy))
+			{
+				delete arrow;
+				arrow = nullptr;
+
+				m_Arrows.erase(m_Arrows.begin() + arrowIndex);
+
+				delete enemy;
+				enemy = nullptr;
+
+				m_Enemies.erase(m_Enemies.begin() + enemyIndex);
+			}
+		}
+	}
 }
 
 void GameplayState::draw()

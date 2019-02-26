@@ -29,4 +29,6 @@ public:
 
 	Position getNextPosition();
 	bool move();
+
+	Texture* const getTexture() { return m_Texture; }
 };
