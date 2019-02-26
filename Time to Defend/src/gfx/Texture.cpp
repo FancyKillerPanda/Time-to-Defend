@@ -36,6 +36,8 @@ void Texture::load(const char* filepath, SDL_Renderer* const renderer)
 	if (s_TextureCache.find(m_Filepath) != s_TextureCache.end())
 	{
 		m_Texture = s_TextureCache.find(m_Filepath)->second.first;
+		SDL_QueryTexture(m_Texture, nullptr, nullptr, &m_Rect.w, &m_Rect.h);
+
 		s_TextureCache.find(m_Filepath)->second.second += 1;
 	}
 
