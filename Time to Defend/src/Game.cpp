@@ -10,10 +10,12 @@
 
 Game::Game()
 {
+	// Initialises other parts of the game
 	Log::init();
 	Random::init();
 	GameState::init(this);
 
+	// Initialises SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
 		LOG_FATAL("Could not initialise SDL.");
@@ -23,8 +25,10 @@ Game::Game()
 
 	LOG_INFO("SDL initialised.");
 
+	// Creates the window
 	m_Window = SDL_CreateWindow(m_WindowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_WindowWidth, m_WindowHeight, SDL_WINDOW_SHOWN);
 
+	// Error checking for window creation
 	if (m_Window == nullptr)
 	{
 		LOG_FATAL("Could not create SDL window.");
@@ -34,8 +38,10 @@ Game::Game()
 
 	LOG_INFO("Created SDL window.");
 
+	// Creates the renderer
 	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
+	// Error checking for renderer creation
 	if (m_Renderer == nullptr)
 	{
 		LOG_FATAL("Could not create SDL renderer.");
@@ -45,17 +51,23 @@ Game::Game()
 
 	LOG_INFO("Created SDL renderer.");
 
+	// Sets the clear colour
+	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
+
+	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 	pushState(std::move(gameplayState));
 }
 
 Game::~Game()
 {
+	// Empties the state stack
 	for (unsigned int i = 0; i < m_GameStates.size(); i++)
 	{
 		popState();
 	}
 
+	// Destroys the renderer
 	if (m_Renderer != nullptr)
 	{
 		SDL_DestroyRenderer(m_Renderer);
@@ -64,6 +76,7 @@ Game::~Game()
 		LOG_INFO("Destroyed SDL renderer.");
 	}
 
+	// Destroys the window
 	if (m_Window != nullptr)
 	{
 		SDL_DestroyWindow(m_Window);
@@ -72,6 +85,7 @@ Game::~Game()
 		LOG_INFO("Destroyed SDL window.");
 	}
 
+	// Terminates SDL
 	SDL_Quit();
 
 	LOG_INFO("Destroyed Game.");
@@ -79,6 +93,7 @@ Game::~Game()
 
 void Game::run()
 {
+	// Main game-loop
 	while (m_Running)
 	{
 		handleEvents();
@@ -101,6 +116,7 @@ void Game::handleEvents()
 			break;
 
 		default:
+			// Makes sure there is a state in the stack
 			if (m_GameStates.empty())
 			{
 				LOG_WARNING("Could not handle events for game state (empty stack).");
@@ -108,6 +124,7 @@ void Game::handleEvents()
 
 			else
 			{
+				// Lets the state handle the event
 				m_GameStates.back()->handleEvent(event);
 			}
 
@@ -118,6 +135,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	// Makes sure there is a state in the stack
 	if (m_GameStates.empty())
 	{
 		LOG_WARNING("Could not update game state (empty stack).");
@@ -125,15 +143,17 @@ void Game::update()
 
 	else
 	{
+		// Updates the state
 		m_GameStates.back()->update();
 	}
 }
 
 void Game::draw()
 {
-	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
+	// Clears the screen
 	SDL_RenderClear(m_Renderer);
 
+	// Makes sure there is a state in the stack
 	if (m_GameStates.empty())
 	{
 		LOG_WARNING("Could not draw game state (empty stack).");
@@ -141,6 +161,7 @@ void Game::draw()
 
 	else
 	{
+		// Lets the state draw what it needs to
 		m_GameStates.back()->draw();
 	}
 
@@ -151,11 +172,13 @@ void Game::draw()
 void Game::pushState(std::unique_ptr<GameState> state)
 {
 	m_GameStates.emplace_back(std::move(state));
+	// Sets up the state
 	m_GameStates.back()->onEnter();
 }
 
 void Game::popState()
 {
+	// Makes sure there is a state in the stack
 	if (m_GameStates.empty())
 	{
 		LOG_WARNING("Tried to pop GameState off empty stack.");
@@ -163,6 +186,7 @@ void Game::popState()
 
 	else
 	{
+		// Cleans up the state before popping
 		m_GameStates.back()->onExit();
 		m_GameStates.pop_back();
 	}
