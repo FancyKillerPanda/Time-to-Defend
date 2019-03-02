@@ -40,8 +40,8 @@ private:
 	int m_TowerRotationVelocity = 0;
 
 private:
-	// Spawns a new enemy
-	void spawnEnemy();
+	// Spawns a set of enemies
+	void spawnEnemies();
 
 public:
 	void onEnter() override;

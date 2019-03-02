@@ -16,8 +16,8 @@ void GameplayState::onEnter()
 	m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
 	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
 
-	// Creates an enemy
-	spawnEnemy();
+	// Creates the first set of enemies
+	spawnEnemies();
 }
 
 void GameplayState::onExit()
@@ -183,10 +183,32 @@ void GameplayState::draw()
 }
 
 
-void GameplayState::spawnEnemy()
+void GameplayState::spawnEnemies()
 {
-	// Suppresses conversion warning
-#pragma warning(suppress: 4267)
-	Position spawnPos = m_CurrentMap.getSpawnCoords()[Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1)];
-	m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, spawnPos));
+	// Stores which spawn positions have already been used
+	std::vector<int> usedIndices;
+
+	// Once for every spawn position
+	for (unsigned int i = 0; i < m_CurrentMap.getSpawnCoords().size(); i++)
+	{
+		int index;
+
+		while (true)
+		{
+			// Gets a spawn position index
+			index = Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1);
+
+			// Index not already used
+			if (std::find(usedIndices.begin(), usedIndices.end(), index) == usedIndices.end())
+			{
+				break;
+			}
+		}
+
+		// Suppresses conversion warning
+	#pragma warning(suppress: 4267)
+		// Creates the enemy
+		m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, m_CurrentMap.getSpawnCoords()[index]));
+		usedIndices.push_back(index);
+	}
 }
