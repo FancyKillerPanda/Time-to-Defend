@@ -39,9 +39,15 @@ private:
 	// Whether the tower is rotating
 	int m_TowerRotationVelocity = 0;
 
+	// Whether the game is over
+	bool m_GameOver = false;
+
 private:
 	// Spawns a set of enemies
 	void spawnEnemies();
+
+	// Ends the game
+	void endGame();
 
 public:
 	void onEnter() override;

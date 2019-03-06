@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "utils/Random.h"
 #include "utils/Position.h"
+#include "GameOverState.h"
 
 
 void GameplayState::onEnter()
@@ -101,13 +102,14 @@ void GameplayState::update()
 		{
 			Enemy* enemy = m_Enemies[i];
 
-			// Deletes the enemy if it has finished moving
+			// Game over state is pushed if enemy has finished moving
 			if (!enemy->move())
 			{
-				delete enemy;
-				enemy = nullptr;
+				LOG_TRACE("Game Over!");
+				m_GameOver = true;
 
-				m_Enemies.erase(m_Enemies.begin() + i);
+				endGame();
+				return;
 			}
 		}
 
@@ -153,6 +155,8 @@ void GameplayState::update()
 				enemy = nullptr;
 
 				m_Enemies.erase(m_Enemies.begin() + enemyIndex);
+
+				break;
 			}
 		}
 	}
@@ -211,4 +215,14 @@ void GameplayState::spawnEnemies()
 		m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, m_CurrentMap.getSpawnCoords()[index]));
 		usedIndices.push_back(index);
 	}
+}
+
+void GameplayState::endGame()
+{
+	// Pops this state off the Game's stack
+	s_Game->popState();
+
+	// Pushes the first state onto the stack
+	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>();
+	s_Game->pushState(std::move(gameOverState));
 }

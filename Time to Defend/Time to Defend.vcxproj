@@ -119,6 +119,7 @@
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\state\BaseGameState.h" />
+    <ClInclude Include="src\state\GameOverState.h" />
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\utils\Log.h" />
     <ClInclude Include="src\utils\Maths.h" />
