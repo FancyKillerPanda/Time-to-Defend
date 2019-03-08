@@ -11,6 +11,7 @@ class GameOverState : public GameState
 {
 private:
 	Text* m_GameOverText;
+	Text* m_InfoText;
 
 public:
 	void onEnter() override;
