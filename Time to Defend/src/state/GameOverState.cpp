@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include "Settings.h"
+#include "GameplayState.h"
 
 
 void GameOverState::onEnter()
@@ -20,6 +21,28 @@ void GameOverState::onExit()
 	m_GameOverText = nullptr;
 	delete m_InfoText;
 	m_InfoText = nullptr;
+}
+
+void GameOverState::handleEvent(SDL_Event& event)
+{
+	switch (event.type)
+	{
+	case SDL_KEYDOWN:
+		switch (event.key.keysym.sym)
+		{
+		case SDLK_r:
+			// Pops this state off the Game's stack
+			s_Game->popState();
+
+			// Pushes the gameplay state onto the stack
+			std::unique_ptr<GameState> gameOverState = std::make_unique<GameplayState>();
+			s_Game->pushState(std::move(gameOverState));
+
+			break;
+		}
+
+		break;
+	}
 }
 
 void GameOverState::draw()
