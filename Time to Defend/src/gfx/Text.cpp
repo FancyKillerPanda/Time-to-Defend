@@ -86,3 +86,12 @@ void Text::setSize(unsigned int size)
 	m_Size = size;
 	updateTexture();
 }
+
+void Text::draw(unsigned int x, unsigned int y)
+{
+	// Sets the text position
+	m_TextRect.x = x;
+	m_TextRect.y = y;
+
+	SDL_RenderCopy(m_Renderer, m_TextTexture, nullptr, &m_TextRect);
+}

@@ -36,5 +36,5 @@ public:
 	void setSize(unsigned int size);
 
 	// Draws the text to the renderer
-	void draw();
+	void draw(unsigned int x, unsigned int y);
 };
