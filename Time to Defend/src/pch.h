@@ -17,6 +17,7 @@
 // SDL2
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 
 // Spdlog
 #include <spdlog/spdlog.h>

@@ -10,3 +10,6 @@ constexpr unsigned int CELL_SIZE = 20;
 // Movement speeds
 constexpr unsigned int ARROW_SPEED = 2;
 constexpr int TOWER_ROTATION_SPEED = 3;
+
+// Font properties
+static const char* DEFAULT_FONT_PATH = "res/fonts/arial.ttf";
