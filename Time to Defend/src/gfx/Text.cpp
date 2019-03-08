@@ -14,7 +14,7 @@ Text::Text(const char* fontPath, const char* text, unsigned int size, SDL_Color 
 	// Error checking for font
 	if (m_Font == nullptr)
 	{
-		LOG_FATAL("Could not load font (filepath: {0}).\nSDLError: {1}", m_FontPath, SDL_GetError());
+		LOG_FATAL("Could not load font (filepath: {0}).\nSDLError: {1}.", m_FontPath, SDL_GetError());
 		return;
 	}
 
@@ -47,7 +47,7 @@ void Text::updateTexture()
 	// Error checking for text surface
 	if (textSurface == nullptr)
 	{
-		LOG_FATAL("Could not create text surface (filepath: {0}).\nSDLError: {1}", m_FontPath, SDL_GetError());
+		LOG_FATAL("Could not create text surface (filepath: {0}).\nSDLError: {1}.", m_FontPath, SDL_GetError());
 		return;
 	}
 
@@ -56,7 +56,7 @@ void Text::updateTexture()
 
 	if (m_TextTexture == nullptr)
 	{
-		LOG_FATAL("Could not create texture from surface for font (filepath: {0}).\nSDLError: {1}", m_FontPath, SDL_GetError());
+		LOG_FATAL("Could not create texture from surface for font (filepath: {0}).\nSDLError: {1}.", m_FontPath, SDL_GetError());
 		return;
 	}
 

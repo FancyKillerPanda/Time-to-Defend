@@ -55,14 +55,14 @@ void Texture::load(const char* filepath, SDL_Renderer* const renderer)
 		// Error checking for texture
 		if (m_Texture == nullptr)
 		{
-			LOG_FATAL("Could not load texture (filepath: {0}).\nSDLError: {1}", filepath, SDL_GetError());
+			LOG_FATAL("Could not load texture (filepath: {0}).\nSDLError: {1}.", filepath, SDL_GetError());
 			return;
 		}
 
 		// Checks for valid texture dimensions
 		if (SDL_QueryTexture(m_Texture, nullptr, nullptr, &m_Rect.w, &m_Rect.h) == -1)
 		{
-			LOG_FATAL("Texture is invalid (filepath: {0}).\nSDLError: {1}", filepath, SDL_GetError());
+			LOG_FATAL("Texture is invalid (filepath: {0}).\nSDLError: {1}.", filepath, SDL_GetError());
 			return;
 		}
 

@@ -18,7 +18,7 @@ Game::Game()
 	// Initialises SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
 	{
-		LOG_FATAL("Could not initialise SDL.");
+		LOG_FATAL("Could not initialise SDL.\nSDLError: {0}.", SDL_GetError());
 		m_Running = false;
 		return;
 	}
@@ -28,7 +28,7 @@ Game::Game()
 	// Initialises IMG
 	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
-		LOG_FATAL("Could not initialise IMG.");
+		LOG_FATAL("Could not initialise IMG.\nSDLError: {0}.", SDL_GetError());
 		m_Running = false;
 		return;
 	}
@@ -38,7 +38,7 @@ Game::Game()
 	// Initialises TTF
 	if (TTF_Init() != 0)
 	{
-		LOG_FATAL("Could not initialise TTF.");
+		LOG_FATAL("Could not initialise TTF.\nSDLError: {0}.", SDL_GetError());
 		m_Running = false;
 		return;
 	}
@@ -51,7 +51,7 @@ Game::Game()
 	// Error checking for window creation
 	if (m_Window == nullptr)
 	{
-		LOG_FATAL("Could not create SDL window.");
+		LOG_FATAL("Could not create SDL window.\nSDLError: {0}.", SDL_GetError());
 		m_Running = false;
 		return;
 	}
@@ -64,7 +64,7 @@ Game::Game()
 	// Error checking for renderer creation
 	if (m_Renderer == nullptr)
 	{
-		LOG_FATAL("Could not create SDL renderer.");
+		LOG_FATAL("Could not create SDL renderer.\nSDLError: {0}.", SDL_GetError());
 		m_Running = false;
 		return;
 	}
