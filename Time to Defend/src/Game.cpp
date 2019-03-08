@@ -25,6 +25,16 @@ Game::Game()
 
 	LOG_INFO("SDL initialised.");
 
+	// Initialises IMG
+	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+	{
+		LOG_FATAL("Could not initialise IMG.");
+		m_Running = false;
+		return;
+	}
+
+	LOG_INFO("IMG initialised.");
+
 	// Initialises TTF
 	if (TTF_Init() != 0)
 	{
