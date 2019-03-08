@@ -9,11 +9,6 @@
 #include "LevelPassedState.h"
 
 
-void GameplayState::onEnter()
-{
-
-}
-
 void GameplayState::onExit()
 {
 	// Destroys all enemies

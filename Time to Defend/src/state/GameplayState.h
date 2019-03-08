@@ -53,7 +53,6 @@ private:
 	void endGame();
 
 public:
-	void onEnter() override;
 	void onExit() override;
 
 	void handleEvent(SDL_Event& event) override;
