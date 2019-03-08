@@ -96,7 +96,7 @@ void GameplayState::handleEvent(SDL_Event& event)
 void GameplayState::update()
 {
 	// Moves each enemy after some time
-	if (m_EnemyMoveTimer.getElapsed() >= 500)
+	if (m_EnemyMoveTimer.getElapsed() >= 310)
 	{
 		for (unsigned int i = 0; i < m_Enemies.size(); i++)
 		{
@@ -199,7 +199,7 @@ void GameplayState::spawnEnemies()
 		while (true)
 		{
 			// Gets a spawn position index
-			index = Random::randint(0, m_CurrentMap.getSpawnCoords().size() - 1);
+			index = Random::randint(0, (int) m_CurrentMap.getSpawnCoords().size() - 1);
 
 			// Index not already used
 			if (std::find(usedIndices.begin(), usedIndices.end(), index) == usedIndices.end())
