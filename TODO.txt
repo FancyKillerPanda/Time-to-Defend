@@ -13,14 +13,15 @@ Potentially a low-framerate game where everything (incl. arrows) moves an intege
 - [DONE] Draw out first map with paths for the enemies
 - [DONE] Create a reader for map data
 - [DONE] Draw different map tiles differently (probably colours)
-- [PENDING] Create enemy class that moves only on path tiles
-- [PENDING] Create player towers
-- [PENDING] Create arrow object
-- [PENDING] Implement using arrow keys to rotate tower
-- [PENDING] Implement using space to shoot an arrow
-- [PENDING] Implement arrow collision detection
-- [PENDING] Remove enemy when arrow collides with it
-- [PENDING] Add game over screen
+- [DONE] Create enemy class that moves only on path tiles
+- [DONE] Create player towers
+- [DONE] Create arrow object
+- [DONE] Implement using arrow keys to rotate tower
+- [DONE] Implement using space to shoot an arrow
+- [DONE] Implement arrow collision detection
+- [DONE] Remove enemy when arrow collides with it
+- [DONE] Add game over screen
+- [PENDING] Add ability to bold text
 - [PENDING] Add completed level screen
 - [PENDING] Add start menu
 - [PENDING] Add second level
