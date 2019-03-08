@@ -10,7 +10,7 @@ private:
 	const char* m_FontPath;
 	const char* m_Text;
 	unsigned int m_Size;
-	SDL_Color& m_Colour;
+	SDL_Color m_Colour;
 	SDL_Renderer* m_Renderer;
 
 	// The font that will be used
@@ -25,7 +25,7 @@ private:
 	void updateTexture();
 
 public:
-	Text(const char* fontPath, const char* text, unsigned int size, SDL_Color& colour, SDL_Renderer* renderer);
+	Text(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
 	~Text();
 
 	// Sets the text

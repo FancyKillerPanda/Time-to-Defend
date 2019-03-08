@@ -25,6 +25,13 @@ Game::Game()
 
 	LOG_INFO("SDL initialised.");
 
+	if (TTF_Init() != 0)
+	{
+		LOG_FATAL("Could not initialise TTF.");
+		m_Running = false;
+		return;
+	}
+
 	// Creates the window
 	m_Window = SDL_CreateWindow(m_WindowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_WindowWidth, m_WindowHeight, SDL_WINDOW_SHOWN);
 

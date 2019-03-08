@@ -105,7 +105,6 @@ void GameplayState::update()
 			// Game over state is pushed if enemy has finished moving
 			if (!enemy->move())
 			{
-				LOG_TRACE("Game Over!");
 				m_GameOver = true;
 
 				endGame();

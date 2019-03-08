@@ -5,7 +5,7 @@
 #include "utils/Log.h"
 
 
-Text::Text(const char* fontPath, const char* text, unsigned int size, SDL_Color& colour, SDL_Renderer* renderer)
+Text::Text(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
 	: m_FontPath(fontPath), m_Text(text), m_Size(size), m_Colour(colour), m_Renderer(renderer)
 {
 	// Loads the font
