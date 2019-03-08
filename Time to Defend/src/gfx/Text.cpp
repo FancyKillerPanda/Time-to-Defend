@@ -20,9 +20,8 @@ Text::~Text()
 	TTF_CloseFont(m_Font);
 	m_Font = nullptr;
 
-	LOG_INFO("Destroyed text (text: {0}).", m_Text);
+	LOG_INFO("Destroyed text (text: \"{0}\").", m_Text);
 }
-
 
 void Text::load(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
 {
@@ -44,6 +43,8 @@ void Text::load(const char* fontPath, const char* text, unsigned int size, SDL_C
 	}
 
 	updateTexture();
+
+	LOG_INFO("Text loaded (text: \"{0}\").", m_Text);
 
 	m_Loaded = true;
 }
