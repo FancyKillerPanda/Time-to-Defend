@@ -95,24 +95,18 @@ void GameplayState::handleEvent(SDL_Event& event)
 
 void GameplayState::update()
 {
-	// Moves each enemy after some time
-	if (m_EnemyMoveTimer.getElapsed() >= 310)
+	for (unsigned int i = 0; i < m_Enemies.size(); i++)
 	{
-		for (unsigned int i = 0; i < m_Enemies.size(); i++)
+		Enemy* enemy = m_Enemies[i];
+
+		// Game over state is pushed if enemy has finished moving
+		if (!enemy->move())
 		{
-			Enemy* enemy = m_Enemies[i];
+			m_GameOver = true;
 
-			// Game over state is pushed if enemy has finished moving
-			if (!enemy->move())
-			{
-				m_GameOver = true;
-
-				endGame();
-				return;
-			}
+			endGame();
+			return;
 		}
-
-		m_EnemyMoveTimer.reset();
 	}
 
 	// Rotates the tower if needed

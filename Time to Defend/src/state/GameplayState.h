@@ -7,7 +7,6 @@
 #include "entities/Enemy.h"
 #include "entities/Tower.h"
 #include "entities/Arrow.h"
-#include "utils/Timer.h"
 
 
 // Possible levels for the game
@@ -30,9 +29,6 @@ private:
 	std::vector<Enemy*> m_Enemies;
 	std::vector<Tower*> m_Towers;
 	std::vector<Arrow*> m_Arrows;
-
-	// Tracks time since last enemy move
-	Timer m_EnemyMoveTimer;
 
 	// Current tower
 	int m_CurrentTowerIndex = 0;

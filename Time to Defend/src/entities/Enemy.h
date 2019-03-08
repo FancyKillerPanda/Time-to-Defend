@@ -3,6 +3,7 @@
 #include "gfx/Texture.h"
 #include "gfx/Map.h"
 #include "utils/Position.h"
+#include "utils/Timer.h"
 
 
 class Game;
@@ -24,6 +25,11 @@ private:
 
 	bool hasMoved = false;
 
+	// Tracks time since last enemy move
+	Timer m_MoveTimer;
+	// Time it takes for enemy to update
+	unsigned int m_MoveTime;
+
 public:
 	Enemy() = default;
 	Enemy(Game* const game, const Map* map, Position position);
@@ -36,5 +42,6 @@ public:
 	// Moves the enemy
 	bool move();
 
-	Texture* const getTexture() { return m_Texture; }
+	inline Texture* const getTexture() { return m_Texture; }
+	inline unsigned int getMoveTime() { return m_MoveTime; }
 };

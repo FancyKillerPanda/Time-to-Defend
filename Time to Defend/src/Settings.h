@@ -10,6 +10,8 @@ constexpr unsigned int CELL_SIZE = 20;
 // Movement speeds
 constexpr unsigned int ARROW_SPEED = 2;
 constexpr int TOWER_ROTATION_SPEED = 3;
+constexpr unsigned int MIN_ENEMY_MOVE_TIME = 220;
+constexpr unsigned int MAX_ENEMY_MOVE_TIME = 380;
 
 // Font properties
 static const char* DEFAULT_FONT_PATH = "res/fonts/arial.ttf";

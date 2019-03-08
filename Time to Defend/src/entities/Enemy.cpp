@@ -12,7 +12,7 @@ const Map* Enemy::s_Map = nullptr;
 
 
 Enemy::Enemy(Game* const game, const Map* map, Position position)
-	: m_Position(position)
+	: m_Position(position), m_MoveTime((unsigned int) Random::randint(MIN_ENEMY_MOVE_TIME, MAX_ENEMY_MOVE_TIME))
 {
 	s_Game = game;
 	s_Map = map;
@@ -40,6 +40,12 @@ void Enemy::draw()
 
 bool Enemy::move()
 {
+	// Only moves if certain amount of time has passed
+	if (m_MoveTimer.getElapsed() < m_MoveTime)
+	{
+		return true;
+	}
+
 	// Gets the next position to move to
 	const Position& nextPos = getNextPosition();
 
@@ -57,6 +63,7 @@ bool Enemy::move()
 	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	hasMoved = true;
+	m_MoveTimer.reset();
 
 	return true;
 }
