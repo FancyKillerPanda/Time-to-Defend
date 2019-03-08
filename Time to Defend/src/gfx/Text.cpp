@@ -6,19 +6,8 @@
 
 
 Text::Text(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
-	: m_FontPath(fontPath), m_Text(text), m_Size(size), m_Colour(colour), m_Renderer(renderer)
 {
-	// Loads the font
-	m_Font = TTF_OpenFont(m_FontPath, size);
-
-	// Error checking for font
-	if (m_Font == nullptr)
-	{
-		LOG_FATAL("Could not load font (filepath: {0}).\nSDLError: {1}.", m_FontPath, SDL_GetError());
-		return;
-	}
-
-	updateTexture();
+	load(fontPath, text, size, colour, renderer);
 }
 
 Text::~Text()
@@ -32,6 +21,31 @@ Text::~Text()
 	m_Font = nullptr;
 
 	LOG_INFO("Destroyed text (text: {0}).", m_Text);
+}
+
+
+void Text::load(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
+{
+	// Sets attributes on load
+	m_FontPath = fontPath;
+	m_Text = text;
+	m_Size = size;
+	m_Colour = colour;
+	m_Renderer = renderer;
+
+	// Loads the font
+	m_Font = TTF_OpenFont(m_FontPath, size);
+
+	// Error checking for font
+	if (m_Font == nullptr)
+	{
+		LOG_FATAL("Could not load font (filepath: {0}).\nSDLError: {1}.", m_FontPath, SDL_GetError());
+		return;
+	}
+
+	updateTexture();
+
+	m_Loaded = true;
 }
 
 
@@ -71,24 +85,48 @@ void Text::updateTexture()
 
 void Text::setText(const char* text)
 {
+	if (!m_Loaded)
+	{
+		LOG_WARNING("Tried to set text before loading.");
+		return;
+	}
+
 	m_Text = text;
 	updateTexture();
 }
 
 void Text::setColour(const SDL_Color& colour)
 {
+	if (!m_Loaded)
+	{
+		LOG_WARNING("Tried to set text colour before loading.");
+		return;
+	}
+
 	m_Colour = colour;
 	updateTexture();
 }
 
 void Text::setSize(unsigned int size)
 {
+	if (!m_Loaded)
+	{
+		LOG_WARNING("Tried to set text size before loading.");
+		return;
+	}
+
 	m_Size = size;
 	updateTexture();
 }
 
 void Text::draw(unsigned int x, unsigned int y)
 {
+	if (!m_Loaded)
+	{
+		LOG_ERROR("Tried to draw text before loading.");
+		return;
+	}
+
 	// Sets the text position (aligned center)
 	m_TextRect.x = x - (m_TextRect.w / 2);
 	m_TextRect.y = y - (m_TextRect.h / 2);

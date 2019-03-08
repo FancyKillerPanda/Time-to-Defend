@@ -6,6 +6,9 @@
 class Text
 {
 private:
+	// Whether the data and texture has been loaded
+	bool m_Loaded = false;
+
 	// Text data
 	const char* m_FontPath;
 	const char* m_Text;
@@ -25,8 +28,12 @@ private:
 	void updateTexture();
 
 public:
+	Text() = default;
 	Text(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
 	~Text();
+
+	// Loads the text
+	void load(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
 
 	// Sets the text
 	void setText(const char* text);
