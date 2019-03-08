@@ -135,6 +135,13 @@ void Game::handleEvents()
 			m_Running = false;
 			break;
 
+		case SDL_KEYDOWN:
+			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
+				m_Running = false;
+				break;
+			}
+
 		default:
 			// Makes sure there is a state in the stack
 			if (m_GameStates.empty())
