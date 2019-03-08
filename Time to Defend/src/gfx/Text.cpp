@@ -89,9 +89,9 @@ void Text::setSize(unsigned int size)
 
 void Text::draw(unsigned int x, unsigned int y)
 {
-	// Sets the text position
-	m_TextRect.x = x;
-	m_TextRect.y = y;
+	// Sets the text position (aligned center)
+	m_TextRect.x = x - (m_TextRect.w / 2);
+	m_TextRect.y = y - (m_TextRect.h / 2);
 
 	SDL_RenderCopy(m_Renderer, m_TextTexture, nullptr, &m_TextRect);
 }
