@@ -12,6 +12,19 @@ void LevelPassedState::onEnter()
 	m_InfoText.load("res/fonts/arial.ttf", "Press <Enter> to continue or <Escape> to exit!", 28, SDL_Color { 0, 0, 0, 255 }, s_Game->getRenderer());
 }
 
+void LevelPassedState::handleEvent(SDL_Event& event)
+{
+	switch (event.type)
+	{
+	case SDL_KEYDOWN:
+		switch (event.key.keysym.sym)
+		{
+		case SDLK_RETURN:
+			s_Game->popState();
+		}
+	}
+}
+
 void LevelPassedState::draw()
 {
 	m_LevelPassedText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);

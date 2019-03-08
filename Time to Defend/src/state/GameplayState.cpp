@@ -11,15 +11,7 @@
 
 void GameplayState::onEnter()
 {
-	// Loads the first map
-	m_CurrentMap.load("res/maps/Level_1.txt");
 
-	// Creates two towers
-	m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
-	m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
-
-	// Creates the first set of enemies
-	spawnEnemies();
 }
 
 void GameplayState::onExit()
@@ -48,6 +40,12 @@ void GameplayState::onExit()
 
 void GameplayState::handleEvent(SDL_Event& event)
 {
+	// Does not handle events until level is loaded
+	if (m_NeedToLoadLevel)
+	{
+		return;
+	}
+
 	switch (event.type)
 	{
 	case SDL_KEYDOWN:
@@ -96,6 +94,14 @@ void GameplayState::handleEvent(SDL_Event& event)
 
 void GameplayState::update()
 {
+	if (m_NeedToLoadLevel)
+	{
+		loadLevel();
+		m_NeedToLoadLevel = false;
+
+		return;
+	}
+
 	for (unsigned int i = 0; i < m_Enemies.size(); i++)
 	{
 		Enemy* enemy = m_Enemies[i];
@@ -155,10 +161,17 @@ void GameplayState::update()
 		}
 	}
 
+	// Level passed
 	if (m_Enemies.size() == 0)
 	{
-		// Pops this state off the Game's stack
-		s_Game->popState();
+		switch (m_GameLevel)
+		{
+		case GameLevel::_1:
+			m_GameLevel = GameLevel::_2;
+			break;
+		}
+
+		m_NeedToLoadLevel = true;
 
 		// Pushes the first state onto the stack
 		std::unique_ptr<GameState> gameOverState = std::make_unique<LevelPassedState>();
@@ -192,6 +205,43 @@ void GameplayState::draw()
 	}
 }
 
+
+void GameplayState::loadLevel()
+{
+	// Makes sure no towers, enemies, or arrows remain
+	onExit();
+
+	// Clears the vectors
+	m_Enemies.clear();
+	m_Arrows.clear();
+	m_Towers.clear();
+
+	switch (m_GameLevel)
+	{
+	case GameLevel::_1:
+		// Loads the first map
+		m_CurrentMap.load("res/maps/Level_1.txt");
+
+		// Creates two towers
+		m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
+
+		break;
+
+	case GameLevel::_2:
+		// Loads the second map
+		m_CurrentMap.load("res/maps/Level_2.txt");
+
+		// Creates two towers
+		m_Towers.emplace_back(new Tower(s_Game, Position { 11, 23 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position { 16, 23 }));
+
+		break;
+	}
+
+	// Creates the set of enemies
+	spawnEnemies();
+}
 
 void GameplayState::spawnEnemies()
 {

@@ -13,6 +13,7 @@
 enum class GameLevel
 {
 	_1,
+	_2,
 };
 
 
@@ -38,7 +39,13 @@ private:
 	// Whether the game is over
 	bool m_GameOver = false;
 
+	// Whether the level needs to be loaded
+	bool m_NeedToLoadLevel = true;
+
 private:
+	// Loads a level
+	void loadLevel();
+
 	// Spawns a set of enemies
 	void spawnEnemies();
 
