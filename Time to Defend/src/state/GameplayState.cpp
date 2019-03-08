@@ -6,6 +6,7 @@
 #include "utils/Random.h"
 #include "utils/Position.h"
 #include "GameOverState.h"
+#include "LevelPassedState.h"
 
 
 void GameplayState::onEnter()
@@ -152,6 +153,18 @@ void GameplayState::update()
 				break;
 			}
 		}
+	}
+
+	if (m_Enemies.size() == 0)
+	{
+		// Pops this state off the Game's stack
+		s_Game->popState();
+
+		// Pushes the first state onto the stack
+		std::unique_ptr<GameState> gameOverState = std::make_unique<LevelPassedState>();
+		s_Game->pushState(std::move(gameOverState));
+
+		return;
 	}
 }
 
