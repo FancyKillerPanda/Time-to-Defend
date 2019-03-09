@@ -228,8 +228,8 @@ void GameplayState::loadLevel()
 		m_CurrentMap = Map("res/maps/Level_2.txt");
 
 		// Creates two towers
-		m_Towers.emplace_back(new Tower(s_Game, Position { 11, 23 }));
-		m_Towers.emplace_back(new Tower(s_Game, Position { 16, 23 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position { 20, 11 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position {  5, 34 }));
 
 		break;
 	}
