@@ -15,3 +15,6 @@ constexpr unsigned int MAX_ENEMY_MOVE_TIME = 380;
 
 // Font properties
 static const char* DEFAULT_FONT_PATH = "res/fonts/arial.ttf";
+
+// Time before next wave spawns
+constexpr unsigned int WAVE_SPAWN_TIME = MAX_ENEMY_MOVE_TIME * 2.5;

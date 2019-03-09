@@ -97,6 +97,18 @@ void GameplayState::update()
 		return;
 	}
 
+	if (m_NumberOfWavesToSpawn > 0 && m_WaveTimer.getElapsed() >= WAVE_SPAWN_TIME)
+	{
+		// Spawns the next wave
+		spawnEnemies();
+
+		// Reduces the number of waves still left to spawn
+		m_NumberOfWavesToSpawn -= 1;
+
+		m_WaveTimer.reset();
+		return;
+	}
+
 	for (unsigned int i = 0; i < m_Enemies.size(); i++)
 	{
 		Enemy* enemy = m_Enemies[i];
@@ -221,6 +233,8 @@ void GameplayState::loadLevel()
 		m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
 		m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
 
+		m_NumberOfWavesToSpawn = 1;
+
 		break;
 
 	case GameLevel::_2:
@@ -231,11 +245,14 @@ void GameplayState::loadLevel()
 		m_Towers.emplace_back(new Tower(s_Game, Position { 20, 11 }));
 		m_Towers.emplace_back(new Tower(s_Game, Position {  5, 34 }));
 
+		m_NumberOfWavesToSpawn = 3;
+
 		break;
 	}
 
-	// Creates the set of enemies
+	// Spawns the first wave
 	spawnEnemies();
+	m_WaveTimer.reset();
 }
 
 void GameplayState::spawnEnemies()
