@@ -57,7 +57,8 @@ void Text::updateTexture()
 	m_TextTexture = nullptr;
 
 	// Creates a surface for the font
-	SDL_Surface* textSurface = TTF_RenderText_Solid(m_Font, m_Text, m_Colour);
+	//SDL_Surface* textSurface = TTF_RenderText_Solid(m_Font, m_Text, m_Colour);
+	SDL_Surface* textSurface = TTF_RenderUTF8_Solid(m_Font, m_Text, m_Colour);
 
 	// Error checking for text surface
 	if (textSurface == nullptr)
