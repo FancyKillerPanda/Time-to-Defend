@@ -137,6 +137,7 @@
   <ItemGroup>
     <Text Include="res\maps\Level_1.txt" />
     <Text Include="res\maps\Level_2.txt" />
+    <Text Include="res\maps\Level_3.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\txrs\Arrow.png" />
