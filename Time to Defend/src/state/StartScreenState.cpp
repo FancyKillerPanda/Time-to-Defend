@@ -13,6 +13,7 @@ void StartScreenState::onEnter()
 	m_TtDText.load("res/fonts/arial.ttf", "Time to Defend!", 48, SDL_Color { 255, 70, 0, 255 }, s_Game->getRenderer());
 	m_InfoText.load("res/fonts/arial.ttf", "Press <H> for instructions or <Enter> to start.", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
+	// Makes the background render black
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
 
