@@ -22,7 +22,14 @@ Potentially a low-framerate game where everything (incl. arrows) moves an intege
 - [DONE] Remove enemy when arrow collides with it
 - [DONE] Add game over screen
 - [PENDING] Add ability to bold text
-- [PENDING] Add completed level screen
-- [PENDING] Add start menu
-- [PENDING] Add second level
-- [PENDING] Transition to second level if first passed
+- [DONE] Add completed level screen
+- [DONE] Add start menu
+- [DONE] Add second level
+- [DONE] Transition to second level if first passed
+- [PENDING] Add level number to completed level screen
+- [PENDING] Allow mouse usage on start menu with buttons
+- [PENDING] Game completed screen
+- [PENDING] Different enemy colours
+- [PENDING] Tower shoot cooldown
+- [PENDING] Power up (maybe unlimited shooting for limited time)
+- [PENDING] Window resizing
