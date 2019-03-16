@@ -10,8 +10,10 @@
 void GameOverState::onEnter()
 {
 	// Creates the text
-	m_GameOverText.load("res/fonts/arial.ttf", "Game Over!", 48, SDL_Color { 0, 0, 0, 255 }, s_Game->getRenderer());
-	m_InfoText.load("res/fonts/arial.ttf", "Press <Escape> to exit or <R> to restart!", 28, SDL_Color { 0, 0, 0, 255 }, s_Game->getRenderer());
+	m_GameOverText.load("res/fonts/arial.ttf", "Game Over!", 48, SDL_Color { 255, 35, 0, 255 }, s_Game->getRenderer());
+	m_InfoText.load("res/fonts/arial.ttf", "Press <Escape> to exit or <R> to restart!", 28, SDL_Color { 90, 160, 0, 255 }, s_Game->getRenderer());
+
+	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
 
 void GameOverState::handleEvent(SDL_Event& event)
