@@ -25,6 +25,7 @@ private:
 
 	// The texture for the grass
 	Texture m_GrassTexture;
+	Texture m_TrackTexture;
 
 #ifdef _DEBUG
 	const char* m_Filepath;

@@ -34,11 +34,13 @@ void Map::load(Game* const game, const char* filepath)
 	// Sets the game instance
 	s_Game = game;
 
-	// Loads the texture
+	// Loads the textures
 	m_GrassTexture.load("res/txrs/Grass.png", s_Game->getRenderer());
+	m_TrackTexture.load("res/txrs/Track.jpg", s_Game->getRenderer());
 
 	// Sets the width and height to the cell size
 	m_GrassTexture.setRect(0, 0, CELL_SIZE, CELL_SIZE);
+	m_TrackTexture.setRect(0, 0, CELL_SIZE, CELL_SIZE);
 
 	int row = 0;
 	int col = 0;
@@ -94,11 +96,23 @@ void Map::draw(SDL_Renderer* renderer)
 	{
 		for (int col = 0; col < NUM_OF_CELLS_X; col++)
 		{
-			// Sets the position of the cell
-			m_GrassTexture.setRect(col * CELL_SIZE, row * CELL_SIZE);
+			if (m_Data[row][col] == 'P' || m_Data[row][col] == 'S')
+			{
+				// Sets the position of the cell
+				m_TrackTexture.setRect(col * CELL_SIZE, row * CELL_SIZE);
 
-			// Draws the texture
-			SDL_RenderCopy(s_Game->getRenderer(), m_GrassTexture.getTexture(), nullptr, &m_GrassTexture.getRect());
+				// Draws the texture
+				SDL_RenderCopy(s_Game->getRenderer(), m_TrackTexture.getTexture(), nullptr, &m_TrackTexture.getRect());
+			}
+
+			else
+			{
+				// Sets the position of the cell
+				m_GrassTexture.setRect(col * CELL_SIZE, row * CELL_SIZE);
+
+				// Draws the texture
+				SDL_RenderCopy(s_Game->getRenderer(), m_GrassTexture.getTexture(), nullptr, &m_GrassTexture.getRect());
+			}
 		}
 	}
 }
