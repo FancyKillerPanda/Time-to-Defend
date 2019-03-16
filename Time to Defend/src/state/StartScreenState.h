@@ -22,10 +22,18 @@ private:
 	Text m_InfoText;
 
 	// The instructions on how to play
-	Text m_InstructionsText;
+	Text m_InstructionsText_0;
+	Text m_InstructionsText_1;
+	Text m_InstructionsText_2;
+	Text m_InstructionsText_3;
+	Text m_InstructionsText_4;
+	Text m_InstructionsText_5;
 
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
+
+private:
+	void loadInstructionText();
 
 public:
 	void onEnter() override;
