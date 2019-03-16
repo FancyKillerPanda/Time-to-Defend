@@ -241,7 +241,7 @@ void GameplayState::loadLevel()
 	{
 	case GameLevel::_1:
 		// Loads the first map
-		m_CurrentMap = Map("res/maps/Level_1.txt");
+		m_CurrentMap.load(s_Game, "res/maps/Level_1.txt");
 
 		// Creates two towers
 		m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
@@ -253,7 +253,7 @@ void GameplayState::loadLevel()
 
 	case GameLevel::_2:
 		// Loads the second map
-		m_CurrentMap = Map("res/maps/Level_2.txt");
+		m_CurrentMap = Map(s_Game, "res/maps/Level_2.txt");
 
 		// Creates two towers
 		m_Towers.emplace_back(new Tower(s_Game, Position { 19, 12 }));
@@ -265,7 +265,7 @@ void GameplayState::loadLevel()
 
 	case GameLevel::_3:
 		// Loads the third map
-		m_CurrentMap = Map("res/maps/Level_3.txt");
+		m_CurrentMap = Map(s_Game, "res/maps/Level_3.txt");
 
 		// Creates four towers
 		m_Towers.emplace_back(new Tower(s_Game, Position { 12, 10 }));

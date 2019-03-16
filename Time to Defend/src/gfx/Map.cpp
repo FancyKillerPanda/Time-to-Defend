@@ -3,19 +3,20 @@
 #include "Map.h"
 
 #include "utils/Log.h"
+#include "Game.h"
+#include "Settings.h"
+
+
+Game* Map::s_Game = nullptr;
 
 
 Map::Map()
 {
-	m_CellRect.w = CELL_SIZE;
-	m_CellRect.h = CELL_SIZE;
 }
 
-Map::Map(const char* filepath)
+Map::Map(Game* const game, const char* filepath)
 {
-	m_CellRect.w = CELL_SIZE;
-	m_CellRect.h = CELL_SIZE;
-	load(filepath);
+	load(game, filepath);
 }
 
 Map::~Map()
@@ -24,11 +25,20 @@ Map::~Map()
 }
 
 
-void Map::load(const char* filepath)
+void Map::load(Game* const game, const char* filepath)
 {
 #ifdef _DEBUG
 	m_Filepath = filepath;
 #endif
+
+	// Sets the game instance
+	s_Game = game;
+
+	// Loads the texture
+	m_GrassTexture.load("res/txrs/Grass.png", s_Game->getRenderer());
+
+	// Sets the width and height to the cell size
+	m_GrassTexture.setRect(0, 0, CELL_SIZE, CELL_SIZE);
 
 	int row = 0;
 	int col = 0;
@@ -85,22 +95,10 @@ void Map::draw(SDL_Renderer* renderer)
 		for (int col = 0; col < NUM_OF_CELLS_X; col++)
 		{
 			// Sets the position of the cell
-			m_CellRect.x = col * CELL_SIZE;
-			m_CellRect.y = row * CELL_SIZE;
+			m_GrassTexture.setRect(col * CELL_SIZE, row * CELL_SIZE);
 
-			// Sets the appropriate drawing colour
-			if (m_Data[row][col] == '.')
-			{
-				SDL_SetRenderDrawColor(renderer, 0, 127, 0, 255);
-			}
-
-			else
-			{
-				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-			}
-
-			// Draws the rectangle
-			SDL_RenderFillRect(renderer, &m_CellRect);
+			// Draws the texture
+			SDL_RenderCopy(s_Game->getRenderer(), m_GrassTexture.getTexture(), nullptr, &m_GrassTexture.getRect());
 		}
 	}
 }
