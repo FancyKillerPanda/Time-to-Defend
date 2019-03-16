@@ -5,7 +5,7 @@
 #include "utils/Log.h"
 #include "utils/Random.h"
 #include "state/BaseGameState.h"
-#include "state/GameplayState.h"
+#include "state/StartScreenState.h"
 
 
 Game::Game()
@@ -75,8 +75,8 @@ Game::Game()
 	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
 
 	// Pushes the first state onto the stack
-	std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
-	pushState(std::move(gameplayState));
+	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
+	pushState(std::move(startScreenState));
 }
 
 Game::~Game()

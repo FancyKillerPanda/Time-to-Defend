@@ -108,6 +108,7 @@
     <ClCompile Include="src\state\GameOverState.cpp" />
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\state\LevelPassedState.cpp" />
+    <ClCompile Include="src\state\StartScreenState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\utils\Random.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="src\state\GameOverState.h" />
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\state\LevelPassedState.h" />
+    <ClInclude Include="src\state\StartScreenState.h" />
     <ClInclude Include="src\utils\Log.h" />
     <ClInclude Include="src\utils\Maths.h" />
     <ClInclude Include="src\utils\Position.h" />
