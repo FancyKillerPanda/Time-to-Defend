@@ -176,6 +176,10 @@ void GameplayState::update()
 		case GameLevel::_1:
 			m_GameLevel = GameLevel::_2;
 			break;
+
+		case GameLevel::_2:
+			m_GameLevel = GameLevel::_3;
+			break;
 		}
 
 		m_NeedToLoadLevel = true;
@@ -249,6 +253,20 @@ void GameplayState::loadLevel()
 		m_Towers.emplace_back(new Tower(s_Game, Position {  6, 33 }));
 
 		m_NumberOfWavesToSpawn = 3;
+
+		break;
+
+	case GameLevel::_3:
+		// Loads the third map
+		m_CurrentMap = Map("res/maps/Level_3.txt");
+
+		// Creates four towers
+		m_Towers.emplace_back(new Tower(s_Game, Position { 12, 10 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position {  4, 23 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position { 13, 36 }));
+		m_Towers.emplace_back(new Tower(s_Game, Position { 22, 23 }));
+
+		m_NumberOfWavesToSpawn = 4;
 
 		break;
 	}
