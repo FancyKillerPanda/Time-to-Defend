@@ -32,7 +32,7 @@ private:
 #endif
 
 public:
-	Map();
+	Map() = default;
 	Map(Game* const game, const char* filepath);
 	~Map();
 

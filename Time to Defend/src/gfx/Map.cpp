@@ -10,10 +10,6 @@
 Game* Map::s_Game = nullptr;
 
 
-Map::Map()
-{
-}
-
 Map::Map(Game* const game, const char* filepath)
 {
 	load(game, filepath);
