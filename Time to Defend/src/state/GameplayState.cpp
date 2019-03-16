@@ -218,6 +218,9 @@ void GameplayState::loadLevel()
 	// Makes sure no towers, enemies, or arrows remain
 	onExit();
 
+	// Makes sure tower isn't spinning after level creation
+	m_TowerRotationVelocity = 0;
+
 	// Clears the vectors
 	m_Enemies.clear();
 	m_Arrows.clear();
