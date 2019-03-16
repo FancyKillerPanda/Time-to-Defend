@@ -57,8 +57,15 @@ void GameplayState::handleEvent(SDL_Event& event)
 			break;
 
 		case SDLK_t:
+			// Stops highlighting the current tower
+			m_Towers[m_CurrentTowerIndex]->setHighlight(false);
+
 			// Changes the current tower
 			m_CurrentTowerIndex = (m_CurrentTowerIndex + 1) % m_Towers.size();
+
+			// Highlights the current tower
+			m_Towers[m_CurrentTowerIndex]->setHighlight(true);
+
 			break;
 
 		case SDLK_SPACE:
@@ -270,6 +277,9 @@ void GameplayState::loadLevel()
 
 		break;
 	}
+
+	// Highlights the first tower the user controls
+	m_Towers[m_CurrentTowerIndex]->setHighlight(true);
 
 	// Spawns the first wave
 	spawnEnemies();

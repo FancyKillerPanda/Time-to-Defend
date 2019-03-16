@@ -15,9 +15,11 @@ Tower::Tower(Game* const game, Position position)
 {
 	s_Game = game;
 
-	// Creates the texture and sets its starting rect
+	// Creates the textures and sets their starting rects
 	m_Texture = new Texture("res/txrs/Tower.png", s_Game->getRenderer());
 	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
+	m_HighlightedTexture = new Texture("res/txrs/Tower Highlighted.png", s_Game->getRenderer());
+	m_HighlightedTexture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	LOG_INFO("Created tower.");
 }
@@ -33,8 +35,20 @@ Tower::~Tower()
 
 void Tower::draw()
 {
+	SDL_Texture* texture;
+
+	if (m_Highlighted)
+	{
+		texture = m_HighlightedTexture->getTexture();
+	}
+
+	else
+	{
+		texture = m_Texture->getTexture();
+	}
+
 	// Renders the tower, rotating by the current direction
-	SDL_RenderCopyEx(s_Game->getRenderer(), m_Texture->getTexture(), nullptr, &m_Texture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(s_Game->getRenderer(), texture, nullptr, &m_Texture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
 }
 
 void Tower::rotate(int amountDeg)
