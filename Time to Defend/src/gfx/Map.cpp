@@ -35,7 +35,7 @@ void Map::load(Game* const game, const char* filepath)
 	s_Game = game;
 
 	// Loads the textures
-	m_GrassTexture.load("res/txrs/Grass.png", s_Game->getRenderer());
+	m_GrassTexture.load("res/txrs/Grass.jpg", s_Game->getRenderer());
 	m_TrackTexture.load("res/txrs/Track.jpg", s_Game->getRenderer());
 
 	// Sets the width and height to the cell size
