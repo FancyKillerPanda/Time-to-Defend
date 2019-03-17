@@ -135,3 +135,8 @@ void Text::draw(unsigned int x, unsigned int y)
 
 	SDL_RenderCopy(m_Renderer, m_TextTexture, nullptr, &m_TextRect);
 }
+
+void Text::setStyle(int style)
+{
+	TTF_SetFontStyle(m_Font, style);
+}

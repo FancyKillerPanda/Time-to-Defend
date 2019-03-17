@@ -11,6 +11,9 @@ void LevelPassedState::onEnter()
 	m_LevelPassedText.load("res/fonts/arial.ttf", "Level Passed!", 48, SDL_Color { 70, 255, 0, 255 }, s_Game->getRenderer());
 	m_InfoText.load("res/fonts/arial.ttf", "Press <Enter> to continue or <Escape> to exit!", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
+	// Makes the text bold
+	m_LevelPassedText.setStyle(TTF_STYLE_BOLD);
+
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
 

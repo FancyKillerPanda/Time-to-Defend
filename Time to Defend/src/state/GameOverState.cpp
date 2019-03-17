@@ -13,6 +13,9 @@ void GameOverState::onEnter()
 	m_GameOverText.load("res/fonts/arial.ttf", "Game Over!", 48, SDL_Color { 255, 35, 0, 255 }, s_Game->getRenderer());
 	m_InfoText.load("res/fonts/arial.ttf", "Press <Escape> to exit or <R> to restart!", 28, SDL_Color { 90, 160, 0, 255 }, s_Game->getRenderer());
 
+	// Makes the text bold
+	m_GameOverText.setStyle(TTF_STYLE_BOLD);
+
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
 

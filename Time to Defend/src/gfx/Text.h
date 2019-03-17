@@ -44,4 +44,7 @@ public:
 
 	// Draws the text to the renderer
 	void draw(unsigned int x, unsigned int y);
+
+	// Sets the style of the font
+	void setStyle(int style);
 };
