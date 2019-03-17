@@ -55,4 +55,6 @@ public:
 	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
 	inline unsigned int getWindowWidth() { return m_WindowWidth; }
 	inline unsigned int getWindowHeight() { return m_WindowHeight; }
+
+	void setRunning(bool value) { m_Running = value; }
 };
