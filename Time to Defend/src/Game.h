@@ -3,6 +3,7 @@
 #include "pch.h"
 
 #include "state/BaseGameState.h"
+#include "utils/Timer.h"
 
 
 class Game
@@ -21,6 +22,14 @@ private:
 
 	// Stack of the current game states
 	std::vector<std::unique_ptr<GameState>> m_GameStates;
+
+#ifdef _DEBUG
+	// Frame rate timer
+	Timer m_FrameTimer;
+	// Counter of number of frames since timer reset
+	unsigned int m_FrameCount;
+#endif // _DEBUG
+
 
 private:
 	void handleEvents();

@@ -77,6 +77,10 @@ Game::Game()
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
 	pushState(std::move(startScreenState));
+
+	// Resets the frame timer
+	m_FrameTimer.reset();
+	m_FrameCount = 0;
 }
 
 Game::~Game()
@@ -173,6 +177,19 @@ void Game::update()
 		// Updates the state
 		m_GameStates.back()->update();
 	}
+
+#ifdef _DEBUG
+	m_FrameCount += 1;
+
+	if (m_FrameTimer.getElapsed() >= 1000)
+	{
+		printf("%d FPS\n", m_FrameCount);
+
+		// Resets the timer
+		m_FrameTimer.reset();
+		m_FrameCount = 0;
+	}
+#endif // _DEBUG
 }
 
 void Game::draw()
