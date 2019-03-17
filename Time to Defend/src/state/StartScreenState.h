@@ -18,8 +18,15 @@ class StartScreenState : public GameState
 private:
 	// The "Time to Defend!" header text
 	Text m_TtDText;
+
 	// Information about what actions the user can take
-	Text m_InfoText;
+	Text m_PlayText;
+	Text m_HelpText;
+	Text m_EditorText;
+	Text m_SettingsText;
+
+	// The button (text) currently being highlighted
+	int m_TextCurrentlyHighlighted = -1;
 
 	// The instructions on how to play
 	Text m_InstructionsText_0;
@@ -39,6 +46,7 @@ public:
 	void onEnter() override;
 
 	void handleEvent(SDL_Event& event) override;
+	void update() override;
 	void draw() override;
 };
 

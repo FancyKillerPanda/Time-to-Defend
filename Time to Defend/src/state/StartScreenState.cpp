@@ -11,7 +11,10 @@ void StartScreenState::onEnter()
 {
 	// Creates the text
 	m_TtDText.load("res/fonts/arial.ttf", "Time to Defend!", 48, SDL_Color { 255, 70, 0, 255 }, s_Game->getRenderer());
-	m_InfoText.load("res/fonts/arial.ttf", "Press <H> for instructions or <Enter> to start.", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+	m_PlayText.load("res/fonts/arial.ttf", "Play", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+	m_HelpText.load("res/fonts/arial.ttf", "Instructions", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+	m_EditorText.load("res/fonts/arial.ttf", "Level Editor (Coming Soon...)", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+	m_SettingsText.load("res/fonts/arial.ttf", "Settings (Coming Soon...)", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
 	// Makes the text bold
 	m_TtDText.setStyle(TTF_STYLE_BOLD);
@@ -66,14 +69,84 @@ void StartScreenState::handleEvent(SDL_Event& event)
 	}
 }
 
+void StartScreenState::update()
+{
+	if (m_ScreenState == ScreenState::MainScreen)
+	{
+		int mouseX;
+		int mouseY;
+		SDL_GetMouseState(&mouseX, &mouseY);
+
+		if (m_PlayText.rectCollides(mouseX, mouseY))
+		{
+			if (m_TextCurrentlyHighlighted == 0)
+			{
+				return;
+			}
+
+			m_TextCurrentlyHighlighted = 0;
+			m_PlayText.setColour(SDL_Color { 255, 255, 0, 255 });
+		}
+
+		else if (m_HelpText.rectCollides(mouseX, mouseY))
+		{
+			if (m_TextCurrentlyHighlighted == 1)
+			{
+				return;
+			}
+
+			m_TextCurrentlyHighlighted = 1;
+			m_HelpText.setColour(SDL_Color { 255, 255, 0, 255 });
+		}
+
+		else if (m_EditorText.rectCollides(mouseX, mouseY))
+		{
+			if (m_TextCurrentlyHighlighted == 2)
+			{
+				return;
+			}
+
+			m_TextCurrentlyHighlighted = 2;
+			m_EditorText.setColour(SDL_Color { 255, 255, 0, 255 });
+		}
+
+		else if (m_SettingsText.rectCollides(mouseX, mouseY))
+		{
+			if (m_TextCurrentlyHighlighted == 3)
+			{
+				return;
+			}
+
+			m_TextCurrentlyHighlighted = 3;
+			m_SettingsText.setColour(SDL_Color { 255, 255, 0, 255 });
+		}
+
+		else
+		{
+			if (m_TextCurrentlyHighlighted != -1)
+			{
+				m_PlayText.setColour(SDL_Color { 90, 160, 30, 255 });
+				m_HelpText.setColour(SDL_Color { 90, 160, 30, 255 });
+				m_EditorText.setColour(SDL_Color { 90, 160, 30, 255 });
+				m_SettingsText.setColour(SDL_Color { 90, 160, 30, 255 });
+
+				m_TextCurrentlyHighlighted = -1;
+			}
+		}
+	}
+}
+
 void StartScreenState::draw()
 {
 	switch (m_ScreenState)
 	{
 	case ScreenState::MainScreen:
 		// Draws text
-		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);
-		m_InfoText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 11 / 20);
+		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5.5 / 20);
+		m_PlayText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
+		m_HelpText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 10 / 20);
+		m_EditorText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 12 / 20);
+		m_SettingsText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 14 / 20);
 
 		break;
 
