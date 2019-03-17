@@ -35,6 +35,9 @@ public:
 	// Loads the text
 	void load(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
 
+	// Whether the text has been clicked
+	bool isClicked(int x, int y);
+
 	// Sets the text
 	void setText(const char* text);
 	// Sets the colour of the text

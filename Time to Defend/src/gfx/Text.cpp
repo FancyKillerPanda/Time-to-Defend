@@ -85,6 +85,12 @@ void Text::updateTexture()
 	LOG_INFO("Created texture (filepath: {0}).", m_FontPath);
 }
 
+bool Text::isClicked(int x, int y)
+{
+	SDL_Rect mouseRect = { x, y, 1, 1 };
+	return SDL_HasIntersection(&mouseRect, &m_TextRect);
+}
+
 void Text::setText(const char* text)
 {
 	if (!m_Loaded)
