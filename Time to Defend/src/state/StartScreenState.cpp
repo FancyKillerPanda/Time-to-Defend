@@ -68,12 +68,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		if (m_ScreenState == ScreenState::MainScreen)
-		{
-			int mouseX;
-			int mouseY;
-			SDL_GetMouseState(&mouseX, &mouseY);
+		int mouseX;
+		int mouseY;
+		SDL_GetMouseState(&mouseX, &mouseY);
 
+		switch (m_ScreenState)
+		{
+		case ScreenState::MainScreen:
+		{
 			if (m_PlayText.rectCollides(mouseX, mouseY))
 			{
 				// Pops this state off the Game's stack
@@ -99,6 +101,17 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			{
 				// TODO: Switch to settings page once it's created
 			}
+
+			break;
+		}
+
+		case ScreenState::Instructions:
+			if (m_BackText.rectCollides(mouseX, mouseY))
+			{
+				m_ScreenState = ScreenState::MainScreen;
+			}
+
+			break;
 		}
 
 		break;
@@ -107,12 +120,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 void StartScreenState::update()
 {
-	if (m_ScreenState == ScreenState::MainScreen)
-	{
-		int mouseX;
-		int mouseY;
-		SDL_GetMouseState(&mouseX, &mouseY);
+	int mouseX;
+	int mouseY;
+	SDL_GetMouseState(&mouseX, &mouseY);
 
+	switch (m_ScreenState)
+	{
+	case ScreenState::MainScreen:
+	{
 		if (m_PlayText.rectCollides(mouseX, mouseY))
 		{
 			if (m_TextCurrentlyHighlighted == 0)
@@ -169,6 +184,28 @@ void StartScreenState::update()
 				m_TextCurrentlyHighlighted = -1;
 			}
 		}
+
+		break;
+	}
+
+	case ScreenState::Instructions:
+		if (m_BackText.rectCollides(mouseX, mouseY))
+		{
+			if (!m_BackTextHighlighted)
+			{
+				m_BackText.setColour(SDL_Color { 255, 255, 0, 255 });
+			}
+		}
+
+		else
+		{
+			if (m_BackTextHighlighted)
+			{
+				m_BackText.setColour(SDL_Color { 90, 160, 30, 255 });
+			}
+		}
+
+		break;
 	}
 }
 
@@ -196,6 +233,8 @@ void StartScreenState::draw()
 		m_InstructionsText_4.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 13 / 20);
 		m_InstructionsText_5.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 14 / 20);
 
+		m_BackText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 18 / 20);
+
 		break;
 	}
 }
@@ -216,4 +255,6 @@ void StartScreenState::loadInstructionText()
 	m_InstructionsText_3.load("res/fonts/arial.ttf", instructionText_3, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 	m_InstructionsText_4.load("res/fonts/arial.ttf", instructionText_4, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 	m_InstructionsText_5.load("res/fonts/arial.ttf", instructionText_5, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+
+	m_BackText.load("res/fonts/arial.ttf", "<-- Back", 30, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 }
