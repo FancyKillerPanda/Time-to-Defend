@@ -91,7 +91,7 @@ bool Text::rectCollides(int x, int y)
 	return SDL_HasIntersection(&mouseRect, &m_TextRect);
 }
 
-void Text::setText(const char* text)
+void Text::setText(const char* text, bool update)
 {
 	if (!m_Loaded)
 	{
@@ -100,10 +100,14 @@ void Text::setText(const char* text)
 	}
 
 	m_Text = text;
-	updateTexture();
+
+	if (update)
+	{
+		updateTexture();
+	}
 }
 
-void Text::setColour(const SDL_Color& colour)
+void Text::setColour(const SDL_Color& colour, bool update)
 {
 	if (!m_Loaded)
 	{
@@ -112,10 +116,14 @@ void Text::setColour(const SDL_Color& colour)
 	}
 
 	m_Colour = colour;
-	updateTexture();
+
+	if (update)
+	{
+		updateTexture();
+	}
 }
 
-void Text::setSize(unsigned int size)
+void Text::setSize(unsigned int size, bool update)
 {
 	if (!m_Loaded)
 	{
@@ -124,7 +132,21 @@ void Text::setSize(unsigned int size)
 	}
 
 	m_Size = size;
-	updateTexture();
+
+	if (update)
+	{
+		updateTexture();
+	}
+}
+
+void Text::setStyle(int style, bool update)
+{
+	TTF_SetFontStyle(m_Font, style);
+
+	if (update)
+	{
+		updateTexture();
+	}
 }
 
 void Text::draw(unsigned int x, unsigned int y)
@@ -140,9 +162,4 @@ void Text::draw(unsigned int x, unsigned int y)
 	m_TextRect.y = y - (m_TextRect.h / 2);
 
 	SDL_RenderCopy(m_Renderer, m_TextTexture, nullptr, &m_TextRect);
-}
-
-void Text::setStyle(int style)
-{
-	TTF_SetFontStyle(m_Font, style);
 }

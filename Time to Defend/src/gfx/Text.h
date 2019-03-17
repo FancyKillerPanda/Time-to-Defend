@@ -39,17 +39,17 @@ public:
 	bool rectCollides(int x, int y);
 
 	// Sets the text
-	void setText(const char* text);
+	void setText(const char* text, bool update = true);
 	// Sets the colour of the text
-	void setColour(const SDL_Color& colour);
+	void setColour(const SDL_Color& colour, bool update = true);
 	// Sets the font size
-	void setSize(unsigned int size);
+	void setSize(unsigned int size, bool update = true);
+
+	// Sets the style of the font
+	void setStyle(int style, bool update = true);
 
 	// Draws the text to the renderer
 	void draw(unsigned int x, unsigned int y);
-
-	// Sets the style of the font
-	void setStyle(int style);
 
 	// Gets the rect
 	const SDL_Rect& getRect() { return m_TextRect; }
