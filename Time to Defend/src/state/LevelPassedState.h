@@ -13,7 +13,11 @@ private:
 	Text m_LevelPassedText;
 	Text m_InfoText;
 
+	unsigned int m_Level;
+
 public:
+	LevelPassedState(unsigned int level);
+
 	void onEnter() override;
 
 	void handleEvent(SDL_Event& event) override;

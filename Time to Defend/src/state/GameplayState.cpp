@@ -191,9 +191,9 @@ void GameplayState::update()
 
 		m_NeedToLoadLevel = true;
 
-		// Pushes the first state onto the stack
-		std::unique_ptr<GameState> gameOverState = std::make_unique<LevelPassedState>();
-		s_Game->pushState(std::move(gameOverState));
+		// Pushes the level passed state onto the stack
+		std::unique_ptr<GameState> levelPassedState = std::make_unique<LevelPassedState>((int) m_GameLevel);
+		s_Game->pushState(std::move(levelPassedState));
 
 		return;
 	}
