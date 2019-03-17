@@ -215,7 +215,7 @@ void StartScreenState::draw()
 	{
 	case ScreenState::MainScreen:
 		// Draws text
-		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5.5 / 20);
+		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
 		m_PlayText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
 		m_HelpText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 10 / 20);
 		m_EditorText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 12 / 20);
