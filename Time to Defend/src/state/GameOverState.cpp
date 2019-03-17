@@ -38,8 +38,6 @@ void GameOverState::onEnter()
 
 	// Makes the text bold
 	m_GameOverText.setStyle(TTF_STYLE_BOLD);
-	m_RestartText.setStyle(TTF_STYLE_BOLD);
-	m_ExitText.setStyle(TTF_STYLE_BOLD);
 
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
@@ -103,6 +101,7 @@ void GameOverState::update()
 	{
 		if (!m_HighlightingRestartText)
 		{
+			m_RestartText.setStyle(TTF_STYLE_BOLD, false);
 			m_RestartText.setColour(SDL_Color { 255, 255, 0, 255 });
 			m_HighlightingRestartText = true;
 		}
@@ -113,6 +112,7 @@ void GameOverState::update()
 	{
 		if (!m_HighlightingExitText)
 		{
+			m_ExitText.setStyle(TTF_STYLE_BOLD, false);
 			m_ExitText.setColour(SDL_Color { 255, 255, 0, 255 });
 			m_HighlightingExitText = true;
 		}
@@ -126,7 +126,10 @@ void GameOverState::update()
 			m_HighlightingRestartText = false;
 			m_HighlightingExitText = false;
 
+			m_RestartText.setStyle(TTF_STYLE_NORMAL, false);
 			m_RestartText.setColour(SDL_Color { 90, 160, 30, 255 });
+
+			m_ExitText.setStyle(TTF_STYLE_NORMAL, false);
 			m_ExitText.setColour(SDL_Color { 90, 160, 30, 255 });
 		}
 	}
