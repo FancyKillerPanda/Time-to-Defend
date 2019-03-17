@@ -78,6 +78,11 @@ Game::Game()
 	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
 	pushState(std::move(startScreenState));
 
+#ifdef _DEBUG
+	// Loads the information text
+	m_InfoText.load("res/fonts/arial.ttf", "Time to Defend V0.1.0 | 0 FPS", 10, SDL_Color { 180, 180, 180, 255 }, m_Renderer);
+#endif // _DEBUG
+
 	// Resets the frame timer
 	m_FrameTimer.reset();
 	m_FrameCount = 0;
@@ -181,9 +186,15 @@ void Game::update()
 #ifdef _DEBUG
 	m_FrameCount += 1;
 
-	if (m_FrameTimer.getElapsed() >= 1000)
+	if (m_FrameTimer.getElapsed() >= 1000.0)
 	{
-		printf("%d FPS\n", m_FrameCount);
+		// Creates the text
+		std::string text = "Time to Defend V0.1.0 | ";
+		text += std::to_string(m_FrameCount);
+		text += " FPS";
+
+		// Sets the text
+		m_InfoText.setText(text.c_str());
 
 		// Resets the timer
 		m_FrameTimer.reset();
@@ -208,6 +219,12 @@ void Game::draw()
 		// Lets the state draw what it needs to
 		m_GameStates.back()->draw();
 	}
+
+#ifdef _DEBUG
+	// Draws the information text
+	m_InfoText.draw(75, 15);
+#endif // _DEBUG
+
 
 	SDL_RenderPresent(m_Renderer);
 }

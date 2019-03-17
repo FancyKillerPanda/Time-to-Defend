@@ -4,6 +4,7 @@
 
 #include "state/BaseGameState.h"
 #include "utils/Timer.h"
+#include "gfx/Text.h"
 
 
 class Game
@@ -28,6 +29,9 @@ private:
 	Timer m_FrameTimer;
 	// Counter of number of frames since timer reset
 	unsigned int m_FrameCount;
+
+	// Text containing debug information
+	Text m_InfoText;
 #endif // _DEBUG
 
 
