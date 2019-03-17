@@ -13,7 +13,12 @@ private:
 	Text m_GameOverText;
 	Text m_InfoText;
 
+	// Whether the game was won
+	bool m_Won;
+
 public:
+	GameOverState(bool won);
+
 	void onEnter() override;
 
 	void handleEvent(SDL_Event& event) override;

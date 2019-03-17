@@ -57,7 +57,7 @@ private:
 	void spawnEnemies();
 
 	// Ends the game
-	void endGame();
+	void endGame(bool won);
 
 public:
 	void onExit() override;

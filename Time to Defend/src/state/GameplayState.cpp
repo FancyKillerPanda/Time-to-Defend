@@ -125,7 +125,7 @@ void GameplayState::update()
 		{
 			m_GameOver = true;
 
-			endGame();
+			endGame(false);
 			return;
 		}
 	}
@@ -187,6 +187,11 @@ void GameplayState::update()
 		case GameLevel::_2:
 			m_GameLevel = GameLevel::_3;
 			break;
+
+		case GameLevel::_3:
+			// Ends the game with a win
+			endGame(true);
+			return;
 		}
 
 		m_NeedToLoadLevel = true;
@@ -316,12 +321,12 @@ void GameplayState::spawnEnemies()
 	}
 }
 
-void GameplayState::endGame()
+void GameplayState::endGame(bool won)
 {
 	// Pops this state off the Game's stack
 	s_Game->popState();
 
 	// Pushes the first state onto the stack
-	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>();
+	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>(won);
 	s_Game->pushState(std::move(gameOverState));
 }
