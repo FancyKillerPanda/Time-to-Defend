@@ -21,15 +21,20 @@ Potentially a low-framerate game where everything (incl. arrows) moves an intege
 - [DONE] Implement arrow collision detection
 - [DONE] Remove enemy when arrow collides with it
 - [DONE] Add game over screen
-- [PENDING] Add ability to bold text
+- [DONE] Add ability to bold text
 - [DONE] Add completed level screen
 - [DONE] Add start menu
 - [DONE] Add second level
 - [DONE] Transition to second level if first passed
-- [PENDING] Add level number to completed level screen
-- [PENDING] Allow mouse usage on start menu with buttons
-- [PENDING] Game completed screen
+- [DONE] Add level number to completed level screen
+- [DONE] Allow mouse usage on start menu with buttons
+- [DONE] Game completed screen
 - [PENDING] Different enemy colours
 - [PENDING] Tower shoot cooldown
 - [PENDING] Power up (maybe unlimited shooting for limited time)
 - [PENDING] Window resizing
+- [PENDING] Level editor
+	- [PENDING] Start with blank file of '.'
+	- [PENDING] User can click on editor to add a 'P'
+	- [PENDING] If next to an edge, 'P' becomes 'S'
+	- [PENDING] Paths must connect
