@@ -66,6 +66,42 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		}
 
 		break;
+
+	case SDL_MOUSEBUTTONDOWN:
+		if (m_ScreenState == ScreenState::MainScreen)
+		{
+			int mouseX;
+			int mouseY;
+			SDL_GetMouseState(&mouseX, &mouseY);
+
+			if (m_PlayText.rectCollides(mouseX, mouseY))
+			{
+				// Pops this state off the Game's stack
+				s_Game->popState();
+
+				// Pushes the gameplay state onto the stack
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
+				s_Game->pushState(std::move(gameplayState));
+			}
+
+			else if (m_HelpText.rectCollides(mouseX, mouseY))
+			{
+				m_ScreenState = ScreenState::Instructions;
+				loadInstructionText();
+			}
+
+			else if (m_EditorText.rectCollides(mouseX, mouseY))
+			{
+				// TODO: Switch to editor once it's created
+			}
+
+			else if (m_SettingsText.rectCollides(mouseX, mouseY))
+			{
+				// TODO: Switch to settings page once it's created
+			}
+		}
+
+		break;
 	}
 }
 
