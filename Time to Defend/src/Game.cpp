@@ -222,7 +222,7 @@ void Game::draw()
 
 #ifdef _DEBUG
 	// Draws the information text
-	m_InfoText.draw(75, 15);
+	m_InfoText.draw(m_WindowWidth - m_InfoText.getRect().w / 2 - 10, m_WindowHeight - m_InfoText.getRect().h / 2 - 10);
 #endif // _DEBUG
 
 

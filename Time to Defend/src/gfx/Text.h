@@ -47,4 +47,7 @@ public:
 
 	// Sets the style of the font
 	void setStyle(int style);
+
+	// Gets the rect
+	const SDL_Rect& getRect() { return m_TextRect; }
 };
