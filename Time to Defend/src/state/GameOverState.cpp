@@ -17,19 +17,22 @@ void GameOverState::onEnter()
 {
 	// Sets the text based upon the result of the game
 	const char* text;
+	SDL_Color colour;
 
 	if (m_Won)
 	{
 		text = "Congratulations! You Won!";
+		colour = SDL_Color { 70, 255, 0, 255 };
 	}
 
 	else
 	{
 		text = "Game Over! You Lost!";
+		colour = SDL_Color { 255, 35, 0, 255 };
 	}
 
 	// Creates the text
-	m_GameOverText.load("res/fonts/arial.ttf", text, 48, SDL_Color { 255, 35, 0, 255 }, s_Game->getRenderer());
+	m_GameOverText.load("res/fonts/arial.ttf", text, 48, colour, s_Game->getRenderer());
 	m_InfoText.load("res/fonts/arial.ttf", "Press <Escape> to exit or <R> to restart!", 28, SDL_Color { 90, 160, 0, 255 }, s_Game->getRenderer());
 
 	// Makes the text bold
