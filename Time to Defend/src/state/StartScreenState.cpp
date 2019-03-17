@@ -59,7 +59,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::MainScreen)
 			{
 				m_ScreenState = ScreenState::Instructions;
-				loadInstructionText();
+				loadInstructionPage();
 			}
 
 			break;
@@ -89,7 +89,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_HelpText.rectCollides(mouseX, mouseY))
 			{
 				m_ScreenState = ScreenState::Instructions;
-				loadInstructionText();
+				loadInstructionPage();
 			}
 
 			else if (m_EditorText.rectCollides(mouseX, mouseY))
@@ -239,8 +239,13 @@ void StartScreenState::draw()
 	}
 }
 
-void StartScreenState::loadInstructionText()
+void StartScreenState::loadInstructionPage()
 {
+	if (m_InstructionPageLoaded)
+	{
+		return;
+	}
+
 	// The instructions
 	const char* instructionText_0 = "Welcome to Time to Defend! Your goal is to try";
 	const char* instructionText_1 = "to defeat all the enemies that will be trying";
@@ -257,4 +262,6 @@ void StartScreenState::loadInstructionText()
 	m_InstructionsText_5.load("res/fonts/arial.ttf", instructionText_5, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
 	m_BackText.load("res/fonts/arial.ttf", "<-- Back", 30, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+
+	m_InstructionPageLoaded = true;
 }

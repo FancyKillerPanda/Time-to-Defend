@@ -28,6 +28,9 @@ private:
 	// The button (text) currently being highlighted
 	int m_TextCurrentlyHighlighted = -1;
 
+	// Whether the instruction page has already loaded
+	bool m_InstructionPageLoaded = false;
+
 	// The instructions on how to play
 	Text m_InstructionsText_0;
 	Text m_InstructionsText_1;
@@ -43,7 +46,7 @@ private:
 	ScreenState m_ScreenState = ScreenState::MainScreen;
 
 private:
-	void loadInstructionText();
+	void loadInstructionPage();
 
 public:
 	void onEnter() override;
