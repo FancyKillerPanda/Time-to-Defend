@@ -72,7 +72,26 @@ void GameplayState::handleEvent(SDL_Event& event)
 			// Shoots an arrow
 			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
 			break;
+
+		#ifdef _DEBUG
+		case SDLK_k:
+			// Kills all enemies
+			for (unsigned int i = 0; i < m_Enemies.size(); i++)
+			{
+				// Gets the enemy
+				Enemy* enemy = m_Enemies[i];
+
+				// Deletes the enemy
+				delete enemy;
+				enemy = nullptr;
+			}
+
+			// Removes the (now destroyed) enemies from the vector
+			m_Enemies.clear();
+
+			break;
 		}
+		#endif // _DEBUG
 
 		break;
 
