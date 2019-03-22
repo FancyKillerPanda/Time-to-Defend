@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BaseApplication.h" />
+    <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\entities\Arrow.h" />
     <ClInclude Include="src\entities\Enemy.h" />
     <ClInclude Include="src\entities\Tower.h" />
@@ -28,7 +28,7 @@
     <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\BaseApplication.cpp" />
+    <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\entities\Arrow.cpp" />
     <ClCompile Include="src\entities\Enemy.cpp" />
     <ClCompile Include="src\entities\Tower.cpp" />

@@ -54,10 +54,10 @@
     <ClInclude Include="src\Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\BaseApplication.h">
+    <ClInclude Include="src\state\BaseGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\state\BaseGameState.h">
+    <ClInclude Include="src\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,7 +92,7 @@
     <ClCompile Include="src\state\BaseGameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BaseApplication.cpp">
+    <ClCompile Include="src\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
