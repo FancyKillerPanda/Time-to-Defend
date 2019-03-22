@@ -85,7 +85,7 @@ void Map::load(Application* const game, const char* filepath)
 	LOG_INFO("Created map (filepath: {0}).", filepath);
 }
 
-void Map::draw(SDL_Renderer* renderer)
+void Map::draw()
 {
 	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
 	{

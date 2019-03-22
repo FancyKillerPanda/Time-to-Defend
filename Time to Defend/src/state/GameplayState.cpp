@@ -226,7 +226,7 @@ void GameplayState::update()
 void GameplayState::draw()
 {
 	// Draws the map
-	m_CurrentMap.draw(s_Game->getRenderer());
+	m_CurrentMap.draw();
 
 	// Draws each enemy
 	for (Enemy* enemy : m_Enemies)
