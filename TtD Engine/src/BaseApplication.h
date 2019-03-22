@@ -5,17 +5,43 @@
 
 class GameState;
 
+
 class Application
 {
+protected:
+	bool m_Running = true;
+
+	// Window properties
+	unsigned int m_WindowWidth;
+	unsigned int m_WindowHeight;
+	const char* m_WindowTitle;
+
+	// SDL window and renderer
+	SDL_Window* m_Window = nullptr;
+	SDL_Renderer* m_Renderer = nullptr;
+
+	// Stack of the current game states
+	std::vector<std::unique_ptr<GameState>> m_GameStates;
+
+protected:
+	virtual void handleEvents() = 0;
+	virtual void update() {}
+	virtual void draw() = 0;
+
 public:
+	Application(unsigned int windowWidth, unsigned int windowHeight, const char* windowTitle);
+
+	// Runs the main game-loop
+	void run();
+
 	// Pushes a state onto the stack
 	virtual void pushState(std::unique_ptr<GameState> state) = 0;
 	// Pops a state from the stack
 	virtual void popState() = 0;
 
-	virtual inline SDL_Renderer* const getRenderer() = 0;
-	virtual inline unsigned int getWindowWidth() = 0;
-	virtual inline unsigned int getWindowHeight() = 0;
+	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
+	inline unsigned int getWindowWidth() { return m_WindowWidth; }
+	inline unsigned int getWindowHeight() { return m_WindowHeight; }
 
-	virtual void setRunning(bool value) = 0;
+	void setRunning(bool value) { m_Running = value; }
 };

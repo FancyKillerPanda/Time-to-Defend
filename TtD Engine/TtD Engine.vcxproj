@@ -28,6 +28,7 @@
     <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseApplication.cpp" />
     <ClCompile Include="src\entities\Arrow.cpp" />
     <ClCompile Include="src\entities\Enemy.cpp" />
     <ClCompile Include="src\entities\Tower.cpp" />

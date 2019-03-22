@@ -12,20 +12,6 @@
 class Game : public Application
 {
 private:
-	bool m_Running = true;
-
-	// Window properties
-	unsigned int m_WindowWidth = 960;
-	unsigned int m_WindowHeight = 540;
-	const char* m_WindowTitle = "Time to Defend!";
-
-	// SDL window and renderer
-	SDL_Window* m_Window = nullptr;
-	SDL_Renderer* m_Renderer = nullptr;
-
-	// Stack of the current game states
-	std::vector<std::unique_ptr<GameState>> m_GameStates;
-
 #ifdef _DEBUG
 	// Frame rate timer
 	Timer m_FrameTimer;
@@ -36,27 +22,17 @@ private:
 	Text m_InfoText;
 #endif // _DEBUG
 
-
 private:
-	void handleEvents();
-	void update();
-	void draw();
+	void handleEvents() override;
+	void update() override;
+	void draw() override;
 
 public:
 	Game();
 	~Game();
 
-	// Runs the main game-loop
-	void run();
-
 	// Pushes a state onto the stack
 	void pushState(std::unique_ptr<GameState> state) override;
 	// Pops a state from the stack
 	void popState() override;
-
-	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
-	inline unsigned int getWindowWidth() { return m_WindowWidth; }
-	inline unsigned int getWindowHeight() { return m_WindowHeight; }
-
-	void setRunning(bool value) { m_Running = value; }
 };

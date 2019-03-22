@@ -9,6 +9,7 @@
 
 
 Game::Game()
+	: Application(960, 540, "Time to Defend!")
 {
 	// Initialises other parts of the game
 	Log::init();
@@ -118,17 +119,6 @@ Game::~Game()
 	SDL_Quit();
 
 	LOG_INFO("Destroyed Game.");
-}
-
-void Game::run()
-{
-	// Main game-loop
-	while (m_Running)
-	{
-		handleEvents();
-		update();
-		draw();
-	}
 }
 
 
