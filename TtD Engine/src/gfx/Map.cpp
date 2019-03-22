@@ -3,14 +3,13 @@
 #include "Map.h"
 
 #include "utils/Log.h"
-#include "Game.h"
 #include "Settings.h"
 
 
-Game* Map::s_Game = nullptr;
+Application* Map::s_Game = nullptr;
 
 
-Map::Map(Game* const game, const char* filepath)
+Map::Map(Application* const game, const char* filepath)
 {
 	load(game, filepath);
 }
@@ -21,7 +20,7 @@ Map::~Map()
 }
 
 
-void Map::load(Game* const game, const char* filepath)
+void Map::load(Application* const game, const char* filepath)
 {
 #ifdef _DEBUG
 	m_Filepath = filepath;

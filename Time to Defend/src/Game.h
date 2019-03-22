@@ -2,12 +2,14 @@
 
 #include "pch.h"
 
+#include "BaseApplication.h"
+
 #include "state/BaseGameState.h"
 #include "utils/Timer.h"
 #include "gfx/Text.h"
 
 
-class Game
+class Game : public Application
 {
 private:
 	bool m_Running = true;
@@ -48,9 +50,9 @@ public:
 	void run();
 
 	// Pushes a state onto the stack
-	void pushState(std::unique_ptr<GameState> state);
+	void pushState(std::unique_ptr<GameState> state) override;
 	// Pops a state from the stack
-	void popState();
+	void popState() override;
 
 	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
 	inline unsigned int getWindowWidth() { return m_WindowWidth; }

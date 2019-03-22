@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseApplication.h" />
     <ClInclude Include="src\entities\Arrow.h" />
     <ClInclude Include="src\entities\Enemy.h" />
     <ClInclude Include="src\entities\Tower.h" />
@@ -19,6 +20,7 @@
     <ClInclude Include="src\gfx\Texture.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Settings.h" />
+    <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\utils\Log.h" />
     <ClInclude Include="src\utils\Maths.h" />
     <ClInclude Include="src\utils\Position.h" />
@@ -36,6 +38,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\state\BaseGameState.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
     <ClCompile Include="src\utils\Random.cpp" />
   </ItemGroup>

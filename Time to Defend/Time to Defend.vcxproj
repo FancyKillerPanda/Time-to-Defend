@@ -98,7 +98,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\state\BaseGameState.cpp" />
     <ClCompile Include="src\state\GameOverState.cpp" />
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\state\LevelPassedState.cpp" />
@@ -108,7 +107,6 @@
   <ItemGroup>
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\state\GameOverState.h" />
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\state\LevelPassedState.h" />

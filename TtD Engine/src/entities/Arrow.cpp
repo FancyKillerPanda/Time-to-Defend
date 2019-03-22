@@ -5,15 +5,14 @@
 
 #include <cmath>
 
-#include "Game.h"
 #include "Settings.h"
 #include "utils/Maths.h"
 
 
-Game* Arrow::s_Game = nullptr;
+Application* Arrow::s_Game = nullptr;
 
 
-Arrow::Arrow(Game* const game, float pixXPos, float pixYPos, unsigned int direction)
+Arrow::Arrow(Application* const game, float pixXPos, float pixYPos, unsigned int direction)
 	: m_Direction((direction + 270) % 360), m_PixXPos(pixXPos), m_PixYPos(pixYPos)
 {
 	s_Game = game;

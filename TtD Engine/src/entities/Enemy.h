@@ -1,19 +1,20 @@
 #pragma once
 
+#include "pch.h"
+
+#include "BaseApplication.h"
+
 #include "gfx/Texture.h"
 #include "gfx/Map.h"
 #include "utils/Position.h"
 #include "utils/Timer.h"
 
 
-class Game;
-
-
 class Enemy
 {
 private:
 	// Game and Map are same for all enemies
-	static Game* s_Game;
+	static Application* s_Game;
 	static const Map* s_Map;
 
 	// Texture
@@ -32,7 +33,7 @@ private:
 
 public:
 	Enemy() = default;
-	Enemy(Game* const game, const Map* map, Position position);
+	Enemy(Application* const game, const Map* map, Position position);
 	~Enemy();
 
 	void draw();

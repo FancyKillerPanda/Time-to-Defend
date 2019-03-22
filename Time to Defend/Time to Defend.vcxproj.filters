@@ -24,9 +24,6 @@
     <ClCompile Include="src\state\GameplayState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\state\BaseGameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,9 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\state\BaseGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\state\GameplayState.h">

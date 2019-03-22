@@ -2,18 +2,17 @@
 
 #include "pch.h"
 
+#include "BaseApplication.h"
+
 #include "Settings.h"
 #include "utils/Position.h"
 #include "gfx/Texture.h"
 
 
-class Game;
-
-
 class Map
 {
 private:
-	static Game* s_Game;
+	static Application* s_Game;
 
 	// The cell data
 	std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y> m_Data = {};
@@ -33,10 +32,10 @@ private:
 
 public:
 	Map() = default;
-	Map(Game* const game, const char* filepath);
+	Map(Application* const game, const char* filepath);
 	~Map();
 
-	void load(Game* const game, const char* filepath);
+	void load(Application* const game, const char* filepath);
 	void draw(SDL_Renderer* renderer);
 	inline const std::vector<Position>& getSpawnCoords() const { return m_SpawnCoords; }
 	inline const std::vector<Position>& getPathCoords() const { return m_PathCoords; }

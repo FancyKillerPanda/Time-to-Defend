@@ -3,14 +3,13 @@
 #include "Tower.h"
 
 #include "utils/Log.h"
-#include "Game.h"
 #include "Settings.h"
 
 
-Game* Tower::s_Game = nullptr;
+Application* Tower::s_Game = nullptr;
 
 
-Tower::Tower(Game* const game, Position position)
+Tower::Tower(Application* const game, Position position)
 	: m_Position(position)
 {
 	s_Game = game;

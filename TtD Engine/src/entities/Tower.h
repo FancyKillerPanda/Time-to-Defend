@@ -2,18 +2,17 @@
 
 #include "pch.h"
 
+#include "BaseApplication.h"
+
 #include "utils/Position.h"
 #include "gfx/Texture.h"
 #include "Arrow.h"
 
 
-class Game;
-
-
 class Tower
 {
 private:
-	static Game* s_Game;
+	static Application* s_Game;
 
 	Texture* m_Texture;
 	Texture* m_HighlightedTexture;
@@ -24,7 +23,7 @@ private:
 
 public:
 	Tower() = default;
-	Tower(Game* const game, Position position);
+	Tower(Application* const game, Position position);
 	~Tower();
 
 	void draw();

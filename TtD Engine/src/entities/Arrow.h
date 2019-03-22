@@ -2,17 +2,17 @@
 
 #include "pch.h"
 
+#include "BaseApplication.h"
 #include "gfx/Texture.h"
 
 
-class Game;
 class Enemy;
 
 
 class Arrow
 {
 private:
-	static Game* s_Game;
+	static Application* s_Game;
 
 	// Texture
 	Texture* m_Texture;
@@ -26,7 +26,7 @@ private:
 
 public:
 	Arrow() = default;
-	Arrow(Game* const game, float xPos, float yPos, unsigned int direction);
+	Arrow(Application* const game, float xPos, float yPos, unsigned int direction);
 	~Arrow();
 
 	void draw();

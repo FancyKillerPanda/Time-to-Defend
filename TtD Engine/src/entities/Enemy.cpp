@@ -2,16 +2,15 @@
 
 #include "Enemy.h"
 
-#include "Game.h"
 #include "Settings.h"
 #include "utils/Random.h"
 
 
-Game* Enemy::s_Game = nullptr;
+Application* Enemy::s_Game = nullptr;
 const Map* Enemy::s_Map = nullptr;
 
 
-Enemy::Enemy(Game* const game, const Map* map, Position position)
+Enemy::Enemy(Application* const game, const Map* map, Position position)
 	: m_Position(position), m_MoveTime((unsigned int) Random::randint(MIN_ENEMY_MOVE_TIME, MAX_ENEMY_MOVE_TIME))
 {
 	s_Game = game;
