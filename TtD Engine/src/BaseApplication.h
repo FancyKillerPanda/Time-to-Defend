@@ -28,6 +28,18 @@ protected:
 	virtual void update() {}
 	virtual void draw() = 0;
 
+	// Initialises SDL
+	bool initSDL();
+	// Initialises IMG
+	bool initIMG();
+	// Initialises TTF
+	bool initTTF();
+
+	// Creates the SDL window
+	bool createWindow();
+	// Creates the SDL renderer
+	bool createRenderer();
+
 public:
 	Application(unsigned int windowWidth, unsigned int windowHeight, const char* windowTitle);
 

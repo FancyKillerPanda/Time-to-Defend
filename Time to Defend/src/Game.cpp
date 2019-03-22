@@ -16,61 +16,16 @@ Game::Game()
 	Random::init();
 	GameState::init(this);
 
-	// Initialises SDL
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0)
+	if (!(
+		initSDL() &&
+		initIMG() &&
+		initTTF() &&
+		createWindow() &&
+		createRenderer()
+		))
 	{
-		LOG_FATAL("Could not initialise SDL.\nSDLError: {0}.", SDL_GetError());
-		m_Running = false;
 		return;
 	}
-
-	LOG_INFO("SDL initialised.");
-
-	// Initialises IMG
-	if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
-	{
-		LOG_FATAL("Could not initialise IMG.\nSDLError: {0}.", SDL_GetError());
-		m_Running = false;
-		return;
-	}
-
-	LOG_INFO("IMG initialised.");
-
-	// Initialises TTF
-	if (TTF_Init() != 0)
-	{
-		LOG_FATAL("Could not initialise TTF.\nSDLError: {0}.", SDL_GetError());
-		m_Running = false;
-		return;
-	}
-
-	LOG_INFO("TTF initialised.");
-
-	// Creates the window
-	m_Window = SDL_CreateWindow(m_WindowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_WindowWidth, m_WindowHeight, SDL_WINDOW_SHOWN);
-
-	// Error checking for window creation
-	if (m_Window == nullptr)
-	{
-		LOG_FATAL("Could not create SDL window.\nSDLError: {0}.", SDL_GetError());
-		m_Running = false;
-		return;
-	}
-
-	LOG_INFO("Created SDL window.");
-
-	// Creates the renderer
-	m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
-	// Error checking for renderer creation
-	if (m_Renderer == nullptr)
-	{
-		LOG_FATAL("Could not create SDL renderer.\nSDLError: {0}.", SDL_GetError());
-		m_Running = false;
-		return;
-	}
-
-	LOG_INFO("Created SDL renderer.");
 
 	// Sets the clear colour
 	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
