@@ -63,6 +63,56 @@ void GameplayState::handleEvent(SDL_Event& event)
 			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
 			break;
 
+		case SDLK_1:
+			// Changes the tower if possible
+			changeToTower(0);
+			break;
+
+		case SDLK_2:
+			// Changes the tower if possible
+			changeToTower(1);
+			break;
+
+		case SDLK_3:
+			// Changes the tower if possible
+			changeToTower(2);
+			break;
+
+		case SDLK_4:
+			// Changes the tower if possible
+			changeToTower(3);
+			break;
+
+		case SDLK_5:
+			// Changes the tower if possible
+			changeToTower(4);
+			break;
+
+		case SDLK_6:
+			// Changes the tower if possible
+			changeToTower(5);
+			break;
+
+		case SDLK_7:
+			// Changes the tower if possible
+			changeToTower(6);
+			break;
+
+		case SDLK_8:
+			// Changes the tower if possible
+			changeToTower(7);
+			break;
+
+		case SDLK_9:
+			// Changes the tower if possible
+			changeToTower(8);
+			break;
+
+		case SDLK_0:
+			// Changes the tower if possible
+			changeToTower(9);
+			break;
+
 		#ifdef _DEBUG
 		case SDLK_k:
 			// Kills all enemies
@@ -343,4 +393,19 @@ void GameplayState::endGame(bool won)
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>(won);
 	s_Game->pushState(std::move(gameOverState));
+}
+
+void GameplayState::changeToTower(int towerNumber)
+{
+	if (towerNumber < m_Towers.size())
+	{
+		// Stops highlighting the current tower
+		m_Towers[m_CurrentTowerIndex]->setHighlight(false);
+
+		// Changes the current tower
+		m_CurrentTowerIndex = towerNumber;
+
+		// Highlights the current tower
+		m_Towers[m_CurrentTowerIndex]->setHighlight(true);
+	}
 }

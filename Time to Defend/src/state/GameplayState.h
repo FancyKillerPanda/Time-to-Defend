@@ -65,4 +65,6 @@ public:
 	void handleEvent(SDL_Event& event) override;
 	void update() override;
 	void draw() override;
+
+	void changeToTower(int towerNumber);
 };
