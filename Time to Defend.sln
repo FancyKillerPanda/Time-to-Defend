@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28527.54
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Time to Defend", "Time to Defend\Time to Defend.vcxproj", "{FC09F575-BBED-4A81-B6F2-EFA35DF5CC47}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TtD Engine", "TtD Engine\TtD Engine.vcxproj", "{6F144520-0816-420C-81C1-A86DE73AA032}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{FC09F575-BBED-4A81-B6F2-EFA35DF5CC47}.Debug|x64.Build.0 = Debug|x64
 		{FC09F575-BBED-4A81-B6F2-EFA35DF5CC47}.Release|x64.ActiveCfg = Release|x64
 		{FC09F575-BBED-4A81-B6F2-EFA35DF5CC47}.Release|x64.Build.0 = Release|x64
+		{6F144520-0816-420C-81C1-A86DE73AA032}.Debug|x64.ActiveCfg = Debug|x64
+		{6F144520-0816-420C-81C1-A86DE73AA032}.Debug|x64.Build.0 = Debug|x64
+		{6F144520-0816-420C-81C1-A86DE73AA032}.Release|x64.ActiveCfg = Release|x64
+		{6F144520-0816-420C-81C1-A86DE73AA032}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

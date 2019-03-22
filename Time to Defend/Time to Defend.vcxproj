@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\spdlog\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)TtD Engine\src;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\spdlog\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -76,7 +76,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\spdlog\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)TtD Engine\src;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\spdlog\include\</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -109,9 +109,7 @@
     <ClCompile Include="src\state\GameplayState.cpp" />
     <ClCompile Include="src\state\LevelPassedState.cpp" />
     <ClCompile Include="src\state\StartScreenState.cpp" />
-    <ClCompile Include="src\utils\Log.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\utils\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\Arrow.h" />
@@ -128,11 +126,6 @@
     <ClInclude Include="src\state\GameplayState.h" />
     <ClInclude Include="src\state\LevelPassedState.h" />
     <ClInclude Include="src\state\StartScreenState.h" />
-    <ClInclude Include="src\utils\Log.h" />
-    <ClInclude Include="src\utils\Maths.h" />
-    <ClInclude Include="src\utils\Position.h" />
-    <ClInclude Include="src\utils\Random.h" />
-    <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\maps\Level_1.txt" />
@@ -143,6 +136,11 @@
     <Image Include="res\txrs\Arrow.png" />
     <Image Include="res\txrs\Enemy.png" />
     <Image Include="res\txrs\Tower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TtD Engine\TtD Engine.vcxproj">
+      <Project>{6f144520-0816-420c-81c1-a86de73aa032}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
