@@ -1,5 +1,9 @@
 #pragma once
 
+// Maths
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 // Containers
 #include <vector>
 #include <array>

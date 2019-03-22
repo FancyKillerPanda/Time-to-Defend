@@ -1,5 +1,9 @@
 #pragma once
 
+// Maths
+#define _USE_MATH_DEFINES
+#include <cmath>
+
 // Miscellaneous
 #include <random>
 #include <chrono>
