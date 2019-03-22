@@ -23,6 +23,11 @@ void StartScreenState::onEnter()
 		"Settings (Coming Soon...)"
 	});
 
+	// Creates the back button
+	m_BackMenu = new Menu(s_Game, {
+		"<-- Back"
+	});
+
 	// Makes the background render black
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
@@ -31,6 +36,9 @@ void StartScreenState::onExit()
 {
 	delete m_MainMenu;
 	m_MainMenu = nullptr;
+
+	delete m_BackMenu;
+	m_BackMenu = nullptr;
 }
 
 void StartScreenState::handleEvent(SDL_Event& event)
@@ -58,7 +66,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Goes back to the main screen
 			case ScreenState::Instructions:
 				m_ScreenState = ScreenState::MainScreen;
-
 				break;
 			}
 
@@ -117,12 +124,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 		case ScreenState::Instructions:
 		{
-			// Gets the mouse posiiton
-			int mouseX;
-			int mouseY;
-			SDL_GetMouseState(&mouseX, &mouseY);
-
-			if (m_BackText.rectCollides(mouseX, mouseY))
+			if (m_BackMenu->itemClicked() == 0)
 			{
 				m_ScreenState = ScreenState::MainScreen;
 			}
@@ -137,10 +139,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 void StartScreenState::update()
 {
-	int mouseX;
-	int mouseY;
-	SDL_GetMouseState(&mouseX, &mouseY);
-
 	switch (m_ScreenState)
 	{
 	case ScreenState::MainScreen:
@@ -150,22 +148,7 @@ void StartScreenState::update()
 	}
 
 	case ScreenState::Instructions:
-		if (m_BackText.rectCollides(mouseX, mouseY))
-		{
-			if (!m_BackTextHighlighted)
-			{
-				m_BackText.setColour(SDL_Color { 255, 255, 0, 255 });
-			}
-		}
-
-		else
-		{
-			if (m_BackTextHighlighted)
-			{
-				m_BackText.setColour(SDL_Color { 90, 160, 30, 255 });
-			}
-		}
-
+		m_BackMenu->update();
 		break;
 	}
 }
@@ -191,7 +174,7 @@ void StartScreenState::draw()
 		m_InstructionsText_4.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 13 / 20);
 		m_InstructionsText_5.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 14 / 20);
 
-		m_BackText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 18 / 20);
+		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
 	}
@@ -218,8 +201,6 @@ void StartScreenState::loadInstructionPage()
 	m_InstructionsText_3.load("res/fonts/arial.ttf", instructionText_3, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 	m_InstructionsText_4.load("res/fonts/arial.ttf", instructionText_4, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 	m_InstructionsText_5.load("res/fonts/arial.ttf", instructionText_5, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-
-	m_BackText.load("res/fonts/arial.ttf", "<-- Back", 30, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
 	m_InstructionPageLoaded = true;
 }

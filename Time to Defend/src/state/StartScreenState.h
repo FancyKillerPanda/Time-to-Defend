@@ -43,8 +43,7 @@ private:
 	Text m_InstructionsText_4;
 	Text m_InstructionsText_5;
 
-	Text m_BackText;
-	bool m_BackTextHighlighted = false;
+	Menu* m_BackMenu;
 
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
