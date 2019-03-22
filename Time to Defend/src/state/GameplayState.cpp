@@ -100,6 +100,11 @@ void GameplayState::handleEvent(SDL_Event& event)
 		}
 
 		break;
+
+	case SDL_MOUSEBUTTONDOWN:
+		// Shoots an arrow
+		m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
+		break;
 	}
 }
 
