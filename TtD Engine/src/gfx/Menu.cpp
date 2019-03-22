@@ -59,3 +59,23 @@ void Menu::addItems(std::initializer_list<const char*> texts)
 		}
 	}
 }
+
+int Menu::itemClicked()
+{
+	// Gets the mouse posiiton
+	int mouseX;
+	int mouseY;
+	SDL_GetMouseState(&mouseX, &mouseY);
+
+	for (unsigned int i = 0; i < m_Texts.size(); i++)
+	{
+		Text* text = m_Texts[i];
+
+		if (text != nullptr && text->rectCollides(mouseX, mouseY))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}

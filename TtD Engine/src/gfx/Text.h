@@ -53,4 +53,7 @@ public:
 
 	// Gets the rect
 	const SDL_Rect& getRect() { return m_TextRect; }
+
+	// Gets the text
+	const char* getText() { return m_Text; }
 };

@@ -78,15 +78,12 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		int mouseX;
-		int mouseY;
-		SDL_GetMouseState(&mouseX, &mouseY);
-
 		switch (m_ScreenState)
 		{
 		case ScreenState::MainScreen:
 		{
-			if (m_PlayText.rectCollides(mouseX, mouseY))
+			// Clicked "Play"
+			if (m_MainMenu->itemClicked() == 0)
 			{
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -96,18 +93,21 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->pushState(std::move(gameplayState));
 			}
 
-			else if (m_HelpText.rectCollides(mouseX, mouseY))
+			// Clicked "Instructions"
+			else if (m_MainMenu->itemClicked() == 1)
 			{
 				m_ScreenState = ScreenState::Instructions;
 				loadInstructionPage();
 			}
 
-			else if (m_EditorText.rectCollides(mouseX, mouseY))
+			// Clicked "Level Editor"
+			else if (m_MainMenu->itemClicked() == 2)
 			{
 				// TODO: Switch to editor once it's created
 			}
 
-			else if (m_SettingsText.rectCollides(mouseX, mouseY))
+			// Clicked "Settings"
+			else if (m_MainMenu->itemClicked() == 3)
 			{
 				// TODO: Switch to settings page once it's created
 			}
@@ -116,12 +116,19 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		}
 
 		case ScreenState::Instructions:
+		{
+			// Gets the mouse posiiton
+			int mouseX;
+			int mouseY;
+			SDL_GetMouseState(&mouseX, &mouseY);
+
 			if (m_BackText.rectCollides(mouseX, mouseY))
 			{
 				m_ScreenState = ScreenState::MainScreen;
 			}
 
 			break;
+		}
 		}
 
 		break;
