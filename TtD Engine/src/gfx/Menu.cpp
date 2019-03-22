@@ -56,7 +56,7 @@ void Menu::update()
 
 		if (text->rectCollides(mouseX, mouseY))
 		{
-			if (m_CurrentlyHighlighting != i)
+			if (m_CurrentlyHighlighting != (int) i)
 			{
 				if (m_CurrentlyHighlighting != -1)
 				{
@@ -93,7 +93,7 @@ void Menu::addItems(std::initializer_list<const char*> texts)
 {
 	for (const char* text : texts)
 	{
-		if (text == "")
+		if (std::strcmp(text, "") == 0)
 		{
 			m_Texts.emplace_back(nullptr);
 		}
