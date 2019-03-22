@@ -22,7 +22,7 @@ public:
 	// Cleans up the state
 	virtual void onExit() { LOG_INFO("Destroyed base game state."); }
 
-	virtual void handleEvent(SDL_Event& event) {}
+	virtual void handleEvent(SDL_Event&) {}
 	virtual void update() {}
 	virtual void draw() {}
 };
