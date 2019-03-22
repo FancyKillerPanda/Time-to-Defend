@@ -12,8 +12,8 @@
 Application* Arrow::s_Game = nullptr;
 
 
-Arrow::Arrow(Application* const game, float pixXPos, float pixYPos, unsigned int direction)
-	: m_Direction((direction + 270) % 360), m_PixXPos(pixXPos), m_PixYPos(pixYPos)
+Arrow::Arrow(Application* const game, float pixXPos, float pixYPos, double direction)
+	: m_Direction(std::fmod((direction + 270), 360)), m_PixXPos(pixXPos), m_PixYPos(pixYPos)
 {
 	s_Game = game;
 

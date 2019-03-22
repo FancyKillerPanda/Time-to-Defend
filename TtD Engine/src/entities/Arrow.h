@@ -18,7 +18,7 @@ private:
 	Texture* m_Texture;
 
 	// Direction the arrow is travelling, in degrees
-	unsigned int m_Direction = 0;
+	double m_Direction = 0;
 
 	// Current position (in pixels)
 	float m_PixXPos = 0.0f;
@@ -26,7 +26,7 @@ private:
 
 public:
 	Arrow() = default;
-	Arrow(Application* const game, float xPos, float yPos, unsigned int direction);
+	Arrow(Application* const game, float xPos, float yPos, double direction);
 	~Arrow();
 
 	void draw();
