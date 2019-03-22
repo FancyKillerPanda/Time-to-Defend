@@ -30,9 +30,4 @@ private:
 public:
 	Game();
 	~Game();
-
-	// Pushes a state onto the stack
-	void pushState(std::unique_ptr<GameState> state) override;
-	// Pops a state from the stack
-	void popState() override;
 };

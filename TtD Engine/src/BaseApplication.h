@@ -35,9 +35,9 @@ public:
 	void run();
 
 	// Pushes a state onto the stack
-	virtual void pushState(std::unique_ptr<GameState> state) = 0;
+	void pushState(std::unique_ptr<GameState> state);
 	// Pops a state from the stack
-	virtual void popState() = 0;
+	void popState();
 
 	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
 	inline unsigned int getWindowWidth() { return m_WindowWidth; }

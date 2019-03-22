@@ -21,3 +21,26 @@ void Application::run()
 		draw();
 	}
 }
+
+void Application::pushState(std::unique_ptr<GameState> state)
+{
+	m_GameStates.emplace_back(std::move(state));
+	// Sets up the state
+	m_GameStates.back()->onEnter();
+}
+
+void Application::popState()
+{
+	// Makes sure there is a state in the stack
+	if (m_GameStates.empty())
+	{
+		LOG_WARNING("Tried to pop GameState off empty stack.");
+	}
+
+	else
+	{
+		// Cleans up the state before popping
+		m_GameStates.back()->onExit();
+		m_GameStates.pop_back();
+	}
+}
