@@ -145,78 +145,7 @@ void StartScreenState::update()
 	{
 	case ScreenState::MainScreen:
 	{
-		if (m_PlayText.rectCollides(mouseX, mouseY))
-		{
-			if (m_TextCurrentlyHighlighted == 0)
-			{
-				return;
-			}
-
-			m_TextCurrentlyHighlighted = 0;
-
-			m_PlayText.setStyle(TTF_STYLE_BOLD, false);
-			m_PlayText.setColour(SDL_Color { 255, 255, 0, 255 });
-		}
-
-		else if (m_HelpText.rectCollides(mouseX, mouseY))
-		{
-			if (m_TextCurrentlyHighlighted == 1)
-			{
-				return;
-			}
-
-			m_TextCurrentlyHighlighted = 1;
-
-			m_HelpText.setStyle(TTF_STYLE_BOLD, false);
-			m_HelpText.setColour(SDL_Color { 255, 255, 0, 255 });
-		}
-
-		else if (m_EditorText.rectCollides(mouseX, mouseY))
-		{
-			if (m_TextCurrentlyHighlighted == 2)
-			{
-				return;
-			}
-
-			m_TextCurrentlyHighlighted = 2;
-
-			m_EditorText.setStyle(TTF_STYLE_BOLD, false);
-			m_EditorText.setColour(SDL_Color { 255, 255, 0, 255 });
-		}
-
-		else if (m_SettingsText.rectCollides(mouseX, mouseY))
-		{
-			if (m_TextCurrentlyHighlighted == 3)
-			{
-				return;
-			}
-
-			m_TextCurrentlyHighlighted = 3;
-
-			m_SettingsText.setStyle(TTF_STYLE_BOLD, false);
-			m_SettingsText.setColour(SDL_Color { 255, 255, 0, 255 });
-		}
-
-		else
-		{
-			if (m_TextCurrentlyHighlighted != -1)
-			{
-				m_PlayText.setStyle(TTF_STYLE_NORMAL, false);
-				m_PlayText.setColour(SDL_Color { 90, 160, 30, 255 });
-
-				m_HelpText.setStyle(TTF_STYLE_NORMAL, false);
-				m_HelpText.setColour(SDL_Color { 90, 160, 30, 255 });
-
-				m_EditorText.setStyle(TTF_STYLE_NORMAL, false);
-				m_EditorText.setColour(SDL_Color { 90, 160, 30, 255 });
-
-				m_SettingsText.setStyle(TTF_STYLE_NORMAL, false);
-				m_SettingsText.setColour(SDL_Color { 90, 160, 30, 255 });
-
-				m_TextCurrentlyHighlighted = -1;
-			}
-		}
-
+		m_MainMenu->update();
 		break;
 	}
 

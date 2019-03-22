@@ -16,9 +16,15 @@ private:
 	// The items currently in the menu
 	std::vector<Text*> m_Texts;
 
+	// The item currently being highlighted
+	int m_CurrentlyHighlighting = -1;
+
 public:
 	Menu(Application* const game, std::initializer_list<const char*> texts);
 	~Menu();
+
+	// Updates the menu
+	void update();
 
 	// Draws the menu
 	void draw(unsigned int yTop);

@@ -44,6 +44,51 @@ void Menu::draw(unsigned int yTop)
 	}
 }
 
+void Menu::update()
+{
+	int mouseX;
+	int mouseY;
+	SDL_GetMouseState(&mouseX, &mouseY);
+
+	for (unsigned int i = 0; i < m_Texts.size(); i++)
+	{
+		Text* text = m_Texts[i];
+
+		if (text->rectCollides(mouseX, mouseY))
+		{
+			if (m_CurrentlyHighlighting != i)
+			{
+				if (m_CurrentlyHighlighting != -1)
+				{
+					// Resets the old menu item highlighting
+					m_Texts[m_CurrentlyHighlighting]->setStyle(TTF_STYLE_NORMAL, false);
+					m_Texts[m_CurrentlyHighlighting]->setColour(SDL_Color { 90, 160, 30, 255 });
+				}
+
+				m_CurrentlyHighlighting = i;
+
+				// Sets the new item to highlight
+				text->setStyle(TTF_STYLE_BOLD, false);
+				text->setColour(SDL_Color { 255, 255, 0, 255 });
+			}
+
+			break;
+		}
+	}
+
+	if (m_CurrentlyHighlighting != -1)
+	{
+		// Resets the old menu item highlighting
+		if (!m_Texts[m_CurrentlyHighlighting]->rectCollides(mouseX, mouseY))
+		{
+			m_Texts[m_CurrentlyHighlighting]->setStyle(TTF_STYLE_NORMAL, false);
+			m_Texts[m_CurrentlyHighlighting]->setColour(SDL_Color { 90, 160, 30, 255 });
+
+			m_CurrentlyHighlighting = -1;
+		}
+	}
+}
+
 void Menu::addItems(std::initializer_list<const char*> texts)
 {
 	for (const char* text : texts)
