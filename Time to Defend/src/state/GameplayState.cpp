@@ -47,15 +47,8 @@ void GameplayState::handleEvent(SDL_Event& event)
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_t:
-			// Stops highlighting the current tower
-			m_Towers[m_CurrentTowerIndex]->setHighlight(false);
-
-			// Changes the current tower
-			m_CurrentTowerIndex = (m_CurrentTowerIndex + 1) % m_Towers.size();
-
-			// Highlights the current tower
-			m_Towers[m_CurrentTowerIndex]->setHighlight(true);
-
+			// Changes the tower
+			changeToTower((m_CurrentTowerIndex + 1) % m_Towers.size());
 			break;
 
 		case SDLK_SPACE:
