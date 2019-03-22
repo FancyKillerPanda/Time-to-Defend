@@ -12,7 +12,7 @@ Game::Game()
 	: Application(960, 540, "Time to Defend!")
 {
 	// Initialises other parts of the game
-	Log::init();
+	Log::init("TTDLOG");
 	Random::init();
 	GameState::init(this);
 

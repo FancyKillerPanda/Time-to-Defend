@@ -15,7 +15,7 @@ private:
 
 public:
 	// Initialises the logger
-	static void init();
+	static void init(const char* name);
 	inline static std::shared_ptr<spdlog::logger>& getLogger() { return s_Logger; }
 };
 
