@@ -3,6 +3,7 @@
 #include "Tower.h"
 
 #include "utils/Log.h"
+#include "utils/Maths.h"
 #include "Settings.h"
 
 
@@ -32,6 +33,16 @@ Tower::~Tower()
 }
 
 
+void Tower::update()
+{
+	// Gets the mouse position
+	int mouseX;
+	int mouseY;
+	SDL_GetMouseState(&mouseX, &mouseY);
+
+	m_Direction = getDegrees(std::atan2(m_Texture->getRect().y - mouseY, m_Texture->getRect().x - mouseX)) - 90;
+}
+
 void Tower::draw()
 {
 	SDL_Texture* texture;
@@ -48,14 +59,6 @@ void Tower::draw()
 
 	// Renders the tower, rotating by the current direction
 	SDL_RenderCopyEx(s_Game->getRenderer(), texture, nullptr, &m_Texture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
-}
-
-void Tower::rotate(int amountDeg)
-{
-	// Makes sure direction is always in the range of [0, 360)
-	m_Direction += 360;
-	m_Direction += amountDeg;
-	m_Direction %= 360;
 }
 
 Arrow* Tower::shoot()

@@ -46,16 +46,6 @@ void GameplayState::handleEvent(SDL_Event& event)
 	case SDL_KEYDOWN:
 		switch (event.key.keysym.sym)
 		{
-		case SDLK_LEFT:
-			// Will rotate tower to the left
-			m_TowerRotationVelocity = -TOWER_ROTATION_SPEED;
-			break;
-
-		case SDLK_RIGHT:
-			// Will rotate tower to the right
-			m_TowerRotationVelocity = TOWER_ROTATION_SPEED;
-			break;
-
 		case SDLK_t:
 			// Stops highlighting the current tower
 			m_Towers[m_CurrentTowerIndex]->setHighlight(false);
@@ -149,8 +139,8 @@ void GameplayState::update()
 		}
 	}
 
-	// Rotates the tower if needed
-	m_Towers[m_CurrentTowerIndex]->rotate(m_TowerRotationVelocity);
+	// Rotates the tower to face the mouse
+	m_Towers[m_CurrentTowerIndex]->update();
 
 	// Moves each arrow
 	for (unsigned int i = 0; i < m_Arrows.size(); i++)

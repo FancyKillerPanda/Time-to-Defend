@@ -17,7 +17,7 @@ private:
 	Texture* m_Texture;
 	Texture* m_HighlightedTexture;
 	Position m_Position = { 0, 0 };
-	unsigned int m_Direction = 0;
+	double m_Direction = 0;
 
 	bool m_Highlighted = false;
 
@@ -26,10 +26,11 @@ public:
 	Tower(Application* const game, Position position);
 	~Tower();
 
+	void update();
 	void draw();
 
-	// Rotates the tower, input in degrees
-	void rotate(int amountDeg);
+	// TODO: Allow changing settings between arrow keys and mouse
+	// void rotate(int amountDeg);
 
 	// Creates a new arrow and returns it
 	Arrow* shoot();
