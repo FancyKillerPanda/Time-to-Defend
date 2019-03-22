@@ -16,6 +16,7 @@
     <ClInclude Include="src\entities\Enemy.h" />
     <ClInclude Include="src\entities\Tower.h" />
     <ClInclude Include="src\gfx\Map.h" />
+    <ClInclude Include="src\gfx\Menu.h" />
     <ClInclude Include="src\gfx\Text.h" />
     <ClInclude Include="src\gfx\Texture.h" />
     <ClInclude Include="src\pch.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="src\entities\Enemy.cpp" />
     <ClCompile Include="src\entities\Tower.cpp" />
     <ClCompile Include="src\gfx\Map.cpp" />
+    <ClCompile Include="src\gfx\Menu.cpp" />
     <ClCompile Include="src\gfx\Text.cpp" />
     <ClCompile Include="src\gfx\Texture.cpp" />
     <ClCompile Include="src\pch.cpp">

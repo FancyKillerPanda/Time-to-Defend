@@ -11,16 +11,26 @@ void StartScreenState::onEnter()
 {
 	// Creates the text
 	m_TtDText.load("res/fonts/arial.ttf", "Time to Defend!", 48, SDL_Color { 255, 70, 0, 255 }, s_Game->getRenderer());
-	m_PlayText.load("res/fonts/arial.ttf", "Play", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_HelpText.load("res/fonts/arial.ttf", "Instructions", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_EditorText.load("res/fonts/arial.ttf", "Level Editor (Coming Soon...)", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_SettingsText.load("res/fonts/arial.ttf", "Settings (Coming Soon...)", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
 	// Makes the text bold
 	m_TtDText.setStyle(TTF_STYLE_BOLD);
 
+	// Creates the main menu
+	m_MainMenu = new Menu(s_Game, {
+		"Play",
+		"Instructions",
+		"Level Editor (Coming Soon...)",
+		"Settings (Coming Soon...)"
+	});
+
 	// Makes the background render black
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
+}
+
+void StartScreenState::onExit()
+{
+	delete m_MainMenu;
+	m_MainMenu = nullptr;
 }
 
 void StartScreenState::handleEvent(SDL_Event& event)
@@ -231,10 +241,7 @@ void StartScreenState::draw()
 	case ScreenState::MainScreen:
 		// Draws text
 		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
-		m_PlayText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
-		m_HelpText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 10 / 20);
-		m_EditorText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 12 / 20);
-		m_SettingsText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 14 / 20);
+		m_MainMenu->draw(s_Game->getWindowHeight() * 8 / 20);
 
 		break;
 

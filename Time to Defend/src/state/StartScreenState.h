@@ -5,6 +5,7 @@
 #include "state/BaseGameState.h"
 
 #include "gfx/Text.h"
+#include "gfx/Menu.h"
 
 
 class StartScreenState : public GameState
@@ -24,6 +25,9 @@ private:
 	Text m_HelpText;
 	Text m_EditorText;
 	Text m_SettingsText;
+
+	// The main menu
+	Menu* m_MainMenu = nullptr;
 
 	// The button (text) currently being highlighted
 	int m_TextCurrentlyHighlighted = -1;
@@ -50,6 +54,7 @@ private:
 
 public:
 	void onEnter() override;
+	void onExit() override;
 
 	void handleEvent(SDL_Event& event) override;
 	void update() override;
