@@ -42,6 +42,7 @@ protected:
 
 public:
 	Application(unsigned int windowWidth, unsigned int windowHeight, const char* windowTitle);
+	~Application();
 
 	// Runs the main game-loop
 	void run();

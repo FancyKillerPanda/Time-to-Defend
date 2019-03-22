@@ -10,6 +10,38 @@ Application::Application(unsigned int windowWidth, unsigned int windowHeight, co
 {
 }
 
+Application::~Application()
+{
+	// Empties the state stack
+	for (unsigned int i = 0; i < m_GameStates.size(); i++)
+	{
+		popState();
+	}
+
+	// Destroys the renderer
+	if (m_Renderer != nullptr)
+	{
+		SDL_DestroyRenderer(m_Renderer);
+		m_Renderer = nullptr;
+
+		LOG_INFO("Destroyed SDL renderer.");
+	}
+
+	// Destroys the window
+	if (m_Window != nullptr)
+	{
+		SDL_DestroyWindow(m_Window);
+		m_Window = nullptr;
+
+		LOG_INFO("Destroyed SDL window.");
+	}
+
+	// Terminates SDL
+	SDL_Quit();
+
+	LOG_INFO("Destroyed Game.");
+}
+
 
 void Application::run()
 {
