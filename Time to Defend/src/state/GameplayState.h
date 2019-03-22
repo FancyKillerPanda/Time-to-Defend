@@ -59,12 +59,13 @@ private:
 	// Ends the game
 	void endGame(bool won);
 
+	// Changes the tower if possible
+	void changeToTower(int towerNumber);
+
 public:
 	void onExit() override;
 
 	void handleEvent(SDL_Event& event) override;
 	void update() override;
 	void draw() override;
-
-	void changeToTower(int towerNumber);
 };
