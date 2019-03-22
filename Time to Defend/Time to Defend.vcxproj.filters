@@ -24,28 +24,10 @@
     <ClCompile Include="src\state\GameplayState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gfx\Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\state\BaseGameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gfx\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Tower.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\entities\Arrow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gfx\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\state\GameOverState.cpp">
@@ -68,31 +50,10 @@
     <ClInclude Include="src\state\GameplayState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gfx\Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Settings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gfx\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\entities\Tower.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Arrow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\state\GameOverState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gfx\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\state\LevelPassedState.h">

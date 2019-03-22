@@ -11,7 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\Arrow.h" />
+    <ClInclude Include="src\entities\Enemy.h" />
+    <ClInclude Include="src\entities\Tower.h" />
+    <ClInclude Include="src\gfx\Map.h" />
+    <ClInclude Include="src\gfx\Text.h" />
+    <ClInclude Include="src\gfx\Texture.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\utils\Log.h" />
     <ClInclude Include="src\utils\Maths.h" />
     <ClInclude Include="src\utils\Position.h" />
@@ -19,6 +26,12 @@
     <ClInclude Include="src\utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\entities\Arrow.cpp" />
+    <ClCompile Include="src\entities\Enemy.cpp" />
+    <ClCompile Include="src\entities\Tower.cpp" />
+    <ClCompile Include="src\gfx\Map.cpp" />
+    <ClCompile Include="src\gfx\Text.cpp" />
+    <ClCompile Include="src\gfx\Texture.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -72,7 +85,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\spdlog\include\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\spdlog\include\;$(SolutionDir)Dependencies\SDL2\include\;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -80,6 +93,10 @@
     <Link>
       <SubSystem>Console</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -89,7 +106,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\spdlog\include\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;$(SolutionDir)Dependencies\spdlog\include\;$(SolutionDir)Dependencies\SDL2\include\;</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -101,6 +118,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

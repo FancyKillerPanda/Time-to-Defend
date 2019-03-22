@@ -93,13 +93,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\entities\Arrow.cpp" />
-    <ClCompile Include="src\entities\Enemy.cpp" />
-    <ClCompile Include="src\entities\Tower.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\gfx\Map.cpp" />
-    <ClCompile Include="src\gfx\Text.cpp" />
-    <ClCompile Include="src\gfx\Texture.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -112,15 +106,8 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\entities\Arrow.h" />
-    <ClInclude Include="src\entities\Enemy.h" />
-    <ClInclude Include="src\entities\Tower.h" />
     <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\gfx\Map.h" />
-    <ClInclude Include="src\gfx\Text.h" />
-    <ClInclude Include="src\gfx\Texture.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\state\BaseGameState.h" />
     <ClInclude Include="src\state\GameOverState.h" />
     <ClInclude Include="src\state\GameplayState.h" />
