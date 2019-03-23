@@ -37,6 +37,22 @@ void Map::load(Application* const game, const char* filepath)
 	m_GrassTexture.setRect(0, 0, CELL_SIZE, CELL_SIZE);
 	m_TrackTexture.setRect(0, 0, CELL_SIZE, CELL_SIZE);
 
+	// Empty map
+	if (m_Filepath == nullptr)
+	{
+		// Fills map with '.'
+		for (int row = 0; row < NUM_OF_CELLS_Y; row++)
+		{
+			for (int col = 0; col < NUM_OF_CELLS_X; col++)
+			{
+				m_Data[row][col] = '.';
+			}
+		}
+
+		LOG_INFO("Created empty map.");
+		return;
+	}
+
 	int row = 0;
 	int col = 0;
 

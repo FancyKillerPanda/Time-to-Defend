@@ -5,6 +5,8 @@
 #include "utils/Log.h"
 #include "utils/Random.h"
 #include "Settings.h"
+#include "state/BaseGameState.h"
+#include "state/EditorState.h"
 
 
 Editor::Editor()
@@ -13,6 +15,7 @@ Editor::Editor()
 	// Initialises other parts of the editor
 	Log::init("TTELOG");
 	Random::init();
+	GameState::init(this);
 
 	if (!(
 		initSDL() &&
@@ -27,6 +30,10 @@ Editor::Editor()
 
 	// Sets the clear colour
 	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
+
+	// Pushes the first state onto the stack
+	std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
+	pushState(std::move(editorState));
 
 #ifdef _DEBUG
 	// Loads the information text
@@ -46,12 +53,39 @@ void Editor::handleEvents()
 		case SDL_QUIT:
 			m_Running = false;
 			break;
+
+		default:
+			// Makes sure there is a state in the stack
+			if (m_GameStates.empty())
+			{
+				LOG_WARNING("Could not handle events for game state (empty stack).");
+			}
+
+			else
+			{
+				// Lets the state handle the event
+				m_GameStates.back()->handleEvent(event);
+			}
+
+			break;
 		}
 	}
 }
 
 void Editor::update()
 {
+	// Makes sure there is a state in the stack
+	if (m_GameStates.empty())
+	{
+		LOG_WARNING("Could not update game state (empty stack).");
+	}
+
+	else
+	{
+		// Updates the state
+		m_GameStates.back()->update();
+	}
+
 #ifdef _DEBUG
 	m_FrameCount += 1;
 
@@ -76,6 +110,18 @@ void Editor::draw()
 {
 	// Clears the screen
 	SDL_RenderClear(m_Renderer);
+
+	// Makes sure there is a state in the stack
+	if (m_GameStates.empty())
+	{
+		LOG_WARNING("Could not draw game state (empty stack).");
+	}
+
+	else
+	{
+		// Lets the state draw what it needs to
+		m_GameStates.back()->draw();
+	}
 
 #ifdef _DEBUG
 	// Draws the information text

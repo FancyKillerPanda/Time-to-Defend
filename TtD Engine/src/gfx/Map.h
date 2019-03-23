@@ -37,6 +37,7 @@ public:
 
 	void load(Application* const game, const char* filepath);
 	void draw();
+
 	inline const std::vector<Position>& getSpawnCoords() const { return m_SpawnCoords; }
 	inline const std::vector<Position>& getPathCoords() const { return m_PathCoords; }
 	inline const std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() const { return m_Data; }
