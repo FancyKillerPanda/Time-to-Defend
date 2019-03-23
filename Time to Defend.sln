@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Time to Defend", "Time to D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TtD Engine", "TtD Engine\TtD Engine.vcxproj", "{6F144520-0816-420C-81C1-A86DE73AA032}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Time to Edit", "Time to Edit\Time to Edit.vcxproj", "{09CE638C-F4C3-448B-A034-A013BE09B003}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{6F144520-0816-420C-81C1-A86DE73AA032}.Debug|x64.Build.0 = Debug|x64
 		{6F144520-0816-420C-81C1-A86DE73AA032}.Release|x64.ActiveCfg = Release|x64
 		{6F144520-0816-420C-81C1-A86DE73AA032}.Release|x64.Build.0 = Release|x64
+		{09CE638C-F4C3-448B-A034-A013BE09B003}.Debug|x64.ActiveCfg = Debug|x64
+		{09CE638C-F4C3-448B-A034-A013BE09B003}.Debug|x64.Build.0 = Debug|x64
+		{09CE638C-F4C3-448B-A034-A013BE09B003}.Release|x64.ActiveCfg = Release|x64
+		{09CE638C-F4C3-448B-A034-A013BE09B003}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
