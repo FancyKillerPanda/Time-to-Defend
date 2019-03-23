@@ -38,5 +38,13 @@ void EditorState::clickCell()
 	int row = std::floor(mouseY / CELL_SIZE);
 	int col = std::floor(mouseX / CELL_SIZE);
 
-	m_MapEditing.getCoords()[row][col] = 'P';
+	if (m_MapEditing.getCoords()[row][col] == '.')
+	{
+		m_MapEditing.getCoords()[row][col] = 'P';
+	}
+
+	else
+	{
+		m_MapEditing.getCoords()[row][col] = '.';
+	}
 };
