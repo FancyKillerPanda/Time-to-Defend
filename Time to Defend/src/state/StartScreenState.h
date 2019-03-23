@@ -20,17 +20,8 @@ private:
 	// The "Time to Defend!" header text
 	Text m_TtDText;
 
-	// Information about what actions the user can take
-	Text m_PlayText;
-	Text m_HelpText;
-	Text m_EditorText;
-	Text m_SettingsText;
-
 	// The main menu
 	Menu* m_MainMenu = nullptr;
-
-	// The button (text) currently being highlighted
-	int m_TextCurrentlyHighlighted = -1;
 
 	// Whether the instruction page has already loaded
 	bool m_InstructionPageLoaded = false;
