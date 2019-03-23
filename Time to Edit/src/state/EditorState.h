@@ -16,6 +16,8 @@ private:
 	bool m_MouseButtonDown = false;
 	bool m_TurnToTrack = true;
 
+	bool m_ShowGrid = false;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();

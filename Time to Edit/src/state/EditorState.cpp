@@ -12,6 +12,16 @@ void EditorState::handleEvent(SDL_Event& event)
 {
 	switch (event.type)
 	{
+	case SDL_KEYDOWN:
+		switch (event.key.keysym.sym)
+		{
+		case SDLK_g:
+			m_ShowGrid = !m_ShowGrid;
+			break;
+		}
+
+		break;
+
 	case SDL_MOUSEBUTTONDOWN:
 	{
 		m_MouseButtonDown = true;
@@ -47,6 +57,21 @@ void EditorState::update()
 void EditorState::draw()
 {
 	m_MapEditing.draw();
+
+	if (m_ShowGrid)
+	{
+		// Vertical lines
+		for (unsigned int x = CELL_SIZE * 3; x < CELL_SIZE * NUM_OF_CELLS_X; x += CELL_SIZE * 3)
+		{
+			SDL_RenderDrawLine(s_Game->getRenderer(), x, 0, x, CELL_SIZE * NUM_OF_CELLS_Y);
+		}
+
+		// Horizontal lines
+		for (unsigned int y = CELL_SIZE * 3; y < CELL_SIZE * NUM_OF_CELLS_Y; y += CELL_SIZE * 3)
+		{
+			SDL_RenderDrawLine(s_Game->getRenderer(), 0, y, CELL_SIZE * NUM_OF_CELLS_X, y);
+		}
+	}
 }
 
 
