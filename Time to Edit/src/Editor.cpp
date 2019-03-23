@@ -29,7 +29,7 @@ Editor::Editor()
 	}
 
 	// Sets the clear colour
-	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
+	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
