@@ -35,8 +35,8 @@ void EditorState::clickCell()
 	int mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
 
-	int row = std::floor(mouseY / CELL_SIZE);
-	int col = std::floor(mouseX / CELL_SIZE);
+	int row = (int) std::floor(mouseY / CELL_SIZE);
+	int col = (int) std::floor(mouseX / CELL_SIZE);
 
 	if (m_MapEditing.getCoords()[row][col] == '.')
 	{
