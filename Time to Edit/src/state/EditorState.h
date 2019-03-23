@@ -13,6 +13,10 @@ private:
 	// Map currently being edited
 	Map m_MapEditing;
 
+private:
+	// Handles when a cell is clicked
+	void clickCell();
+
 public:
 	void onEnter() override;
 
