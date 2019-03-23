@@ -13,9 +13,15 @@ private:
 	// Map currently being edited
 	Map m_MapEditing;
 
+	bool m_MouseButtonDown = false;
+	bool m_TurnToTrack = true;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();
+
+	// Gets the position of the cell under the mouse
+	Position getCellUnderMouse();
 
 public:
 	void onEnter() override;
