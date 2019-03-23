@@ -3,10 +3,23 @@
 #include "pch.h"
 
 #include "Application.h"
+#include "gfx/Text.h"
+#include "utils/Timer.h"
 
 
 class Editor : public Application
 {
+private:
+#ifdef _DEBUG
+	// Frame rate timer
+	Timer m_FrameTimer;
+	// Counter of number of frames since timer reset
+	unsigned int m_FrameCount;
+
+	// Text containing debug information
+	Text m_InfoText;
+#endif // _DEBUG
+
 private:
 	void handleEvents() override;
 	void update() override;

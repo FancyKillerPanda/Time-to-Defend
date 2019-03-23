@@ -6,6 +6,7 @@
 #include "utils/Random.h"
 #include "state/BaseGameState.h"
 #include "state/StartScreenState.h"
+#include "Settings.h"
 
 
 Game::Game()
@@ -36,7 +37,7 @@ Game::Game()
 
 #ifdef _DEBUG
 	// Loads the information text
-	m_InfoText.load("res/fonts/arial.ttf", "Time to Defend V0.1.0 | 0 FPS", 10, SDL_Color { 180, 180, 180, 255 }, m_Renderer);
+	m_InfoText.load(DEFAULT_FONT_PATH, "Time to Defend V0.1.0 | 0 FPS", 10, SDL_Color { 180, 180, 180, 255 }, m_Renderer);
 #endif // _DEBUG
 
 	// Resets the frame timer
@@ -137,7 +138,6 @@ void Game::draw()
 	// Draws the information text
 	m_InfoText.draw(m_WindowWidth - m_InfoText.getRect().w / 2 - 10, m_WindowHeight - m_InfoText.getRect().h / 2 - 10);
 #endif // _DEBUG
-
 
 	SDL_RenderPresent(m_Renderer);
 }
