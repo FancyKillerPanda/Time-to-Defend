@@ -9,6 +9,11 @@
 #include "LevelPassedState.h"
 
 
+#define CHANGE_TOWER(key, num) case key:\
+	changeToTower(num);\
+	break;
+
+
 void GameplayState::onExit()
 {
 	// Destroys all enemies
@@ -56,55 +61,16 @@ void GameplayState::handleEvent(SDL_Event& event)
 			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
 			break;
 
-		case SDLK_1:
-			// Changes the tower if possible
-			changeToTower(0);
-			break;
-
-		case SDLK_2:
-			// Changes the tower if possible
-			changeToTower(1);
-			break;
-
-		case SDLK_3:
-			// Changes the tower if possible
-			changeToTower(2);
-			break;
-
-		case SDLK_4:
-			// Changes the tower if possible
-			changeToTower(3);
-			break;
-
-		case SDLK_5:
-			// Changes the tower if possible
-			changeToTower(4);
-			break;
-
-		case SDLK_6:
-			// Changes the tower if possible
-			changeToTower(5);
-			break;
-
-		case SDLK_7:
-			// Changes the tower if possible
-			changeToTower(6);
-			break;
-
-		case SDLK_8:
-			// Changes the tower if possible
-			changeToTower(7);
-			break;
-
-		case SDLK_9:
-			// Changes the tower if possible
-			changeToTower(8);
-			break;
-
-		case SDLK_0:
-			// Changes the tower if possible
-			changeToTower(9);
-			break;
+		CHANGE_TOWER(SDLK_1, 0);
+		CHANGE_TOWER(SDLK_2, 1);
+		CHANGE_TOWER(SDLK_3, 2);
+		CHANGE_TOWER(SDLK_4, 3);
+		CHANGE_TOWER(SDLK_5, 4);
+		CHANGE_TOWER(SDLK_6, 5);
+		CHANGE_TOWER(SDLK_7, 6);
+		CHANGE_TOWER(SDLK_8, 7);
+		CHANGE_TOWER(SDLK_9, 8);
+		CHANGE_TOWER(SDLK_0, 9);
 
 		#ifdef _DEBUG
 		case SDLK_k:
