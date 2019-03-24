@@ -21,6 +21,17 @@ void StartScreenState::onEnter()
 		"Instructions",
 	});
 
+	// The instructions
+	m_Instructions = new Paragraph(s_Game, {
+		"Welcome to Time to Edit! This is a level editor",
+		"for Time to Defend!",
+		"",
+		"To change a tile between grass and track,",
+		"simply click on it (or click and drag for",
+		"multiple tiles). If you want to see grid",
+		"lines, press <G>."
+	});
+
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
 		"<-- Back"
@@ -77,7 +88,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::MainScreen)
 			{
 				m_ScreenState = ScreenState::Instructions;
-				loadInstructionPage();
 			}
 
 			break;
@@ -111,7 +121,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_MainMenu->itemClicked() == 2)
 			{
 				m_ScreenState = ScreenState::Instructions;
-				loadInstructionPage();
 			}
 
 			break;
@@ -167,25 +176,4 @@ void StartScreenState::draw()
 
 		break;
 	}
-}
-
-void StartScreenState::loadInstructionPage()
-{
-	if (m_InstructionPageLoaded)
-	{
-		return;
-	}
-
-	// The instructions
-	m_Instructions = new Paragraph(s_Game, {
-		"Welcome to Time to Edit! This is a level editor",
-		"for Time to Defend!",
-		"",
-		"To change a tile between grass and track,",
-		"simply click on it (or click and drag for",
-		"multiple tiles). If you want to see grid",
-		"lines, press <G>."
-	});
-
-	m_InstructionPageLoaded = true;
 }

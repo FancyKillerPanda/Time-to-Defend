@@ -36,9 +36,6 @@ private:
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
 
-private:
-	void loadInstructionPage();
-
 public:
 	void onEnter() override;
 	void onExit() override;

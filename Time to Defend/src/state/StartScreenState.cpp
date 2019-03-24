@@ -23,6 +23,17 @@ void StartScreenState::onEnter()
 		"Settings (Coming Soon...)"
 	});
 
+	// The instructions
+	m_Instructions = new Paragraph(s_Game, {
+		"Welcome to Time to Defend! Your goal is to try",
+		"to defeat all the enemies that will be trying",
+		"to invade your land.",
+		"",
+		"To rotate your tower, press <Left> or <Right>.",
+		"To shoot, press <Space>. To switch which",
+		"tower you are controlling, press <T>."
+	});
+
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
 		"<-- Back"
@@ -79,7 +90,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::MainScreen)
 			{
 				m_ScreenState = ScreenState::Instructions;
-				loadInstructionPage();
 			}
 
 			break;
@@ -107,7 +117,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_MainMenu->itemClicked() == 1)
 			{
 				m_ScreenState = ScreenState::Instructions;
-				loadInstructionPage();
 			}
 
 			// Clicked "Level Editor"
@@ -175,25 +184,4 @@ void StartScreenState::draw()
 
 		break;
 	}
-}
-
-void StartScreenState::loadInstructionPage()
-{
-	if (m_InstructionPageLoaded)
-	{
-		return;
-	}
-
-	// The instructions
-	m_Instructions = new Paragraph(s_Game, {
-		"Welcome to Time to Defend! Your goal is to try",
-		"to defeat all the enemies that will be trying",
-		"to invade your land.",
-		"",
-		"To rotate your tower, press <Left> or <Right>.",
-		"To shoot, press <Space>. To switch which",
-		"tower you are controlling, press <T>."
-	});
-
-	m_InstructionPageLoaded = true;
 }
