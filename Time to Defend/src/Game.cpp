@@ -28,8 +28,9 @@ Game::Game()
 		return;
 	}
 
-	// Sets the clear colour
+	// Sets the clear colour and blend mode
 	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
+	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();

@@ -49,6 +49,9 @@ private:
 	// Timer for when to spawn the next wave
 	Timer m_WaveTimer;
 
+	// Whether the game is paused
+	bool m_Paused = false;
+
 private:
 	// Loads a level
 	void loadLevel();

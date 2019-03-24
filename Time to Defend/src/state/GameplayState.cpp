@@ -51,6 +51,11 @@ void GameplayState::handleEvent(SDL_Event& event)
 	case SDL_KEYDOWN:
 		switch (event.key.keysym.sym)
 		{
+		case SDLK_p:
+			// Pauses/unpauses the game
+			m_Paused = !m_Paused;
+			break;
+
 		case SDLK_t:
 			// Changes the tower
 			changeToTower((m_CurrentTowerIndex + 1) % m_Towers.size());
@@ -119,6 +124,11 @@ void GameplayState::handleEvent(SDL_Event& event)
 
 void GameplayState::update()
 {
+	if (m_Paused)
+	{
+		return;
+	}
+
 	if (m_NeedToLoadLevel)
 	{
 		loadLevel();
@@ -248,6 +258,12 @@ void GameplayState::draw()
 	for (Tower* tower : m_Towers)
 	{
 		tower->draw();
+	}
+
+	if (m_Paused)
+	{
+		SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 150);
+		SDL_RenderFillRect(s_Game->getRenderer(), nullptr);
 	}
 }
 
