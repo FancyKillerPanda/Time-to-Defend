@@ -35,6 +35,9 @@ void StartScreenState::onExit()
 	delete m_MainMenu;
 	m_MainMenu = nullptr;
 
+	delete m_Instructions;
+	m_Instructions = nullptr;
+
 	delete m_BackMenu;
 	m_BackMenu = nullptr;
 }
@@ -159,13 +162,7 @@ void StartScreenState::draw()
 	case ScreenState::Instructions:
 		// Draws text
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
-		m_InstructionsText_0.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
-		m_InstructionsText_1.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);
-		m_InstructionsText_2.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 11 / 20);
-		m_InstructionsText_3.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 12 / 20);
-		m_InstructionsText_4.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 13 / 20);
-		m_InstructionsText_5.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 14 / 20);
-
+		m_Instructions->draw(s_Game->getWindowHeight() * 8 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
@@ -180,19 +177,15 @@ void StartScreenState::loadInstructionPage()
 	}
 
 	// The instructions
-	const char* instructionText_0 = "Welcome to Time to Edit! This is a level editor";
-	const char* instructionText_1 = "for Time to Defend!";
-	const char* instructionText_2 = "To change a tile between grass and track,";
-	const char* instructionText_3 = "simply click on it (or click and drag for";
-	const char* instructionText_4 = "multiple tiles). If you want to see grid";
-	const char* instructionText_5 = "lines, press <G>.";
-
-	m_InstructionsText_0.load("res/fonts/arial.ttf", instructionText_0, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_InstructionsText_1.load("res/fonts/arial.ttf", instructionText_1, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_InstructionsText_2.load("res/fonts/arial.ttf", instructionText_2, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_InstructionsText_3.load("res/fonts/arial.ttf", instructionText_3, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_InstructionsText_4.load("res/fonts/arial.ttf", instructionText_4, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
-	m_InstructionsText_5.load("res/fonts/arial.ttf", instructionText_5, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+	m_Instructions = new Paragraph(s_Game, {
+		"Welcome to Time to Edit! This is a level editor",
+		"for Time to Defend!",
+		"",
+		"To change a tile between grass and track,",
+		"simply click on it (or click and drag for",
+		"multiple tiles). If you want to see grid",
+		"lines, press <G>."
+	});
 
 	m_InstructionPageLoaded = true;
 }
