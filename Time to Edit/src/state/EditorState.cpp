@@ -20,7 +20,11 @@ void EditorState::handleEvent(SDL_Event& event)
 			break;
 
 		case SDLK_s:
-			saveMap();
+			if (SDL_GetModState() & KMOD_CTRL)
+			{
+				saveMap();
+			}
+
 			break;
 		}
 
