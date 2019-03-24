@@ -29,6 +29,9 @@ public:
 	// Draws the menu
 	void draw(unsigned int yTop);
 
+	// Draws the menu horizontally
+	void drawHorizontal(unsigned int xLeft, unsigned int y, unsigned int increment);
+
 	// Adds one or more items to the menu
 	void addItems(std::initializer_list<const char*> texts);
 

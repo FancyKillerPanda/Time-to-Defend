@@ -44,6 +44,21 @@ void Menu::draw(unsigned int yTop)
 	}
 }
 
+void Menu::drawHorizontal(unsigned int xLeft, unsigned int y, unsigned int increment)
+{
+	unsigned int currentX = xLeft;
+
+	for (Text* text : m_Texts)
+	{
+		if (text != nullptr)
+		{
+			text->draw(currentX, y);
+		}
+
+		currentX += increment;
+	}
+}
+
 void Menu::update()
 {
 	int mouseX;

@@ -5,18 +5,14 @@
 #include "state/BaseGameState.h"
 
 #include "gfx/Text.h"
+#include "gfx/Menu.h"
 
 
 class GameOverState : public GameState
 {
 private:
 	Text m_GameOverText;
-	Text m_RestartText;
-	Text m_ExitText;
-
-	// Whether currently highlighting text
-	bool m_HighlightingRestartText = false;
-	bool m_HighlightingExitText = false;
+	Menu* m_OptionsMenu;
 
 	// Whether the game was won
 	bool m_Won;
@@ -25,6 +21,7 @@ public:
 	GameOverState(bool won);
 
 	void onEnter() override;
+	void onExit() override;
 
 	void handleEvent(SDL_Event& event) override;
 	void update() override;
