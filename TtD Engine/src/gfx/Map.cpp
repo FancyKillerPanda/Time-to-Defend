@@ -127,3 +127,48 @@ void Map::draw()
 		}
 	}
 }
+
+void Map::convertToPlayableFormat()
+{
+	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
+	{
+		for (int col = 0; col < NUM_OF_CELLS_X; col++)
+		{
+			char& cell = m_Data[row][col];
+
+			if (cell == 'P')
+			{
+				int numOfNeighbors = 0;
+
+				for (int rowDiff = -1; rowDiff <= 1; rowDiff++)
+				{
+					for (int colDiff = -1; colDiff <= 1; colDiff++)
+					{
+						if (rowDiff == 0 && colDiff == 0)
+						{
+							continue;
+						}
+
+						int newRow = row + rowDiff;
+						int newCol = col + colDiff;
+
+						if (newRow < 0 || newRow >= NUM_OF_CELLS_Y || newCol < 0 || newCol >= NUM_OF_CELLS_X)
+						{
+							continue;
+						}
+
+						if (m_Data[newRow][newCol] == 'P' || m_Data[newRow][newCol] == 'S')
+						{
+							numOfNeighbors += 1;
+						}
+					}
+				}
+
+				if (row == 0 || col == 0 || row == NUM_OF_CELLS_Y - 1 || col == NUM_OF_CELLS_X - 1 || numOfNeighbors == 1)
+				{
+					cell = 'S';
+				}
+			}
+		}
+	}
+}

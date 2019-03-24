@@ -123,6 +123,8 @@ void EditorState::saveMap()
 		return;
 	}
 
+	m_MapEditing.convertToPlayableFormat();
+
 	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
 	{
 		for (int col = 0; col < NUM_OF_CELLS_X; col++)
