@@ -4,6 +4,7 @@
 
 #include "state/BaseGameState.h"
 #include "gfx/Map.h"
+#include "gfx/Text.h"
 #include "entities/Enemy.h"
 #include "entities/Tower.h"
 #include "entities/Arrow.h"
@@ -52,6 +53,9 @@ private:
 	// Whether the game is paused
 	bool m_Paused = false;
 
+	// Text that appears when game is paused
+	Text m_PausedText;
+
 private:
 	// Loads a level
 	void loadLevel();
@@ -66,6 +70,7 @@ private:
 	void changeToTower(int towerNumber);
 
 public:
+	void onEnter() override;
 	void onExit() override;
 
 	void handleEvent(SDL_Event& event) override;

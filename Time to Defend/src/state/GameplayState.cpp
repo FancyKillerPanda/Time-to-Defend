@@ -14,6 +14,12 @@
 	break;
 
 
+void GameplayState::onEnter()
+{
+	m_PausedText.load(DEFAULT_FONT_PATH, "Paused!", 48, SDL_Color { 255, 255, 255, 255 }, s_Game->getRenderer());
+	m_PausedText.setStyle(TTF_STYLE_BOLD);
+}
+
 void GameplayState::onExit()
 {
 	// Destroys all enemies
@@ -262,8 +268,12 @@ void GameplayState::draw()
 
 	if (m_Paused)
 	{
+		// Dims the screen
 		SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 150);
 		SDL_RenderFillRect(s_Game->getRenderer(), nullptr);
+
+		// Draws the paused text
+		m_PausedText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() / 2);
 	}
 }
 
