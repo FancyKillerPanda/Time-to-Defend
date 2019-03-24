@@ -18,6 +18,10 @@ void EditorState::handleEvent(SDL_Event& event)
 		case SDLK_g:
 			m_ShowGrid = !m_ShowGrid;
 			break;
+
+		case SDLK_s:
+			saveMap();
+			break;
 		}
 
 		break;
@@ -97,4 +101,30 @@ Position EditorState::getCellUnderMouse()
 	SDL_GetMouseState(&mouseX, &mouseY);
 
 	return Position { (int) std::floor(mouseY / CELL_SIZE), (int) std::floor(mouseX / CELL_SIZE) };
+}
+
+void EditorState::saveMap()
+{
+	std::fstream file;
+	file.open("res/maps/custom/map1.txt", std::fstream::out | std::fstream::trunc);
+
+	if (!file)
+	{
+		LOG_ERROR("Could not open file to save map to.");
+		return;
+	}
+
+	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
+	{
+		for (int col = 0; col < NUM_OF_CELLS_X; col++)
+		{
+			file << m_MapEditing.getCoords()[row][col];
+		}
+
+		file << '\n';
+	}
+
+	file.close();
+
+	LOG_INFO("Saved map.");
 }

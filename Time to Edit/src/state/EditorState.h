@@ -25,6 +25,9 @@ private:
 	// Gets the position of the cell under the mouse
 	Position getCellUnderMouse();
 
+	// Saves the map
+	void saveMap();
+
 public:
 	void onEnter() override;
 
