@@ -62,6 +62,11 @@ void GameplayState::handleEvent(SDL_Event& event)
 			m_Paused = !m_Paused;
 			break;
 
+		case SDLK_RETURN:
+			// Unpauses the game
+			m_Paused = false;
+			break;
+
 		case SDLK_t:
 			// Changes the tower
 			changeToTower((m_CurrentTowerIndex + 1) % m_Towers.size());
