@@ -57,7 +57,7 @@ void LevelPassedState::handleEvent(SDL_Event& event)
 		}
 
 		// Clicked "Restart"
-		else if (m_OptionsMenu->itemClicked() == 0)
+		else if (m_OptionsMenu->itemClicked() == 1)
 		{
 			// Pops both this and the gameplay state off the stack
 			s_Game->popState();
@@ -69,7 +69,7 @@ void LevelPassedState::handleEvent(SDL_Event& event)
 		}
 
 		// Clicked "Exit"
-		else if (m_OptionsMenu->itemClicked() == 0)
+		else if (m_OptionsMenu->itemClicked() == 2)
 		{
 			// Stops the game from running
 			s_Game->setRunning(false);
