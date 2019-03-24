@@ -6,6 +6,7 @@
 
 #include "gfx/Text.h"
 #include "gfx/Menu.h"
+#include "gfx/Paragraph.h"
 
 
 class StartScreenState : public GameState
@@ -27,12 +28,7 @@ private:
 	bool m_InstructionPageLoaded = false;
 
 	// The instructions on how to play
-	Text m_InstructionsText_0;
-	Text m_InstructionsText_1;
-	Text m_InstructionsText_2;
-	Text m_InstructionsText_3;
-	Text m_InstructionsText_4;
-	Text m_InstructionsText_5;
+	Paragraph* m_Instructions;
 
 	Menu* m_BackMenu;
 
