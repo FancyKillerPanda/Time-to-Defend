@@ -105,6 +105,15 @@ Position EditorState::getCellUnderMouse()
 
 void EditorState::saveMap()
 {
+	// Windows only
+#ifdef WIN32
+	if (!(CreateDirectory("res\\maps\\custom\\", nullptr) || GetLastError() == ERROR_ALREADY_EXISTS))
+	{
+		LOG_ERROR("Could not create directory to save in.");
+		return;
+	}
+#endif // WIN32
+
 	std::fstream file;
 	file.open("res/maps/custom/map1.txt", std::fstream::out | std::fstream::trunc);
 
