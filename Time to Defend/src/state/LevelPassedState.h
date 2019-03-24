@@ -5,20 +5,14 @@
 #include "state/BaseGameState.h"
 
 #include "gfx/Text.h"
+#include "gfx/Menu.h"
 
 
 class LevelPassedState : public GameState
 {
 private:
 	Text m_LevelPassedText;
-	Text m_ContinueText;
-	Text m_RestartText;
-	Text m_ExitText;
-
-	// Whether currently highlighting text
-	bool m_HighlightingContinueText = false;
-	bool m_HighlightingRestartText = false;
-	bool m_HighlightingExitText = false;
+	Menu* m_OptionsMenu;
 
 	unsigned int m_Level;
 
