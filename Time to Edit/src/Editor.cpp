@@ -6,7 +6,7 @@
 #include "utils/Random.h"
 #include "Settings.h"
 #include "state/BaseGameState.h"
-#include "state/EditorState.h"
+#include "state/StartScreenState.h"
 
 
 Editor::Editor()
@@ -32,8 +32,8 @@ Editor::Editor()
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 
 	// Pushes the first state onto the stack
-	std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
-	pushState(std::move(editorState));
+	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
+	pushState(std::move(startScreenState));
 
 #ifdef _DEBUG
 	// Loads the information text
