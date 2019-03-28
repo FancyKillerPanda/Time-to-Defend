@@ -33,6 +33,9 @@ void EditorState::handleEvent(SDL_Event& event)
 	case SDL_MOUSEBUTTONDOWN:
 	{
 		m_MouseButtonDown = true;
+
+		// TODO: Make option to change between
+		/*
 		Position cell = getCellUnderMouse();
 
 		if (m_MapEditing.getCoords()[cell.row][cell.col] == '.')
@@ -43,6 +46,17 @@ void EditorState::handleEvent(SDL_Event& event)
 		else
 		{
 			m_TurnToTrack = false;
+		}
+		*/
+
+		if (SDL_GetModState() & KMOD_CTRL)
+		{
+			m_TurnToTrack = false;
+		}
+
+		else
+		{
+			m_TurnToTrack = true;
 		}
 
 		break;
