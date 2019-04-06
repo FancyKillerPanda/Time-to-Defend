@@ -19,6 +19,12 @@ void StartScreenState::onEnter()
 		"Start New",
 		"Load (Coming Soon...)",
 		"Instructions",
+		"Settings"
+	});
+
+	// The settings
+	m_SettingsMenu = new Menu(s_Game, {
+		"Use <Ctrl-Click> to Remove Track: True"
 	});
 
 	// The instructions
@@ -77,6 +83,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			// Goes back to the main screen
 			case ScreenState::Instructions:
+			case ScreenState::Settings:
 				m_ScreenState = ScreenState::MainScreen;
 				break;
 			}
@@ -123,6 +130,12 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				m_ScreenState = ScreenState::Instructions;
 			}
 
+			// Clicked "Settings
+			else if (m_MainMenu->itemClicked() == 3)
+			{
+				m_ScreenState = ScreenState::Settings;
+			}
+
 			break;
 		}
 
@@ -134,6 +147,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			}
 
 			break;
+		}
+
+		case ScreenState::Settings:
+		{
+			if (m_SettingsMenu->itemClicked() == 0)
+			{
+				// TODO: Change item value
+			}
 		}
 		}
 
@@ -154,6 +175,10 @@ void StartScreenState::update()
 	case ScreenState::Instructions:
 		m_BackMenu->update();
 		break;
+
+	case ScreenState::Settings:
+		m_SettingsMenu->update();
+		break;
 	}
 }
 
@@ -163,8 +188,8 @@ void StartScreenState::draw()
 	{
 	case ScreenState::MainScreen:
 		// Draws text
-		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 6 / 20);
-		m_MainMenu->draw(s_Game->getWindowHeight() * 9 / 20);
+		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
+		m_MainMenu->draw(s_Game->getWindowHeight() * 8 / 20);
 
 		break;
 
@@ -175,5 +200,10 @@ void StartScreenState::draw()
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
+
+	case ScreenState::Settings:
+		// Draws text
+		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
+		m_SettingsMenu->draw(s_Game->getWindowHeight() * 11 / 20);
 	}
 }

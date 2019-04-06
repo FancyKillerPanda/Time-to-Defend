@@ -15,6 +15,7 @@ class StartScreenState : public GameState
 	{
 		MainScreen,
 		Instructions,
+		Settings,
 	};
 
 private:
@@ -23,6 +24,9 @@ private:
 
 	// The main menu
 	Menu* m_MainMenu = nullptr;
+
+	// The settings menu
+	Menu* m_SettingsMenu;
 
 	// Whether the instruction page has already loaded
 	bool m_InstructionPageLoaded = false;
