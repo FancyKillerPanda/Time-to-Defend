@@ -153,7 +153,17 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		{
 			if (m_SettingsMenu->itemClicked() == 0)
 			{
-				// TODO: Change item value
+				if (m_CtrlClickRemoveTrack)
+				{
+					m_SettingsMenu->getItems()[0]->setText("Use <Ctrl-Click> to Remove Track: False");
+				}
+
+				else
+				{
+					m_SettingsMenu->getItems()[0]->setText("Use <Ctrl-Click> to Remove Track: True");
+				}
+
+				m_CtrlClickRemoveTrack = !m_CtrlClickRemoveTrack;
 			}
 		}
 		}

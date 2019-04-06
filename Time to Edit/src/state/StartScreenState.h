@@ -40,6 +40,9 @@ private:
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
 
+	// The method used to remove track
+	bool m_CtrlClickRemoveTrack = true;
+
 public:
 	void onEnter() override;
 	void onExit() override;

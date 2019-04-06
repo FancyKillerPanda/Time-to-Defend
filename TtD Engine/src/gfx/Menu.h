@@ -37,4 +37,7 @@ public:
 
 	// Returns the menu text that was clicked, if any
 	int itemClicked();
+
+	// Gets the items in the menu
+	std::vector<Text*>& getItems() { return m_Texts; }
 };
