@@ -31,10 +31,18 @@ private:
 	// The instructions on how to play
 	Paragraph* m_Instructions;
 
+	// The settings menu
+	Menu* m_SettingsMenu;
+
+	// The back button
 	Menu* m_BackMenu;
 
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
+
+	// Togglable settigns
+	bool m_ArrowKeysToRotate = true;
+	bool m_SpaceToShoot = true;
 
 public:
 	void onEnter() override;

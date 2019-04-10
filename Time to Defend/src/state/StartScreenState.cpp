@@ -23,6 +23,12 @@ void StartScreenState::onEnter()
 		"Settings (Coming Soon...)"
 	});
 
+	// The settings
+	m_SettingsMenu = new Menu(s_Game, {
+		"Arrow Keys to Rotate Tower: True",
+		"Space to Shoot: True",
+	});
+
 	// The instructions
 	m_Instructions = new Paragraph(s_Game, {
 		"Welcome to Time to Defend! Your goal is to try",
@@ -157,6 +163,38 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		}
 
 		case ScreenState::Settings:
+			// Toggles arrow keys to rotate
+			if (m_SettingsMenu->itemClicked() == 0)
+			{
+				if (m_ArrowKeysToRotate)
+				{
+					m_SettingsMenu->getItems()[0]->setText("Arrow Keys to Rotate Tower: False");
+				}
+
+				else
+				{
+					m_SettingsMenu->getItems()[0]->setText("Arrow Keys to Rotate Tower: True");
+				}
+
+				m_ArrowKeysToRotate = !m_ArrowKeysToRotate;
+			}
+
+			// Toggles space to shoot
+			else if (m_SettingsMenu->itemClicked() == 1)
+			{
+				if (m_SpaceToShoot)
+				{
+					m_SettingsMenu->getItems()[1]->setText("Space to Shoot: False");
+				}
+
+				else
+				{
+					m_SettingsMenu->getItems()[1]->setText("Space to Shoot: True");
+				}
+
+				m_SpaceToShoot = !m_SpaceToShoot;
+			}
+
 			if (m_BackMenu->itemClicked() == 0)
 			{
 				m_ScreenState = ScreenState::MainScreen;
@@ -184,6 +222,7 @@ void StartScreenState::update()
 		break;
 
 	case ScreenState::Settings:
+		m_SettingsMenu->update();
 		m_BackMenu->update();
 		break;
 	}
@@ -210,7 +249,8 @@ void StartScreenState::draw()
 
 	case ScreenState::Settings:
 		// Draws text
-		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
+		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
+		m_SettingsMenu->draw(s_Game->getWindowHeight() * 10 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 	}
 }
