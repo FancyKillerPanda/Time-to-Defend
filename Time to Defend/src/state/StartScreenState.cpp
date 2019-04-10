@@ -19,7 +19,7 @@ void StartScreenState::onEnter()
 	m_MainMenu = new Menu(s_Game, {
 		"Play",
 		"Instructions",
-		"Level Editor (Coming Soon...)",
+		"Level Editor",
 		"Settings (Coming Soon...)"
 	});
 
