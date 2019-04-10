@@ -122,8 +122,9 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Level Editor"
 			else if (m_MainMenu->itemClicked() == 2)
 			{
-			#ifdef WIN32
+			#ifdef _WIN32
 
+				/*
 				// Additional information
 				STARTUPINFO startupInfo;
 				PROCESS_INFORMATION processInformation;
@@ -137,7 +138,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				if (CreateProcess("Time to Edit.exe", nullptr, nullptr, nullptr, false, 0, nullptr, nullptr, &startupInfo, &processInformation))
 				{
 					// Waits for the process to finish
-					WaitForSingleObject(processInformation.hProcess, INFINITE);
+					// WaitForSingleObject(processInformation.hProcess, INFINITE);
 
 					// Closes the process
 					CloseHandle(processInformation.hThread);
@@ -146,6 +147,16 @@ void StartScreenState::handleEvent(SDL_Event& event)
 					LOG_INFO("Successfully started editor process.");
 				}
 
+				else
+				{
+					LOG_ERROR("Could not start editor process.");
+				}
+				*/
+
+				if (ShellExecute(NULL, "open", "Time to Edit.exe", "", "", SW_SHOW))
+				{
+					LOG_INFO("Successfully started editor process.");
+				}
 				else
 				{
 					LOG_ERROR("Could not start editor process.");
