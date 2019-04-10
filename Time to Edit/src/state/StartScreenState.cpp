@@ -110,11 +110,13 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Start New"
 			if (m_MainMenu->itemClicked() == 0)
 			{
+				// Creates the new editor state
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_CtrlClickRemoveTrack);
+
 				// Pops this state off the Game's stack
 				s_Game->popState();
 
 				// Pushes the editor state onto the stack
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_CtrlClickRemoveTrack);
 				s_Game->pushState(std::move(editorState));
 			}
 

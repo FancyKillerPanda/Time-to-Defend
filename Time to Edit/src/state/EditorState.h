@@ -17,7 +17,7 @@ private:
 	bool m_TurnToTrack = true;
 
 	bool m_ShowGrid = false;
-	bool m_CtrlClickRemoveTrack = true;
+	bool m_CtrlClickRemoveTrack;
 
 private:
 	// Handles when a cell is clicked
