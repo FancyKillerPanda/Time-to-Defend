@@ -27,6 +27,7 @@ void StartScreenState::onEnter()
 	m_SettingsMenu = new Menu(s_Game, {
 		"Arrow Keys to Rotate Tower: True",
 		"Space to Shoot: True",
+		"Tower Shoot Cooldown: True"
 	});
 
 	// The instructions
@@ -201,6 +202,22 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->settings->spaceToShoot = !s_Game->settings->spaceToShoot;
 			}
 
+			// Toggles tower shoot cooldown
+			else if (m_SettingsMenu->itemClicked() == 2)
+			{
+				if (s_Game->settings->towerShootCooldown)
+				{
+					m_SettingsMenu->getItems()[2]->setText("Tower Shoot Cooldown: False");
+				}
+
+				else
+				{
+					m_SettingsMenu->getItems()[2]->setText("Tower Shoot Cooldown: True");
+				}
+
+				s_Game->settings->towerShootCooldown = !s_Game->settings->towerShootCooldown;
+			}
+
 			if (m_BackMenu->itemClicked() == 0)
 			{
 				m_ScreenState = ScreenState::MainScreen;
@@ -256,7 +273,7 @@ void StartScreenState::draw()
 	case ScreenState::Settings:
 		// Draws text
 		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
-		m_SettingsMenu->draw(s_Game->getWindowHeight() * 10 / 20);
+		m_SettingsMenu->draw(s_Game->getWindowHeight() * 9 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 	}
 }
