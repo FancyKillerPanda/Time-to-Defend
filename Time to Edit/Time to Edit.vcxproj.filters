@@ -44,5 +44,8 @@
     <ClInclude Include="src\state\StartScreenState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

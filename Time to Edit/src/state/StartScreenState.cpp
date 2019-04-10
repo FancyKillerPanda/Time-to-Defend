@@ -4,6 +4,7 @@
 
 #include "Settings.h"
 #include "EditorState.h"
+#include "GameSettings.h"
 
 
 void StartScreenState::onEnter()
@@ -43,6 +44,9 @@ void StartScreenState::onEnter()
 		"<-- Back"
 	});
 
+	// Initialises the settings
+	s_Game->settings = new GameSettings();
+
 	// Makes the background render black
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
@@ -75,7 +79,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->popState();
 
 				// Pushes the editor state onto the stack
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_CtrlClickRemoveTrack);
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
 				s_Game->pushState(std::move(editorState));
 
 				break;
@@ -111,7 +115,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_MainMenu->itemClicked() == 0)
 			{
 				// Creates the new editor state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_CtrlClickRemoveTrack);
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -155,7 +159,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		{
 			if (m_SettingsMenu->itemClicked() == 0)
 			{
-				if (m_CtrlClickRemoveTrack)
+				if (s_Game->settings->ctrlClickToRemoveTrack)
 				{
 					m_SettingsMenu->getItems()[0]->setText("Use <Ctrl-Click> to Remove Track: False");
 				}
@@ -165,7 +169,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 					m_SettingsMenu->getItems()[0]->setText("Use <Ctrl-Click> to Remove Track: True");
 				}
 
-				m_CtrlClickRemoveTrack = !m_CtrlClickRemoveTrack;
+				s_Game->settings->ctrlClickToRemoveTrack = !s_Game->settings->ctrlClickToRemoveTrack;
 			}
 
 			if (m_BackMenu->itemClicked() == 0)

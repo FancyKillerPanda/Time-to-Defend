@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor.h" />
+    <ClInclude Include="src\GameSettings.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\state\EditorState.h" />
     <ClInclude Include="src\state\StartScreenState.h" />

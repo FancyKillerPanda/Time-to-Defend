@@ -1,12 +1,7 @@
 #include "pch.h"
 
 #include "EditorState.h"
-
-
-EditorState::EditorState(bool ctrlClickRemoveTrack)
-	: m_CtrlClickRemoveTrack(ctrlClickRemoveTrack)
-{
-}
+#include "GameSettings.h"
 
 
 void EditorState::onEnter()
@@ -40,7 +35,7 @@ void EditorState::handleEvent(SDL_Event& event)
 	{
 		m_MouseButtonDown = true;
 
-		if (!m_CtrlClickRemoveTrack)
+		if (!s_Game->settings->ctrlClickToRemoveTrack)
 		{
 			Position cell = getCellUnderMouse();
 
