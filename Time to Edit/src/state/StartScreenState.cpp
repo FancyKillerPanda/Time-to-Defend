@@ -165,6 +165,11 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 				m_CtrlClickRemoveTrack = !m_CtrlClickRemoveTrack;
 			}
+
+			if (m_BackMenu->itemClicked() == 0)
+			{
+				m_ScreenState = ScreenState::MainScreen;
+			}
 		}
 		}
 
@@ -188,6 +193,7 @@ void StartScreenState::update()
 
 	case ScreenState::Settings:
 		m_SettingsMenu->update();
+		m_BackMenu->update();
 		break;
 	}
 }
@@ -215,5 +221,6 @@ void StartScreenState::draw()
 		// Draws text
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
 		m_SettingsMenu->draw(s_Game->getWindowHeight() * 11 / 20);
+		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 	}
 }
