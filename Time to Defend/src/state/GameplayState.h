@@ -49,6 +49,8 @@ private:
 
 	// Timer for when to spawn the next wave
 	Timer m_WaveTimer;
+	// Timer for how long since tower has shot
+	Timer m_TowerShootTimer;
 
 	// Whether the game is paused
 	bool m_Paused = false;

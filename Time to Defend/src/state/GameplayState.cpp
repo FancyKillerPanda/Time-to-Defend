@@ -83,10 +83,12 @@ void GameplayState::handleEvent(SDL_Event& event)
 			break;
 
 		case SDLK_SPACE:
-			if (s_Game->settings->spaceToShoot)
+			if (s_Game->settings->spaceToShoot && m_TowerShootTimer.getElapsed() >= TOWER_SHOOT_COOLDOWN_TIME)
 			{
 				// Shoots an arrow
 				m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
+				m_TowerShootTimer.reset();
+
 				break;
 			}
 
@@ -146,10 +148,12 @@ void GameplayState::handleEvent(SDL_Event& event)
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		if (!s_Game->settings->spaceToShoot)
+		if (!s_Game->settings->spaceToShoot && m_TowerShootTimer.getElapsed() >= TOWER_SHOOT_COOLDOWN_TIME)
 		{
 			// Shoots an arrow
 			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
+			m_TowerShootTimer.reset();
+
 			break;
 		}
 	}
@@ -429,4 +433,6 @@ void GameplayState::changeToTower(int towerNumber)
 		// Highlights the current tower
 		m_Towers[m_CurrentTowerIndex]->setHighlight(true);
 	}
+
+	m_TowerShootTimer.reset();
 }
