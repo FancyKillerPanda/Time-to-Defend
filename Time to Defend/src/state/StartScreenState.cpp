@@ -73,11 +73,13 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			{
 			case ScreenState::MainScreen:
 			{
+				// Creates the next state
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ArrowKeysToRotate, m_SpaceToShoot);
+
 				// Pops this state off the Game's stack
 				s_Game->popState();
 
 				// Pushes the gameplay state onto the stack
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 				s_Game->pushState(std::move(gameplayState));
 
 				break;
@@ -112,12 +114,16 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Play"
 			if (m_MainMenu->itemClicked() == 0)
 			{
+				// Creates the next state
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ArrowKeysToRotate, m_SpaceToShoot);
+
 				// Pops this state off the Game's stack
 				s_Game->popState();
 
 				// Pushes the gameplay state onto the stack
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 				s_Game->pushState(std::move(gameplayState));
+
+				break;
 			}
 
 			// Clicked "Instructions"

@@ -29,8 +29,8 @@ public:
 	void update();
 	void draw();
 
-	// TODO: Allow changing settings between arrow keys and mouse
-	// void rotate(int amountDeg);
+	// Rotates the tower by an amount
+	void rotate(double amountDeg);
 
 	// Creates a new arrow and returns it
 	Arrow* shoot();

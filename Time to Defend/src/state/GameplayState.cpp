@@ -14,6 +14,12 @@
 	break;
 
 
+GameplayState::GameplayState(bool arrowKeysToRotate, bool spaceToShoot)
+	: m_ArrowKeysToRotate(arrowKeysToRotate), m_SpaceToShoot(spaceToShoot)
+{
+}
+
+
 void GameplayState::onEnter()
 {
 	m_PausedText.load(DEFAULT_FONT_PATH, "Paused!", 48, SDL_Color { 255, 255, 255, 255 }, s_Game->getRenderer());
@@ -57,6 +63,16 @@ void GameplayState::handleEvent(SDL_Event& event)
 	case SDL_KEYDOWN:
 		switch (event.key.keysym.sym)
 		{
+		case SDLK_LEFT:
+			// Will rotate tower to the left
+			m_TowerRotationVelocity = -TOWER_ROTATION_SPEED;
+			break;
+
+		case SDLK_RIGHT:
+			// Will rotate tower to the right
+			m_TowerRotationVelocity = TOWER_ROTATION_SPEED;
+			break;
+
 		case SDLK_p:
 			// Pauses/unpauses the game
 			m_Paused = !m_Paused;
@@ -73,9 +89,12 @@ void GameplayState::handleEvent(SDL_Event& event)
 			break;
 
 		case SDLK_SPACE:
-			// Shoots an arrow
-			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
-			break;
+			if (m_SpaceToShoot)
+			{
+				// Shoots an arrow
+				m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
+				break;
+			}
 
 		CHANGE_TOWER(SDLK_1, 0);
 		CHANGE_TOWER(SDLK_2, 1);
@@ -114,22 +133,31 @@ void GameplayState::handleEvent(SDL_Event& event)
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_LEFT:
-			// Will stop the tower from moving
-			m_TowerRotationVelocity = 0;
-			break;
+			if (m_ArrowKeysToRotate)
+			{
+				// Will stop the tower from moving
+				m_TowerRotationVelocity = 0;
+				break;
+			}
 
 		case SDLK_RIGHT:
-			// Will stop the tower from moving
-			m_TowerRotationVelocity = 0;
-			break;
+			if (m_ArrowKeysToRotate)
+			{
+				// Will stop the tower from moving
+				m_TowerRotationVelocity = 0;
+				break;
+			}
 		}
 
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		// Shoots an arrow
-		m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
-		break;
+		if (!m_SpaceToShoot)
+		{
+			// Shoots an arrow
+			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
+			break;
+		}
 	}
 }
 
@@ -174,8 +202,17 @@ void GameplayState::update()
 		}
 	}
 
-	// Rotates the tower to face the mouse
-	m_Towers[m_CurrentTowerIndex]->update();
+	if (m_ArrowKeysToRotate)
+	{
+		// Rotates the tower if needed
+		m_Towers[m_CurrentTowerIndex]->rotate((double) m_TowerRotationVelocity);
+	}
+
+	else
+	{
+		// Rotates the tower to face the mouse
+		m_Towers[m_CurrentTowerIndex]->update();
+	}
 
 	// Moves each arrow
 	for (unsigned int i = 0; i < m_Arrows.size(); i++)

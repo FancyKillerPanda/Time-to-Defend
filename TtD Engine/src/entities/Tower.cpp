@@ -43,6 +43,14 @@ void Tower::update()
 	m_Direction = getDegrees(std::atan2(m_Texture->getRect().y - mouseY, m_Texture->getRect().x - mouseX)) - 90;
 }
 
+void Tower::rotate(double amountDeg)
+{
+	// Makes sure direction is always in the range of [0, 360)
+	m_Direction += 360.0;
+	m_Direction += amountDeg;
+	m_Direction = std::fmod(m_Direction, 360.0);
+}
+
 void Tower::draw()
 {
 	SDL_Texture* texture;
