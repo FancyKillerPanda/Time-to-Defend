@@ -75,7 +75,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->popState();
 
 				// Pushes the editor state onto the stack
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_CtrlClickRemoveTrack);
 				s_Game->pushState(std::move(editorState));
 
 				break;
@@ -114,7 +114,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->popState();
 
 				// Pushes the editor state onto the stack
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_CtrlClickRemoveTrack);
 				s_Game->pushState(std::move(editorState));
 			}
 

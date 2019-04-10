@@ -3,6 +3,12 @@
 #include "EditorState.h"
 
 
+EditorState::EditorState(bool ctrlClickRemoveTrack)
+	: m_CtrlClickRemoveTrack(ctrlClickRemoveTrack)
+{
+}
+
+
 void EditorState::onEnter()
 {
 	m_MapEditing.load(s_Game, nullptr);
@@ -34,29 +40,32 @@ void EditorState::handleEvent(SDL_Event& event)
 	{
 		m_MouseButtonDown = true;
 
-		// TODO: Make option to change between
-		/*
-		Position cell = getCellUnderMouse();
-
-		if (m_MapEditing.getCoords()[cell.row][cell.col] == '.')
+		if (!m_CtrlClickRemoveTrack)
 		{
-			m_TurnToTrack = true;
+			Position cell = getCellUnderMouse();
+
+			if (m_MapEditing.getCoords()[cell.row][cell.col] == '.')
+			{
+				m_TurnToTrack = true;
+			}
+
+			else
+			{
+				m_TurnToTrack = false;
+			}
 		}
 
 		else
 		{
-			m_TurnToTrack = false;
-		}
-		*/
+			if (SDL_GetModState() & KMOD_CTRL)
+			{
+				m_TurnToTrack = false;
+			}
 
-		if (SDL_GetModState() & KMOD_CTRL)
-		{
-			m_TurnToTrack = false;
-		}
-
-		else
-		{
-			m_TurnToTrack = true;
+			else
+			{
+				m_TurnToTrack = true;
+			}
 		}
 
 		break;

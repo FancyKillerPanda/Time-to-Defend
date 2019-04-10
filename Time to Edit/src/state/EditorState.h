@@ -17,6 +17,7 @@ private:
 	bool m_TurnToTrack = true;
 
 	bool m_ShowGrid = false;
+	bool m_CtrlClickRemoveTrack = true;
 
 private:
 	// Handles when a cell is clicked
@@ -29,6 +30,8 @@ private:
 	void saveMap();
 
 public:
+	EditorState(bool ctrlClickRemoveTrack);
+
 	void onEnter() override;
 
 	void handleEvent(SDL_Event& event) override;
