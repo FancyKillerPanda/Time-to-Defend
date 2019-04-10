@@ -124,35 +124,6 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			{
 			#ifdef _WIN32
 
-				/*
-				// Additional information
-				STARTUPINFO startupInfo;
-				PROCESS_INFORMATION processInformation;
-
-				// Set the structures' size
-				ZeroMemory(&startupInfo, sizeof(startupInfo));
-				startupInfo.cb = sizeof(startupInfo);
-				ZeroMemory(&processInformation, sizeof(processInformation));
-
-				// Tries to start the program
-				if (CreateProcess("Time to Edit.exe", nullptr, nullptr, nullptr, false, 0, nullptr, nullptr, &startupInfo, &processInformation))
-				{
-					// Waits for the process to finish
-					// WaitForSingleObject(processInformation.hProcess, INFINITE);
-
-					// Closes the process
-					CloseHandle(processInformation.hThread);
-					CloseHandle(processInformation.hProcess);
-
-					LOG_INFO("Successfully started editor process.");
-				}
-
-				else
-				{
-					LOG_ERROR("Could not start editor process.");
-				}
-				*/
-
 				if (ShellExecute(NULL, "open", "Time to Edit.exe", "", "", SW_SHOW))
 				{
 					LOG_INFO("Successfully started editor process.");
