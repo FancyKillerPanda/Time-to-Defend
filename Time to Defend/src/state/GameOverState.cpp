@@ -63,8 +63,7 @@ void GameOverState::handleEvent(SDL_Event& event)
 			s_Game->popState();
 
 			// Pushes the gameplay state onto the stack
-			// TODO: Use old settings
-			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(true, true);
+			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 			s_Game->pushState(std::move(gameplayState));
 
 			break;
@@ -81,8 +80,7 @@ void GameOverState::handleEvent(SDL_Event& event)
 			s_Game->popState();
 
 			// Pushes the gameplay state onto the stack
-			// TODO: Use old settings
-			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(true, true);
+			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 			s_Game->pushState(std::move(gameplayState));
 		}
 

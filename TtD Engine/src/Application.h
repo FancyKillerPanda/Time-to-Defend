@@ -4,6 +4,7 @@
 
 
 class GameState;
+struct GameSettings;
 
 
 class Application
@@ -22,6 +23,10 @@ protected:
 
 	// Stack of the current game states
 	std::vector<std::unique_ptr<GameState>> m_GameStates;
+
+public:
+	// Settings
+	GameSettings* settings;
 
 protected:
 	virtual void handleEvents() = 0;

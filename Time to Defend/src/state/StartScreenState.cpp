@@ -74,7 +74,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			case ScreenState::MainScreen:
 			{
 				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ArrowKeysToRotate, m_SpaceToShoot);
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -115,7 +115,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_MainMenu->itemClicked() == 0)
 			{
 				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ArrowKeysToRotate, m_SpaceToShoot);
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -172,7 +172,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Toggles arrow keys to rotate
 			if (m_SettingsMenu->itemClicked() == 0)
 			{
-				if (m_ArrowKeysToRotate)
+				if (s_Game->settings->arrowKeysToRotateTower)
 				{
 					m_SettingsMenu->getItems()[0]->setText("Arrow Keys to Rotate Tower: False");
 				}
@@ -182,13 +182,13 @@ void StartScreenState::handleEvent(SDL_Event& event)
 					m_SettingsMenu->getItems()[0]->setText("Arrow Keys to Rotate Tower: True");
 				}
 
-				m_ArrowKeysToRotate = !m_ArrowKeysToRotate;
+				s_Game->settings->arrowKeysToRotateTower = !s_Game->settings->arrowKeysToRotateTower;
 			}
 
 			// Toggles space to shoot
 			else if (m_SettingsMenu->itemClicked() == 1)
 			{
-				if (m_SpaceToShoot)
+				if (s_Game->settings->spaceToShoot)
 				{
 					m_SettingsMenu->getItems()[1]->setText("Space to Shoot: False");
 				}
@@ -198,7 +198,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 					m_SettingsMenu->getItems()[1]->setText("Space to Shoot: True");
 				}
 
-				m_SpaceToShoot = !m_SpaceToShoot;
+				s_Game->settings->spaceToShoot = !s_Game->settings->spaceToShoot;
 			}
 
 			if (m_BackMenu->itemClicked() == 0)

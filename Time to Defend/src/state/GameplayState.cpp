@@ -14,12 +14,6 @@
 	break;
 
 
-GameplayState::GameplayState(bool arrowKeysToRotate, bool spaceToShoot)
-	: m_ArrowKeysToRotate(arrowKeysToRotate), m_SpaceToShoot(spaceToShoot)
-{
-}
-
-
 void GameplayState::onEnter()
 {
 	m_PausedText.load(DEFAULT_FONT_PATH, "Paused!", 48, SDL_Color { 255, 255, 255, 255 }, s_Game->getRenderer());
@@ -89,7 +83,7 @@ void GameplayState::handleEvent(SDL_Event& event)
 			break;
 
 		case SDLK_SPACE:
-			if (m_SpaceToShoot)
+			if (s_Game->settings->spaceToShoot)
 			{
 				// Shoots an arrow
 				m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
@@ -133,7 +127,7 @@ void GameplayState::handleEvent(SDL_Event& event)
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_LEFT:
-			if (m_ArrowKeysToRotate)
+			if (s_Game->settings->arrowKeysToRotateTower)
 			{
 				// Will stop the tower from moving
 				m_TowerRotationVelocity = 0;
@@ -141,7 +135,7 @@ void GameplayState::handleEvent(SDL_Event& event)
 			}
 
 		case SDLK_RIGHT:
-			if (m_ArrowKeysToRotate)
+			if (s_Game->settings->arrowKeysToRotateTower)
 			{
 				// Will stop the tower from moving
 				m_TowerRotationVelocity = 0;
@@ -152,7 +146,7 @@ void GameplayState::handleEvent(SDL_Event& event)
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		if (!m_SpaceToShoot)
+		if (!s_Game->settings->spaceToShoot)
 		{
 			// Shoots an arrow
 			m_Arrows.emplace_back(m_Towers[m_CurrentTowerIndex]->shoot());
@@ -202,7 +196,7 @@ void GameplayState::update()
 		}
 	}
 
-	if (m_ArrowKeysToRotate)
+	if (s_Game->settings->arrowKeysToRotateTower)
 	{
 		// Rotates the tower if needed
 		m_Towers[m_CurrentTowerIndex]->rotate((double) m_TowerRotationVelocity);

@@ -32,6 +32,9 @@ Game::Game()
 	SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
 	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
+	// Initialises the settings
+	settings = new GameSettings();
+
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
 	pushState(std::move(startScreenState));
@@ -44,6 +47,12 @@ Game::Game()
 	// Resets the frame timer
 	m_FrameTimer.reset();
 	m_FrameCount = 0;
+}
+
+Game::~Game()
+{
+	delete settings;
+	settings = nullptr;
 }
 
 

@@ -56,10 +56,6 @@ private:
 	// Text that appears when game is paused
 	Text m_PausedText;
 
-	// Settings
-	bool m_ArrowKeysToRotate = true;
-	bool m_SpaceToShoot = true;
-
 private:
 	// Loads a level
 	void loadLevel();
@@ -74,8 +70,6 @@ private:
 	void changeToTower(int towerNumber);
 
 public:
-	GameplayState(bool arrowKeysToRotate, bool spaceToShoot);
-
 	void onEnter() override;
 	void onExit() override;
 

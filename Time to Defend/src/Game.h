@@ -7,6 +7,7 @@
 #include "state/BaseGameState.h"
 #include "utils/Timer.h"
 #include "gfx/Text.h"
+#include "GameSettings.h"
 
 
 class Game : public Application
@@ -29,4 +30,5 @@ private:
 
 public:
 	Game();
+	~Game();
 };

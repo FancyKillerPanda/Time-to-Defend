@@ -40,10 +40,6 @@ private:
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
 
-	// Togglable settigns
-	bool m_ArrowKeysToRotate = true;
-	bool m_SpaceToShoot = true;
-
 public:
 	void onEnter() override;
 	void onExit() override;
