@@ -15,6 +15,7 @@ class StartScreenState : public GameState
 	{
 		MainScreen,
 		Instructions,
+		Settings,
 	};
 
 private:

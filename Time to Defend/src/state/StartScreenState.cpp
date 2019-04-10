@@ -79,6 +79,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			// Goes back to the main screen
 			case ScreenState::Instructions:
+			case ScreenState::Settings:
 				m_ScreenState = ScreenState::MainScreen;
 				break;
 			}
@@ -139,7 +140,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Settings"
 			else if (m_MainMenu->itemClicked() == 3)
 			{
-				// TODO: Switch to settings page once it's created
+				m_ScreenState = ScreenState::Settings;
 			}
 
 			break;
@@ -154,6 +155,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			break;
 		}
+
+		case ScreenState::Settings:
+			if (m_BackMenu->itemClicked() == 0)
+			{
+				m_ScreenState = ScreenState::MainScreen;
+			}
+
+			break;
 		}
 
 		break;
@@ -171,6 +180,10 @@ void StartScreenState::update()
 	}
 
 	case ScreenState::Instructions:
+		m_BackMenu->update();
+		break;
+
+	case ScreenState::Settings:
 		m_BackMenu->update();
 		break;
 	}
@@ -194,5 +207,10 @@ void StartScreenState::draw()
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
+
+	case ScreenState::Settings:
+		// Draws text
+		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
+		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 	}
 }
