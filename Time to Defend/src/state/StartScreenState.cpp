@@ -122,7 +122,36 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Level Editor"
 			else if (m_MainMenu->itemClicked() == 2)
 			{
-				// TODO: Switch to editor once it's created
+			#ifdef WIN32
+
+				// Additional information
+				STARTUPINFO startupInfo;
+				PROCESS_INFORMATION processInformation;
+
+				// Set the structures' size
+				ZeroMemory(&startupInfo, sizeof(startupInfo));
+				startupInfo.cb = sizeof(startupInfo);
+				ZeroMemory(&processInformation, sizeof(processInformation));
+
+				// Tries to start the program
+				if (CreateProcess("Time to Edit.exe", nullptr, nullptr, nullptr, false, 0, nullptr, nullptr, &startupInfo, &processInformation))
+				{
+					// Waits for the process to finish
+					WaitForSingleObject(processInformation.hProcess, INFINITE);
+
+					// Closes the process
+					CloseHandle(processInformation.hThread);
+					CloseHandle(processInformation.hProcess);
+
+					LOG_INFO("Successfully started editor process.");
+				}
+
+				else
+				{
+					LOG_ERROR("Could not start editor process.");
+				}
+
+			#endif
 			}
 
 			// Clicked "Settings"

@@ -12,6 +12,12 @@
 // Streams
 #include <fstream>
 
+
+// Windows
+#ifdef WIN32
+#include <Windows.h>
+#endif
+
 // Miscellaneous
 #include <random>
 #include <chrono>
