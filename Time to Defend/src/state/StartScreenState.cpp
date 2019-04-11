@@ -25,9 +25,9 @@ void StartScreenState::onEnter()
 
 	// The settings
 	m_SettingsMenu = new Menu(s_Game, {
-		"Arrow Keys to Rotate Tower: True",
-		"Space to Shoot: True",
-		"Tower Shoot Cooldown: True"
+		s_Game->settings->arrowKeysToRotateTower ? "Arrow Keys to Rotate Tower: True" : "Arrow Keys to Rotate Tower: False",
+		s_Game->settings->spaceToShoot ? "Space to Shoot: True" : "Space to Shoot: False",
+		s_Game->settings->towerShootCooldown ? "Tower Shoot Cooldown: True" : "Tower Shoot Cooldown: False"
 	});
 
 	// The instructions
