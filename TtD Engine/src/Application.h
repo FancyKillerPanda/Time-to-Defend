@@ -45,6 +45,9 @@ protected:
 	// Creates the SDL renderer
 	bool createRenderer();
 
+	// Reads settings from file (or sets to default)
+	virtual void readSettings() {}
+
 public:
 	Application(unsigned int windowWidth, unsigned int windowHeight, const char* windowTitle);
 	~Application();
@@ -56,6 +59,9 @@ public:
 	void pushState(std::unique_ptr<GameState> state);
 	// Pops a state from the stack
 	void popState();
+
+	// Saves the current settings
+	virtual void saveSettings() {}
 
 	inline SDL_Renderer* const getRenderer() { return m_Renderer; }
 	inline unsigned int getWindowWidth() { return m_WindowWidth; }

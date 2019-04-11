@@ -28,7 +28,13 @@ private:
 	void update() override;
 	void draw() override;
 
+	// Reads settings from file (or sets to default)
+	void readSettings() override;
+
 public:
 	Game();
 	~Game();
+
+	// Saves the current settings
+	void saveSettings() override;
 };

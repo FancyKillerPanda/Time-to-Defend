@@ -33,7 +33,7 @@ Game::Game()
 	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
 	// Initialises the settings
-	settings = new GameSettings();
+	readSettings();
 
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
@@ -51,6 +51,9 @@ Game::Game()
 
 Game::~Game()
 {
+	// Saves the settings to a file
+	saveSettings();
+
 	delete settings;
 	settings = nullptr;
 }
@@ -150,4 +153,73 @@ void Game::draw()
 #endif // _DEBUG
 
 	SDL_RenderPresent(m_Renderer);
+}
+
+
+void Game::saveSettings()
+{
+	// Opens the file to write in
+	std::fstream settingsFile;
+	settingsFile.open("res/TtDSettings.txt", std::fstream::out | std::fstream::trunc);
+
+	// Error checking
+	if (!settingsFile)
+	{
+		LOG_ERROR("Could not open file to save settings to.");
+		return;
+	}
+
+	// Puts the settings into the file
+	settingsFile << (int) settings->arrowKeysToRotateTower << "\n";
+	settingsFile << (int) settings->spaceToShoot << "\n";
+	settingsFile << (int) settings->towerShootCooldown << "\n";
+
+	// Closes the file
+	settingsFile.close();
+}
+
+void Game::readSettings()
+{
+	// Sets the settings to their default value
+	settings = new GameSettings();
+
+	// Opens the file to write in
+	std::fstream settingsFile;
+	settingsFile.open("res/TtDSettings.txt", std::fstream::in);
+
+	// Error checking
+	if (!settingsFile)
+	{
+		LOG_WARNING("Could not open file to read settings from.");
+		return;
+	}
+
+	std::string nextVal;
+
+	// Assigns values to the settings
+	try
+	{
+		if (std::getline(settingsFile, nextVal))
+		{
+			settings->arrowKeysToRotateTower = (bool) std::stoi(nextVal);
+		}
+
+		if (std::getline(settingsFile, nextVal))
+		{
+			settings->spaceToShoot = (bool) std::stoi(nextVal);
+		}
+
+		if (std::getline(settingsFile, nextVal))
+		{
+			settings->towerShootCooldown = (bool) std::stoi(nextVal);
+		}
+	}
+
+	catch (const std::exception&)
+	{
+		LOG_WARNING("Failed to set game settings. File most likely contains non-integers.");
+	}
+
+	// Closes the file
+	settingsFile.close();
 }
