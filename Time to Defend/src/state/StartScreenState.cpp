@@ -20,7 +20,7 @@ void StartScreenState::onEnter()
 		"Play",
 		"Instructions",
 		"Level Editor",
-		"Settings (Coming Soon...)"
+		"Settings"
 	});
 
 	// The settings
