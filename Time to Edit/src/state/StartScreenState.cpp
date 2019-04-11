@@ -25,7 +25,7 @@ void StartScreenState::onEnter()
 
 	// The settings
 	m_SettingsMenu = new Menu(s_Game, {
-		"Use <Ctrl-Click> to Remove Track: True"
+		s_Game->settings->ctrlClickToRemoveTrack ? "Use <Ctrl-Click> to Remove Track: True" : "Use <Ctrl-Click> to Remove Track: False"
 	});
 
 	// The instructions

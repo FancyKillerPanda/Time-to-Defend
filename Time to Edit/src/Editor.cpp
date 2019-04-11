@@ -7,6 +7,7 @@
 #include "Settings.h"
 #include "state/BaseGameState.h"
 #include "state/StartScreenState.h"
+#include "GameSettings.h"
 
 
 Editor::Editor()
@@ -31,6 +32,9 @@ Editor::Editor()
 	// Sets the clear colour
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 
+	// Initialises the settings
+	readSettings();
+
 	// Pushes the first state onto the stack
 	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
 	pushState(std::move(startScreenState));
@@ -39,6 +43,15 @@ Editor::Editor()
 	// Loads the information text
 	m_InfoText.load(DEFAULT_FONT_PATH, "Time to Edit V0.1.0 | 0 FPS", 10, SDL_Color { 180, 180, 180, 255 }, m_Renderer);
 #endif // _DEBUG
+}
+
+Editor::~Editor()
+{
+	// Saves settings to a file
+	saveSettings();
+
+	delete settings;
+	settings = nullptr;
 }
 
 
@@ -130,4 +143,61 @@ void Editor::draw()
 
 	// Displays the screen
 	SDL_RenderPresent(m_Renderer);
+}
+
+
+void Editor::saveSettings()
+{
+	// Opens the file to write in
+	std::fstream settingsFile;
+	settingsFile.open("res/TtESettings.txt", std::fstream::out | std::fstream::trunc);
+
+	// Error checking
+	if (!settingsFile)
+	{
+		LOG_ERROR("Could not open file to save settings to.");
+		return;
+	}
+
+	// Puts the settings into the file
+	settingsFile << (int) settings->ctrlClickToRemoveTrack << '\n';
+
+	// Closes the file
+	settingsFile.close();
+}
+
+void Editor::readSettings()
+{
+	// Sets the settings to their default value
+	settings = new GameSettings();
+
+	// Opens the file to read from
+	std::fstream settingsFile;
+	settingsFile.open("res/TtESettings.txt", std::fstream::in);
+
+	// Error checking
+	if (!settingsFile)
+	{
+		LOG_WARNING("Could not open file to read settings from.");
+		return;
+	}
+
+	std::string nextVal;
+
+	// Assigns values to the settings
+	try
+	{
+		if (std::getline(settingsFile, nextVal))
+		{
+			settings->ctrlClickToRemoveTrack = (bool) std::stoi(nextVal);
+		}
+	}
+
+	catch (const std::exception&)
+	{
+		LOG_WARNING("Failed to set editor settings. File most likely contains non-integers.");
+	}
+
+	// Closes the file
+	settingsFile.close();
 }

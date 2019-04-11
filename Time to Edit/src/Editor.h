@@ -20,6 +20,9 @@ private:
 	Text m_InfoText;
 #endif // _DEBUG
 
+	// Reads settings from file (or sets to default)
+	void readSettings() override;
+
 private:
 	void handleEvents() override;
 	void update() override;
@@ -27,4 +30,8 @@ private:
 
 public:
 	Editor();
+	~Editor();
+
+	// Saves the current settings
+	void saveSettings() override;
 };
