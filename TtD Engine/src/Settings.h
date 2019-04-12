@@ -24,4 +24,4 @@ constexpr double WAVE_SPAWN_TIME = MAX_ENEMY_MOVE_TIME * 2.5;
 constexpr double TOWER_SHOOT_COOLDOWN_TIME = 75;
 
 // Characters that can't be in a filename
-constexpr const char* NON_FILENAME_CHARACTERS = "[/\\:*?\"<>|]";
+constexpr const char* NON_FILENAME_CHARACTERS = "[/\\\\:*?\"<>|]";
