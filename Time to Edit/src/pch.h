@@ -17,6 +17,7 @@
 #include <chrono>
 #include <memory>
 #include <utility>
+#include <regex>
 
 // SDL2
 #include <SDL/SDL.h>

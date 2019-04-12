@@ -20,6 +20,9 @@ class StartScreenState : public GameState
 	};
 
 private:
+	// Characters that can't be used in a filename
+	static std::regex s_NonFilenameCharacters;
+
 	// The "Time to Edit!" header text
 	Text m_TtEText;
 

@@ -6,6 +6,8 @@
 #include "EditorState.h"
 #include "GameSettings.h"
 
+std::regex StartScreenState::s_NonFilenameCharacters = std::regex(NON_FILENAME_CHARACTERS);
+
 
 void StartScreenState::onEnter()
 {
@@ -238,6 +240,11 @@ void StartScreenState::handleEvent(SDL_Event& event)
 	case SDL_TEXTINPUT:
 		if (m_ScreenState == ScreenState::NewProject)
 		{
+			if (std::regex_match(event.text.text, s_NonFilenameCharacters))
+			{
+				break;
+			}
+
 			if (m_ProjectName.getText() == "Untitled")
 			{
 				m_ProjectName.setText("", false);

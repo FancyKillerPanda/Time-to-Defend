@@ -1,5 +1,6 @@
 #pragma once
 
+
 // Number of cells on the X and Y axis
 constexpr unsigned int NUM_OF_CELLS_X = 48;
 constexpr unsigned int NUM_OF_CELLS_Y = 27;
@@ -21,3 +22,6 @@ constexpr double WAVE_SPAWN_TIME = MAX_ENEMY_MOVE_TIME * 2.5;
 
 // Time before tower can shoot again (ms)
 constexpr double TOWER_SHOOT_COOLDOWN_TIME = 75;
+
+// Characters that can't be in a filename
+constexpr const char* NON_FILENAME_CHARACTERS = "[/\\:*?\"<>|]";
