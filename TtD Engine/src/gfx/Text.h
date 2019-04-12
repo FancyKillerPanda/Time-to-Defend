@@ -55,5 +55,5 @@ public:
 	const SDL_Rect& getRect() { return m_TextRect; }
 
 	// Gets the text
-	const std::string& getText() { return m_Text; }
+	std::string& getText() { return m_Text; }
 };

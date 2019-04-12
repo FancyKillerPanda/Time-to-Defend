@@ -118,6 +118,31 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			}
 
 			break;
+
+		case SDLK_BACKSPACE:
+			if (m_ScreenState == ScreenState::NewProject)
+			{
+				unsigned int length = m_ProjectName.getText().length();
+
+				if (length == 0 || m_ProjectName.getText() == "Untitled")
+				{
+					break;
+				}
+
+				// Removes a character
+				m_ProjectName.getText().pop_back();
+
+				// Actual length would be 0
+				if (length == 1)
+				{
+					m_ProjectName.setText("Untitled", false);
+				}
+
+				// Updates the text
+				m_ProjectName.setText(m_ProjectName.getText());
+			}
+
+			break;
 		}
 
 		break;
@@ -221,6 +246,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 		break;
 
+	/*
 	case SDL_TEXTEDITING:
 		if (m_ScreenState == ScreenState::NewProject)
 		{
@@ -230,6 +256,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		}
 
 		break;
+	*/
 	}
 }
 
