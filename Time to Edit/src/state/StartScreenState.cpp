@@ -207,6 +207,24 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		}
 
 		break;
+
+	case SDL_TEXTINPUT:
+		if (m_ScreenState == ScreenState::NewProject)
+		{
+			m_ProjectName.setText(m_ProjectName.getText() + event.text.text);
+		}
+
+		break;
+
+	case SDL_TEXTEDITING:
+		if (m_ScreenState == ScreenState::NewProject)
+		{
+			m_Composition = event.edit.text;
+			m_Cursor = event.edit.start;
+			m_SelectionLength = event.edit.length;
+		}
+
+		break;
 	}
 }
 
