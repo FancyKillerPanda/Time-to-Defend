@@ -91,11 +91,13 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			case ScreenState::NewProject:
 			{
+				// Creates the new state
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName.getText());
+
 				// Pops this state off the Game's stack
 				s_Game->popState();
 
 				// Pushes the editor state onto the stack
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
 				s_Game->pushState(std::move(editorState));
 
 				break;
@@ -122,7 +124,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		case SDLK_BACKSPACE:
 			if (m_ScreenState == ScreenState::NewProject)
 			{
-				unsigned int length = m_ProjectName.getText().length();
+				std::size_t length = m_ProjectName.getText().length();
 
 				if (length == 0 || m_ProjectName.getText() == "Untitled")
 				{
@@ -185,7 +187,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_NewProjectMenu->itemClicked() == 0)
 			{
 				// Creates the new editor state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName.getText());
 
 				// Pops this state off the Game's stack
 				s_Game->popState();

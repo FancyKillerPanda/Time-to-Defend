@@ -4,6 +4,12 @@
 #include "GameSettings.h"
 
 
+EditorState::EditorState(std::string projectName)
+	: m_ProjectName(projectName)
+{
+}
+
+
 void EditorState::onEnter()
 {
 	m_MapEditing.load(s_Game, nullptr);
@@ -136,8 +142,12 @@ void EditorState::saveMap()
 	}
 #endif // WIN32
 
+	std::string filename = "res/maps/custom/";
+	filename += m_ProjectName;
+	filename += ".txt";
+
 	std::fstream file;
-	file.open("res/maps/custom/map1.txt", std::fstream::out | std::fstream::trunc);
+	file.open(filename.c_str(), std::fstream::out | std::fstream::trunc);
 
 	if (!file)
 	{

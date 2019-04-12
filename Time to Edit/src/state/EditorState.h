@@ -18,6 +18,9 @@ private:
 
 	bool m_ShowGrid = false;
 
+	// The name of the project
+	std::string m_ProjectName;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();
@@ -29,6 +32,8 @@ private:
 	void saveMap();
 
 public:
+	EditorState(std::string projectName);
+
 	void onEnter() override;
 
 	void handleEvent(SDL_Event& event) override;
