@@ -11,7 +11,7 @@ private:
 
 	// Text data
 	const char* m_FontPath;
-	const char* m_Text;
+	std::string m_Text;
 	unsigned int m_Size;
 	SDL_Color m_Colour;
 	SDL_Renderer* m_Renderer;
@@ -29,17 +29,17 @@ private:
 
 public:
 	Text() = default;
-	Text(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
+	Text(const char* fontPath, std::string text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
 	~Text();
 
 	// Loads the text
-	void load(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
+	void load(const char* fontPath, std::string text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer);
 
 	// Whether the text has been clicked
 	bool rectCollides(int x, int y);
 
 	// Sets the text
-	void setText(const char* text, bool update = true);
+	void setText(std::string text, bool update = true);
 	// Sets the colour of the text
 	void setColour(const SDL_Color& colour, bool update = true);
 	// Sets the font size
@@ -55,5 +55,5 @@ public:
 	const SDL_Rect& getRect() { return m_TextRect; }
 
 	// Gets the text
-	const char* getText() { return m_Text; }
+	const std::string& getText() { return m_Text; }
 };

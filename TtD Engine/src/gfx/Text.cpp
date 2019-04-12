@@ -5,7 +5,7 @@
 #include "utils/Log.h"
 
 
-Text::Text(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
+Text::Text(const char* fontPath, std::string text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
 {
 	load(fontPath, text, size, colour, renderer);
 }
@@ -23,7 +23,7 @@ Text::~Text()
 	LOG_INFO("Destroyed text (text: \"{0}\").", m_Text);
 }
 
-void Text::load(const char* fontPath, const char* text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
+void Text::load(const char* fontPath, std::string text, unsigned int size, SDL_Color colour, SDL_Renderer* renderer)
 {
 	// Sets attributes on load
 	m_FontPath = fontPath;
@@ -57,8 +57,7 @@ void Text::updateTexture()
 	m_TextTexture = nullptr;
 
 	// Creates a surface for the font
-	//SDL_Surface* textSurface = TTF_RenderText_Solid(m_Font, m_Text, m_Colour);
-	SDL_Surface* textSurface = TTF_RenderUTF8_Solid(m_Font, m_Text, m_Colour);
+	SDL_Surface* textSurface = TTF_RenderUTF8_Solid(m_Font, m_Text.c_str(), m_Colour);
 
 	// Error checking for text surface
 	if (textSurface == nullptr)
@@ -91,7 +90,7 @@ bool Text::rectCollides(int x, int y)
 	return SDL_HasIntersection(&mouseRect, &m_TextRect);
 }
 
-void Text::setText(const char* text, bool update)
+void Text::setText(std::string text, bool update)
 {
 	if (!m_Loaded)
 	{
