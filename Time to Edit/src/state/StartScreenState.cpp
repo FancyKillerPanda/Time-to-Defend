@@ -211,6 +211,11 @@ void StartScreenState::handleEvent(SDL_Event& event)
 	case SDL_TEXTINPUT:
 		if (m_ScreenState == ScreenState::NewProject)
 		{
+			if (m_ProjectName.getText() == "Untitled")
+			{
+				m_ProjectName.setText("", false);
+			}
+
 			m_ProjectName.setText(m_ProjectName.getText() + event.text.text);
 		}
 
