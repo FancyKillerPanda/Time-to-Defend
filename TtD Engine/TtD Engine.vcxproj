@@ -15,6 +15,7 @@
     <ClInclude Include="src\entities\Arrow.h" />
     <ClInclude Include="src\entities\Enemy.h" />
     <ClInclude Include="src\entities\Tower.h" />
+    <ClInclude Include="src\gfx\InputText.h" />
     <ClInclude Include="src\gfx\Map.h" />
     <ClInclude Include="src\gfx\Menu.h" />
     <ClInclude Include="src\gfx\Paragraph.h" />
@@ -34,6 +35,7 @@
     <ClCompile Include="src\entities\Arrow.cpp" />
     <ClCompile Include="src\entities\Enemy.cpp" />
     <ClCompile Include="src\entities\Tower.cpp" />
+    <ClCompile Include="src\gfx\InputText.cpp" />
     <ClCompile Include="src\gfx\Map.cpp" />
     <ClCompile Include="src\gfx\Menu.cpp" />
     <ClCompile Include="src\gfx\Paragraph.cpp" />
@@ -98,6 +100,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>_MBCS;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,6 +125,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>_MBCS;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

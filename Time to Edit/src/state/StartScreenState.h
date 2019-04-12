@@ -7,6 +7,7 @@
 #include "gfx/Text.h"
 #include "gfx/Menu.h"
 #include "gfx/Paragraph.h"
+#include "gfx/InputText.h"
 
 
 class StartScreenState : public GameState
@@ -20,9 +21,6 @@ class StartScreenState : public GameState
 	};
 
 private:
-	// Characters that can't be used in a filename
-	static std::regex s_NonFilenameCharacters;
-
 	// The "Time to Edit!" header text
 	Text m_TtEText;
 
@@ -48,7 +46,7 @@ private:
 	ScreenState m_ScreenState = ScreenState::MainScreen;
 
 	// The currently inputted project name
-	Text m_ProjectName;
+	InputText* m_ProjectName;
 	Text m_NewProjectLabel;
 
 	// Text input properties

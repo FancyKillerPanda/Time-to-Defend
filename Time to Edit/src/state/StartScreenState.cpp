@@ -6,8 +6,6 @@
 #include "EditorState.h"
 #include "GameSettings.h"
 
-std::regex StartScreenState::s_NonFilenameCharacters = std::regex(NON_FILENAME_CHARACTERS);
-
 
 void StartScreenState::onEnter()
 {
@@ -52,7 +50,7 @@ void StartScreenState::onEnter()
 	});
 
 	// Initialises the project name and its label
-	m_ProjectName.load(DEFAULT_FONT_PATH, "Untitled", 28, SDL_Color { 160, 160, 160, 255 }, s_Game->getRenderer());
+	m_ProjectName = new InputText(s_Game, "Untitled");
 	m_NewProjectLabel.load(DEFAULT_FONT_PATH, "Project Name:", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
 	// Initialises the settings
@@ -69,6 +67,9 @@ void StartScreenState::onExit()
 
 	delete m_NewProjectMenu;
 	m_NewProjectMenu = nullptr;
+
+	delete m_ProjectName;
+	m_ProjectName = nullptr;
 
 	delete m_Instructions;
 	m_Instructions = nullptr;
@@ -94,7 +95,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			case ScreenState::NewProject:
 			{
 				// Creates the new state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName.getText());
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText());
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -126,42 +127,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		case SDLK_BACKSPACE:
 			if (m_ScreenState == ScreenState::NewProject)
 			{
-				std::size_t length = m_ProjectName.getText().length();
-
-				if (length == 0 || m_ProjectName.getText() == "Untitled")
-				{
-					break;
-				}
-
-				if (SDL_GetModState() & KMOD_CTRL)
-				{
-					// Removes characters until a space
-					while (m_ProjectName.getText().length() > 0 && m_ProjectName.getText().back() != ' ')
-					{
-						m_ProjectName.getText().pop_back();
-					}
-
-					if (m_ProjectName.getText().length() > 0)
-					{
-						// Removes the space
-						m_ProjectName.getText().pop_back();
-					}
-				}
-
-				else
-				{
-					// Removes a character
-					m_ProjectName.getText().pop_back();
-				}
-
-				// Sets empty text to default
-				if (m_ProjectName.getText().length() == 0)
-				{
-					m_ProjectName.setText("Untitled", false);
-				}
-
-				// Updates the text
-				m_ProjectName.setText(m_ProjectName.getText());
+				m_ProjectName->handleKeyEvent(event);
 			}
 
 			break;
@@ -207,7 +173,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_NewProjectMenu->itemClicked() == 0)
 			{
 				// Creates the new editor state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName.getText());
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText());
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -258,17 +224,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 	case SDL_TEXTINPUT:
 		if (m_ScreenState == ScreenState::NewProject)
 		{
-			if (std::regex_match(event.text.text, s_NonFilenameCharacters))
-			{
-				break;
-			}
-
-			if (m_ProjectName.getText() == "Untitled")
-			{
-				m_ProjectName.setText("", false);
-			}
-
-			m_ProjectName.setText(m_ProjectName.getText() + event.text.text);
+			m_ProjectName->handleInputEvent(event);
 		}
 
 		break;
@@ -316,7 +272,7 @@ void StartScreenState::draw()
 		// Draws text
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
 		m_NewProjectLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 9 / 20);
-		m_ProjectName.draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_ProjectName->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
 		m_NewProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 

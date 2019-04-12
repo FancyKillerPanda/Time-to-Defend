@@ -9,6 +9,11 @@
 #include <chrono>
 #include <memory>
 
+// String
+#include <string>
+#include <string_view>
+#include <regex>
+
 // Streams
 #include <fstream>
 

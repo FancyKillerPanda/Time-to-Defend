@@ -28,6 +28,9 @@ public:
 	// Settings
 	GameSettings* settings;
 
+	// Characters that can't be used in a filename
+	static std::regex s_NonFilenameCharacters;
+
 protected:
 	virtual void handleEvents() = 0;
 	virtual void update() {}

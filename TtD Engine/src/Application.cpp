@@ -3,6 +3,10 @@
 #include "Application.h"
 
 #include "state/BaseGameState.h"
+#include "Settings.h"
+
+
+std::regex Application::s_NonFilenameCharacters = std::regex(NON_FILENAME_CHARACTERS);
 
 
 Application::Application(unsigned int windowWidth, unsigned int windowHeight, const char* windowTitle)
