@@ -16,6 +16,7 @@ class StartScreenState : public GameState
 		MainScreen,
 		Instructions,
 		Settings,
+		NewProject,
 	};
 
 private:
@@ -28,6 +29,9 @@ private:
 	// The settings menu
 	Menu* m_SettingsMenu;
 
+	// The new project next button
+	Menu* m_NewProjectMenu;
+
 	// Whether the instruction page has already loaded
 	bool m_InstructionPageLoaded = false;
 
@@ -39,6 +43,10 @@ private:
 
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
+
+	// The currently inputted project name
+	Text m_ProjectName;
+	Text m_NewProjectLabel;
 
 public:
 	void onEnter() override;

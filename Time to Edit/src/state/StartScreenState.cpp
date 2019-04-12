@@ -23,6 +23,11 @@ void StartScreenState::onEnter()
 		"Settings"
 	});
 
+	// The new project page
+	m_NewProjectMenu = new Menu(s_Game, {
+		"Continue -->"
+	});
+
 	// The settings
 	m_SettingsMenu = new Menu(s_Game, {
 		s_Game->settings->ctrlClickToRemoveTrack ? "Use <Ctrl-Click> to Remove Track: True" : "Use <Ctrl-Click> to Remove Track: False"
@@ -44,6 +49,10 @@ void StartScreenState::onEnter()
 		"<-- Back"
 	});
 
+	// Initialises the project name and its label
+	m_ProjectName.load(DEFAULT_FONT_PATH, "Untitled", 28, SDL_Color { 160, 160, 160, 255 }, s_Game->getRenderer());
+	m_NewProjectLabel.load(DEFAULT_FONT_PATH, "Project Name:", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+
 	// Initialises the settings
 	s_Game->settings = new GameSettings();
 
@@ -55,6 +64,9 @@ void StartScreenState::onExit()
 {
 	delete m_MainMenu;
 	m_MainMenu = nullptr;
+
+	delete m_NewProjectMenu;
+	m_NewProjectMenu = nullptr;
 
 	delete m_Instructions;
 	m_Instructions = nullptr;
@@ -74,6 +86,10 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			switch (m_ScreenState)
 			{
 			case ScreenState::MainScreen:
+				m_ScreenState = ScreenState::NewProject;
+				break;
+
+			case ScreenState::NewProject:
 			{
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -114,14 +130,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Start New"
 			if (m_MainMenu->itemClicked() == 0)
 			{
-				// Creates the new editor state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the editor state onto the stack
-				s_Game->pushState(std::move(editorState));
+				m_ScreenState = ScreenState::NewProject;
 			}
 
 			// Clicked "Load"
@@ -140,6 +149,24 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_MainMenu->itemClicked() == 3)
 			{
 				m_ScreenState = ScreenState::Settings;
+			}
+
+			break;
+		}
+
+		case ScreenState::NewProject:
+		{
+			// Clicked "Next"
+			if (m_NewProjectMenu->itemClicked() == 0)
+			{
+				// Creates the new editor state
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>();
+
+				// Pops this state off the Game's stack
+				s_Game->popState();
+
+				// Pushes the editor state onto the stack
+				s_Game->pushState(std::move(editorState));
 			}
 
 			break;
@@ -193,6 +220,11 @@ void StartScreenState::update()
 		break;
 	}
 
+	case ScreenState::NewProject:
+		m_NewProjectMenu->update();
+		m_BackMenu->update();
+		break;
+
 	case ScreenState::Instructions:
 		m_BackMenu->update();
 		break;
@@ -215,6 +247,16 @@ void StartScreenState::draw()
 
 		break;
 
+	case ScreenState::NewProject:
+		// Draws text
+		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
+		m_NewProjectLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_ProjectName.draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_NewProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
+		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
+
+		break;
+
 	case ScreenState::Instructions:
 		// Draws text
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
@@ -228,5 +270,7 @@ void StartScreenState::draw()
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 8 / 20);
 		m_SettingsMenu->draw(s_Game->getWindowHeight() * 11 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
+
+		break;
 	}
 }
