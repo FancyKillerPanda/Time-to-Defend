@@ -133,11 +133,29 @@ void StartScreenState::handleEvent(SDL_Event& event)
 					break;
 				}
 
-				// Removes a character
-				m_ProjectName.getText().pop_back();
+				if (SDL_GetModState() & KMOD_CTRL)
+				{
+					// Removes characters until a space
+					while (m_ProjectName.getText().length() > 0 && m_ProjectName.getText().back() != ' ')
+					{
+						m_ProjectName.getText().pop_back();
+					}
 
-				// Actual length would be 0
-				if (length == 1)
+					if (m_ProjectName.getText().length() > 0)
+					{
+						// Removes the space
+						m_ProjectName.getText().pop_back();
+					}
+				}
+
+				else
+				{
+					// Removes a character
+					m_ProjectName.getText().pop_back();
+				}
+
+				// Sets empty text to default
+				if (m_ProjectName.getText().length() == 0)
 				{
 					m_ProjectName.setText("Untitled", false);
 				}
