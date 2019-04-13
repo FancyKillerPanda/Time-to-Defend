@@ -16,6 +16,7 @@ enum class GameLevel
 	_1,
 	_2,
 	_3,
+	Custom,
 };
 
 
@@ -58,9 +59,15 @@ private:
 	// Text that appears when game is paused
 	Text m_PausedText;
 
+	// Tower positions on a custom map
+	std::vector<Position> m_CustomTowerPositions = {};
+
+	// Custom map filepath
+	std::string m_CustomMapFilepath = "";
+
 private:
 	// Loads a level
-	void loadLevel();
+	void loadLevel(std::vector<Position> towerPositions = {});
 
 	// Spawns a set of enemies
 	void spawnEnemies();
@@ -72,6 +79,9 @@ private:
 	void changeToTower(int towerNumber);
 
 public:
+	GameplayState() = default;
+	GameplayState(std::string customMapFilepath, std::vector<Position> towerPositions);
+
 	void onEnter() override;
 	void onExit() override;
 

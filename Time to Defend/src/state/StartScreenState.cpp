@@ -103,17 +103,25 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			}
 
 			case ScreenState::LoadProject:
-				if (loadProject())
-				{
-					// TODO: Start custom map
-				}
+			{
+				// Creates the map
+				std::string mapFilepath = "res/maps/custom/";
+				mapFilepath += m_ProjectName->get().getText() + ".txt";
 
-				else
-				{
-					// TODO: Display error
-				}
+				// The map's tower positions
+				std::vector<Position> towerPositions = { Position { 2, 2 }, Position { 10, 10 } };
+
+				// Creates the next state
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(mapFilepath, towerPositions);
+
+				// Pops this state off the Game's stack
+				s_Game->popState();
+
+				// Pushes the gameplay state onto the stack
+				s_Game->pushState(std::move(gameplayState));
 
 				break;
+			}
 
 			// Goes back to the main screen
 			case ScreenState::Instructions:
@@ -207,15 +215,23 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Next"
 			if (m_LoadProjectMenu->itemClicked() == 0)
 			{
-				if (loadProject())
-				{
-					// TODO: Start custom map
-				}
+				// Creates the map
+				std::string mapFilepath = "res/maps/custom/";
+				mapFilepath += m_ProjectName->get().getText() + ".txt";
 
-				else
-				{
-					// TODO: Display error
-				}
+				// The map's tower positions
+				std::vector<Position> towerPositions = { Position { 2, 2 }, Position { 10, 10 } };
+
+				// Creates the next state
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(mapFilepath, towerPositions);
+
+				// Pops this state off the Game's stack
+				s_Game->popState();
+
+				// Pushes the gameplay state onto the stack
+				s_Game->pushState(std::move(gameplayState));
+
+				break;
 			}
 
 			break;

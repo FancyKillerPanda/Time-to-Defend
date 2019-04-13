@@ -49,10 +49,6 @@ private:
 	InputText* m_ProjectName;
 	Text m_LoadProjectLabel;
 
-private:
-	// TODO: Implement
-	bool loadProject() { return false; }
-
 public:
 	void onEnter() override;
 	void onExit() override;

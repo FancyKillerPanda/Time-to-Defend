@@ -14,6 +14,13 @@
 	break;
 
 
+GameplayState::GameplayState(std::string customMapFilepath, std::vector<Position> towerPositions)
+	: m_CustomMapFilepath(customMapFilepath), m_CustomTowerPositions(towerPositions)
+{
+	m_GameLevel = GameLevel::Custom;
+}
+
+
 void GameplayState::onEnter()
 {
 	m_PausedText.load(DEFAULT_FONT_PATH, "Paused!", 48, SDL_Color { 255, 255, 255, 255 }, s_Game->getRenderer());
@@ -318,7 +325,7 @@ void GameplayState::draw()
 }
 
 
-void GameplayState::loadLevel()
+void GameplayState::loadLevel(std::vector<Position> towerPositions)
 {
 	// Makes sure no towers, enemies, or arrows remain
 	onExit();
@@ -368,6 +375,21 @@ void GameplayState::loadLevel()
 		m_Towers.emplace_back(new Tower(s_Game, Position { 22, 23 }));
 
 		m_NumberOfWavesToSpawn = 4;
+
+		break;
+
+	case GameLevel::Custom:
+		// Loads the custom map
+		m_CurrentMap.load(s_Game, m_CustomMapFilepath.c_str());
+
+		// Creates the towers
+		for (const Position& position : m_CustomTowerPositions)
+		{
+			m_Towers.emplace_back(new Tower(s_Game, position));
+		}
+
+		// TODO: Make this a setting
+		m_NumberOfWavesToSpawn = 2;
 
 		break;
 	}
