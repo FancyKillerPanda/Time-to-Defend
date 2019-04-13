@@ -7,6 +7,7 @@
 #include "gfx/Text.h"
 #include "gfx/Menu.h"
 #include "gfx/Paragraph.h"
+#include "gfx/InputText.h"
 
 
 class StartScreenState : public GameState
@@ -16,6 +17,7 @@ class StartScreenState : public GameState
 		MainScreen,
 		Instructions,
 		Settings,
+		LoadProject,
 	};
 
 private:
@@ -24,6 +26,9 @@ private:
 
 	// The main menu
 	Menu* m_MainMenu = nullptr;
+
+	// The load project next button
+	Menu* m_LoadProjectMenu = nullptr;
 
 	// Whether the instruction page has already loaded
 	bool m_InstructionPageLoaded = false;
@@ -39,6 +44,14 @@ private:
 
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
+
+	// The currently inputted project name to load
+	InputText* m_ProjectName;
+	Text m_LoadProjectLabel;
+
+private:
+	// TODO: Implement
+	bool loadProject() { return false; }
 
 public:
 	void onEnter() override;

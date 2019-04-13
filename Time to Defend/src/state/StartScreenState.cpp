@@ -18,9 +18,15 @@ void StartScreenState::onEnter()
 	// Creates the main menu
 	m_MainMenu = new Menu(s_Game, {
 		"Play",
+		"Load Level",
 		"Instructions",
 		"Level Editor",
 		"Settings"
+	});
+
+	// The load project page
+	m_LoadProjectMenu = new Menu(s_Game, {
+		"Continue -->"
 	});
 
 	// The settings
@@ -46,6 +52,10 @@ void StartScreenState::onEnter()
 		"<-- Back"
 	});
 
+	// Initialises the project name and its label
+	m_ProjectName = new InputText(s_Game, "Untitled");
+	m_LoadProjectLabel.load(DEFAULT_FONT_PATH, "Project Name:", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+
 	// Makes the background render black
 	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
@@ -54,6 +64,12 @@ void StartScreenState::onExit()
 {
 	delete m_MainMenu;
 	m_MainMenu = nullptr;
+
+	delete m_LoadProjectMenu;
+	m_LoadProjectMenu = nullptr;
+
+	delete m_ProjectName;
+	m_ProjectName = nullptr;
 
 	delete m_Instructions;
 	m_Instructions = nullptr;
@@ -86,6 +102,19 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				break;
 			}
 
+			case ScreenState::LoadProject:
+				if (loadProject())
+				{
+					// TODO: Start custom map
+				}
+
+				else
+				{
+					// TODO: Display error
+				}
+
+				break;
+
 			// Goes back to the main screen
 			case ScreenState::Instructions:
 			case ScreenState::Settings:
@@ -100,6 +129,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::MainScreen)
 			{
 				m_ScreenState = ScreenState::Instructions;
+			}
+
+			break;
+
+		case SDLK_BACKSPACE:
+			if (m_ScreenState == ScreenState::LoadProject)
+			{
+				m_ProjectName->handleKeyEvent(event);
 			}
 
 			break;
@@ -125,6 +162,12 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->pushState(std::move(gameplayState));
 
 				break;
+			}
+
+			// Clicked "Load Level"
+			else if (m_MainMenu->itemClicked() == 1)
+			{
+				m_ScreenState = ScreenState::LoadProject;
 			}
 
 			// Clicked "Instructions"
@@ -154,6 +197,25 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_MainMenu->itemClicked() == 3)
 			{
 				m_ScreenState = ScreenState::Settings;
+			}
+
+			break;
+		}
+
+		case ScreenState::LoadProject:
+		{
+			// Clicked "Next"
+			if (m_LoadProjectMenu->itemClicked() == 0)
+			{
+				if (loadProject())
+				{
+					// TODO: Start custom map
+				}
+
+				else
+				{
+					// TODO: Display error
+				}
 			}
 
 			break;
@@ -227,6 +289,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		}
 
 		break;
+
+	case SDL_TEXTINPUT:
+		if (m_ScreenState == ScreenState::LoadProject)
+		{
+			m_ProjectName->handleInputEvent(event);
+		}
+
+		break;
 	}
 }
 
@@ -239,6 +309,11 @@ void StartScreenState::update()
 		m_MainMenu->update();
 		break;
 	}
+
+	case ScreenState::LoadProject:
+		m_LoadProjectMenu->update();
+		m_BackMenu->update();
+		break;
 
 	case ScreenState::Instructions:
 		m_BackMenu->update();
@@ -257,8 +332,18 @@ void StartScreenState::draw()
 	{
 	case ScreenState::MainScreen:
 		// Draws text
+		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 4 / 20);
+		m_MainMenu->draw(s_Game->getWindowHeight() * 7 / 20);
+
+		break;
+
+	case ScreenState::LoadProject:
+		// Draws text
 		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
-		m_MainMenu->draw(s_Game->getWindowHeight() * 8 / 20);
+		m_LoadProjectLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_ProjectName->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_LoadProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
+		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
 

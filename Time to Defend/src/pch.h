@@ -12,6 +12,10 @@
 // Streams
 #include <fstream>
 
+// String
+#include <string>
+#include <string_view>
+#include <regex>
 
 // Windows
 #ifdef _WIN32
