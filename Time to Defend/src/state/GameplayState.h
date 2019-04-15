@@ -65,6 +65,9 @@ private:
 	// Custom map filepath
 	std::string m_CustomMapFilepath = "";
 
+	// Custom map name
+	std::string m_CustomMapName = "";
+
 private:
 	// Loads a level
 	void loadLevel(std::vector<Position> towerPositions = {});
@@ -80,7 +83,7 @@ private:
 
 public:
 	GameplayState() = default;
-	GameplayState(std::string customMapFilepath, std::vector<Position> towerPositions);
+	GameplayState(std::string customMapName, std::string customMapFilepath, std::vector<Position> towerPositions);
 
 	void onEnter() override;
 	void onExit() override;

@@ -7,8 +7,8 @@
 #include "GameplayState.h"
 
 
-GameOverState::GameOverState(bool won)
-	: m_Won(won)
+GameOverState::GameOverState(bool won, std::string customMapName)
+	: m_Won(won), m_CustomMapName(customMapName)
 {
 }
 
@@ -21,18 +21,57 @@ void GameOverState::onEnter()
 
 	if (m_Won)
 	{
-		text = "Congratulations! You Won!";
+		if (m_CustomMapName == "")
+		{
+			text = "Congratulations! You Won!";
+		}
+
+		else
+		{
+			m_GameOverTextString = "Congratulations! You Won (Map: ";
+			m_GameOverTextString += m_CustomMapName;
+			m_GameOverTextString += ")!";
+
+			text = m_GameOverTextString.c_str();
+		}
+
 		colour = SDL_Color { 70, 255, 0, 255 };
 	}
 
 	else
 	{
-		text = "Game Over! You Lost!";
+		if (m_CustomMapName == "")
+		{
+			text = "Game Over! You Lost!";
+		}
+
+		else
+		{
+			m_GameOverTextString = "Game Over! You Lost (Map: ";
+			m_GameOverTextString += m_CustomMapName;
+			m_GameOverTextString += ")!";
+
+			text = m_GameOverTextString.c_str();
+		}
+
 		colour = SDL_Color { 255, 35, 0, 255 };
 	}
 
+	int textSize;
+
+	// Text size is smaller to display entire map name
+	if (m_CustomMapName == "")
+	{
+		textSize = 48;
+	}
+
+	else
+	{
+		textSize = 36;
+	}
+
 	// Creates the text
-	m_GameOverText.load("res/fonts/arial.ttf", text, 48, colour, s_Game->getRenderer());
+	m_GameOverText.load("res/fonts/arial.ttf", text, textSize, colour, s_Game->getRenderer());
 
 	// Makes the text bold
 	m_GameOverText.setStyle(TTF_STYLE_BOLD);
@@ -59,11 +98,26 @@ void GameOverState::handleEvent(SDL_Event& event)
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_r:
+			std::unique_ptr<GameplayState> gameplayState;
+
+			if (m_CustomMapName == "")
+			{
+				gameplayState = std::make_unique<GameplayState>();
+			}
+
+			else
+			{
+				std::string mapFilepath = "res/maps/custom/";
+				mapFilepath += m_CustomMapName;
+				mapFilepath += ".txt";
+
+				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath, std::vector<Position> { Position { 0, 0 } });
+			}
+
 			// Pops this state off the Game's stack
 			s_Game->popState();
 
 			// Pushes the gameplay state onto the stack
-			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 			s_Game->pushState(std::move(gameplayState));
 
 			break;
@@ -76,11 +130,26 @@ void GameOverState::handleEvent(SDL_Event& event)
 		// Clicked "Restart"
 		if (m_OptionsMenu->itemClicked() == 0)
 		{
+			std::unique_ptr<GameplayState> gameplayState;
+
+			if (m_CustomMapName == "")
+			{
+				gameplayState = std::make_unique<GameplayState>();
+			}
+
+			else
+			{
+				std::string mapFilepath = "res/maps/custom/";
+				mapFilepath += m_CustomMapName;
+				mapFilepath += ".txt";
+
+				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath, std::vector<Position> { Position { 0, 0 } });
+			}
+
 			// Pops this state off the Game's stack
 			s_Game->popState();
 
 			// Pushes the gameplay state onto the stack
-			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
 			s_Game->pushState(std::move(gameplayState));
 		}
 

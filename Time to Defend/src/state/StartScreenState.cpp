@@ -112,7 +112,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				std::vector<Position> towerPositions = { Position { 2, 2 }, Position { 10, 10 } };
 
 				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(mapFilepath, towerPositions);
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ProjectName->get().getText(), mapFilepath, towerPositions);
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -223,7 +223,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				std::vector<Position> towerPositions = { Position { 2, 2 }, Position { 10, 10 } };
 
 				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(mapFilepath, towerPositions);
+				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ProjectName->get().getText(), mapFilepath, towerPositions);
 
 				// Pops this state off the Game's stack
 				s_Game->popState();

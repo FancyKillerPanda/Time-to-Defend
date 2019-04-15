@@ -13,12 +13,16 @@ class GameOverState : public GameState
 private:
 	Text m_GameOverText;
 	Menu* m_OptionsMenu;
+	std::string m_GameOverTextString;
 
 	// Whether the game was won
 	bool m_Won;
 
+	// The custom map's name (empty if not custom)
+	std::string m_CustomMapName = "";
+
 public:
-	GameOverState(bool won);
+	GameOverState(bool won, std::string customMapName);
 
 	void onEnter() override;
 	void onExit() override;

@@ -14,8 +14,8 @@
 	break;
 
 
-GameplayState::GameplayState(std::string customMapFilepath, std::vector<Position> towerPositions)
-	: m_CustomMapFilepath(customMapFilepath), m_CustomTowerPositions(towerPositions)
+GameplayState::GameplayState(std::string customMapName, std::string customMapFilepath, std::vector<Position> towerPositions)
+	: m_CustomMapName(customMapName), m_CustomMapFilepath(customMapFilepath), m_CustomTowerPositions(towerPositions)
 {
 	m_GameLevel = GameLevel::Custom;
 }
@@ -201,8 +201,8 @@ void GameplayState::update()
 		if (!enemy->move())
 		{
 			m_GameOver = true;
-
 			endGame(false);
+
 			return;
 		}
 	}
@@ -276,6 +276,10 @@ void GameplayState::update()
 
 		case GameLevel::_3:
 			// Ends the game with a win
+			endGame(true);
+			return;
+
+		case GameLevel::Custom:
 			endGame(true);
 			return;
 		}
@@ -434,11 +438,13 @@ void GameplayState::spawnEnemies()
 
 void GameplayState::endGame(bool won)
 {
+	// Creates the next state
+	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>(won, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
+
 	// Pops this state off the Game's stack
 	s_Game->popState();
 
 	// Pushes the first state onto the stack
-	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>(won);
 	s_Game->pushState(std::move(gameOverState));
 }
 
