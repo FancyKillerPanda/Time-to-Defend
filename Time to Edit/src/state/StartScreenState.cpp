@@ -182,6 +182,11 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->pushState(std::move(editorState));
 			}
 
+			if (m_BackMenu->itemClicked() == 0)
+			{
+				m_ScreenState = ScreenState::MainScreen;
+			}
+
 			break;
 		}
 
