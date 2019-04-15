@@ -39,6 +39,8 @@ void EditorState::handleEvent(SDL_Event& event)
 
 		case SDLK_t:
 			m_CurrentlyPlacingTower = !m_CurrentlyPlacingTower;
+			m_HoveringTowerLocation = getCellUnderMouse();
+
 			break;
 		}
 
