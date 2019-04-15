@@ -24,6 +24,9 @@ private:
 	// The current location of the "hovering" tower
 	Position m_HoveringTowerLocation = { -1, -1 };
 
+	// The tower drawn when the user is deciding where to place it
+	Tower* m_TowerToDraw;
+
 	// The name of the project
 	std::string m_ProjectName;
 

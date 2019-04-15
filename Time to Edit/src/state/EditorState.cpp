@@ -13,6 +13,9 @@ EditorState::EditorState(std::string projectName)
 void EditorState::onEnter()
 {
 	m_MapEditing.load(s_Game, nullptr);
+
+	// Creates the tower
+	m_TowerToDraw = new Tower(s_Game, m_HoveringTowerLocation);
 }
 
 void EditorState::handleEvent(SDL_Event& event)
@@ -131,6 +134,13 @@ void EditorState::draw()
 		{
 			SDL_RenderDrawLine(s_Game->getRenderer(), 0, y, CELL_SIZE * NUM_OF_CELLS_X, y);
 		}
+	}
+
+	if (m_CurrentlyPlacingTower)
+	{
+		// Draws the tower where the mouse is
+		m_TowerToDraw->setPosition(m_HoveringTowerLocation);
+		m_TowerToDraw->draw();
 	}
 }
 
