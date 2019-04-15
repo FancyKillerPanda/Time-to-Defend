@@ -234,13 +234,13 @@ void EditorState::saveMap()
 bool EditorState::towerConflicts(Tower* tower)
 {
 	// Creates a rectangle for the tower
-	SDL_Rect towerRect = { tower->getPosition().col * CELL_SIZE, tower->getPosition().row * CELL_SIZE, CELL_SIZE * 2, CELL_SIZE * 2 };
+	SDL_Rect towerRect = { tower->getPosition().col * (int) CELL_SIZE, tower->getPosition().row * (int) CELL_SIZE, (int) CELL_SIZE * 2, (int) CELL_SIZE * 2 };
 
 	// Checks if tower conflicts with path
 	for (const Position& pathCell : m_MapEditing.getPathCoords())
 	{
 		// Creates a rectangle for the path cell
-		SDL_Rect pathRect = { pathCell.col * CELL_SIZE, pathCell.row * CELL_SIZE, CELL_SIZE, CELL_SIZE };
+		SDL_Rect pathRect = { pathCell.col * (int) CELL_SIZE, pathCell.row * (int) CELL_SIZE, (int) CELL_SIZE, (int) CELL_SIZE };
 
 		// Checks for an intersection
 		if (SDL_HasIntersection(&towerRect, &pathRect))
@@ -252,7 +252,7 @@ bool EditorState::towerConflicts(Tower* tower)
 	for (const Position& otherTowerPos : m_MapEditing.getTowerCoords())
 	{
 		// Creates a rectangle for the other tower
-		SDL_Rect otherTowerRect = { otherTowerPos.col * CELL_SIZE, otherTowerPos.row * CELL_SIZE, CELL_SIZE * 2, CELL_SIZE * 2 };
+		SDL_Rect otherTowerRect = { otherTowerPos.col * (int) CELL_SIZE, otherTowerPos.row * (int) CELL_SIZE, (int) CELL_SIZE * 2, (int) CELL_SIZE * 2 };
 
 		// Checks for an intersection
 		if (SDL_HasIntersection(&towerRect, &otherTowerRect))
