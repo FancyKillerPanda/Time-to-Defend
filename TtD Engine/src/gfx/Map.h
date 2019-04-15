@@ -7,6 +7,7 @@
 #include "Settings.h"
 #include "utils/Position.h"
 #include "gfx/Texture.h"
+#include "entities/Tower.h"
 
 
 class Map
@@ -31,6 +32,8 @@ private:
 	// Whether the map is loaded
 	bool m_Loaded = false;
 
+	Tower* m_TowerToDraw = nullptr;
+
 #ifdef _DEBUG
 	const char* m_Filepath;
 #endif
@@ -41,14 +44,14 @@ public:
 	~Map();
 
 	void load(Application* const game, const char* filepath);
-	void draw();
+	void draw(bool drawTowers = false);
 
 	// Adds necessary information such as enemy spawn points
 	void convertToPlayableFormat();
 
 	inline const std::vector<Position>& getSpawnCoords() const { return m_SpawnCoords; }
 	inline const std::vector<Position>& getPathCoords() const { return m_PathCoords; }
-	inline const std::vector<Position>& getTowerCoords() const { return m_TowerCoords; }
+	inline std::vector<Position>& getTowerCoords() { return m_TowerCoords; }
 	inline const std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() const { return m_Data; }
 	inline std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() { return m_Data; }
 	inline bool getLoaded() { return m_Loaded; }

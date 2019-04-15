@@ -35,6 +35,12 @@ public:
 	// Creates a new arrow and returns it
 	Arrow* shoot();
 
+	// Updates the position
+	void setPosition(const Position& position);
+
+	// Gets the current position
+	inline const Position& getPosition() { return m_Position; }
+
 	// Sets whether the tower is highlighted
 	void setHighlight(bool value) { m_Highlighted = value; }
 };

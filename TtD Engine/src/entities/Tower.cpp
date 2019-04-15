@@ -15,11 +15,12 @@ Tower::Tower(Application* const game, Position position)
 {
 	s_Game = game;
 
-	// Creates the textures and sets their starting rects
+	// Creates the textures
 	m_Texture = new Texture("res/txrs/Tower.png", s_Game->getRenderer());
-	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 	m_HighlightedTexture = new Texture("res/txrs/Tower Highlighted.png", s_Game->getRenderer());
-	m_HighlightedTexture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
+
+	// Sets the texture's starting rects
+	setPosition(m_Position);
 
 	LOG_INFO("Created tower.");
 }
@@ -78,4 +79,11 @@ Arrow* Tower::shoot()
 		(float) ((m_Position.row + 1) * CELL_SIZE),
 		m_Direction
 	);
+}
+
+void Tower::setPosition(const Position& position)
+{
+	m_Position = position;
+	m_Texture->setRect(position.col * CELL_SIZE, position.row * CELL_SIZE);
+	m_HighlightedTexture->setRect(position.col * CELL_SIZE, position.row * CELL_SIZE);
 }

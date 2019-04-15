@@ -98,8 +98,13 @@ void EditorState::update()
 		{
 			Position cell = getCellUnderMouse();
 			m_MapEditing.getCoords()[cell.row][cell.col] = 'T';
+			m_MapEditing.getTowerCoords().push_back(cell);
 
 			m_CurrentlyPlacingTower = false;
+
+			// Needs to happen otherwise clickCell() will
+			// be called on the next frame
+			m_MouseButtonDown = false;
 		}
 
 		else
@@ -111,7 +116,7 @@ void EditorState::update()
 
 void EditorState::draw()
 {
-	m_MapEditing.draw();
+	m_MapEditing.draw(true);
 
 	if (m_ShowGrid)
 	{

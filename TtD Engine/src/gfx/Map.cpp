@@ -16,6 +16,9 @@ Map::Map(Application* const game, const char* filepath)
 
 Map::~Map()
 {
+	delete m_TowerToDraw;
+	m_TowerToDraw = nullptr;
+
 	LOG_INFO("Destroyed map (filepath: {0}).", m_Filepath);
 }
 
@@ -32,6 +35,9 @@ void Map::load(Application* const game, const char* filepath)
 	// Loads the textures
 	m_GrassTexture.load("res/txrs/Grass.jpg", s_Game->getRenderer());
 	m_TrackTexture.load("res/txrs/Track.jpg", s_Game->getRenderer());
+
+	// Creates the tower that will be drawn
+	m_TowerToDraw = new Tower(s_Game, Position { 0, 0 });
 
 	// Sets the width and height to the cell size
 	m_GrassTexture.setRect(0, 0, CELL_SIZE, CELL_SIZE);
@@ -117,7 +123,7 @@ void Map::load(Application* const game, const char* filepath)
 	LOG_INFO("Created map (filepath: {0}).", filepath);
 }
 
-void Map::draw()
+void Map::draw(bool drawTowers)
 {
 	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
 	{
@@ -140,6 +146,18 @@ void Map::draw()
 				// Draws the texture
 				SDL_RenderCopy(s_Game->getRenderer(), m_GrassTexture.getTexture(), nullptr, &m_GrassTexture.getRect());
 			}
+		}
+	}
+
+	if (drawTowers)
+	{
+		for (const Position& position : m_TowerCoords)
+		{
+			// Sets the position of the tower
+			m_TowerToDraw->setPosition(position);
+
+			// Draws the tower
+			m_TowerToDraw->draw();
 		}
 	}
 }
