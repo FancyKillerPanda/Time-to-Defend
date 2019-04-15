@@ -18,6 +18,12 @@ private:
 
 	bool m_ShowGrid = false;
 
+	// Whether the user is currently in the process of placing a tower
+	bool m_CurrentlyPlacingTower = false;
+
+	// The current location of the "hovering" tower
+	Position m_HoveringTowerLocation = { -1, -1 };
+
 	// The name of the project
 	std::string m_ProjectName;
 

@@ -33,6 +33,10 @@ void EditorState::handleEvent(SDL_Event& event)
 			}
 
 			break;
+
+		case SDLK_t:
+			m_CurrentlyPlacingTower = !m_CurrentlyPlacingTower;
+			break;
 		}
 
 		break;
@@ -75,6 +79,14 @@ void EditorState::handleEvent(SDL_Event& event)
 	case SDL_MOUSEBUTTONUP:
 		m_MouseButtonDown = false;
 		break;
+
+	case SDL_MOUSEMOTION:
+		if (m_CurrentlyPlacingTower)
+		{
+			m_HoveringTowerLocation = getCellUnderMouse();
+		}
+
+		break;
 	}
 }
 
@@ -82,7 +94,18 @@ void EditorState::update()
 {
 	if (m_MouseButtonDown)
 	{
-		clickCell();
+		if (m_CurrentlyPlacingTower)
+		{
+			Position cell = getCellUnderMouse();
+			m_MapEditing.getCoords()[cell.row][cell.col] = 'T';
+
+			m_CurrentlyPlacingTower = false;
+		}
+
+		else
+		{
+			clickCell();
+		}
 	}
 }
 
