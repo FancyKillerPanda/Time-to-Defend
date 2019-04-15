@@ -59,9 +59,6 @@ private:
 	// Text that appears when game is paused
 	Text m_PausedText;
 
-	// Tower positions on a custom map
-	std::vector<Position> m_CustomTowerPositions = {};
-
 	// Custom map filepath
 	std::string m_CustomMapFilepath = "";
 
@@ -70,7 +67,7 @@ private:
 
 private:
 	// Loads a level
-	void loadLevel(std::vector<Position> towerPositions = {});
+	void loadLevel();
 
 	// Spawns a set of enemies
 	void spawnEnemies();
@@ -83,7 +80,7 @@ private:
 
 public:
 	GameplayState() = default;
-	GameplayState(std::string customMapName, std::string customMapFilepath, std::vector<Position> towerPositions);
+	GameplayState(std::string customMapName, std::string customMapFilepath);
 
 	void onEnter() override;
 	void onExit() override;

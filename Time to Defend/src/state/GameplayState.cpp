@@ -14,8 +14,8 @@
 	break;
 
 
-GameplayState::GameplayState(std::string customMapName, std::string customMapFilepath, std::vector<Position> towerPositions)
-	: m_CustomMapName(customMapName), m_CustomMapFilepath(customMapFilepath), m_CustomTowerPositions(towerPositions)
+GameplayState::GameplayState(std::string customMapName, std::string customMapFilepath)
+	: m_CustomMapName(customMapName), m_CustomMapFilepath(customMapFilepath)
 {
 	m_GameLevel = GameLevel::Custom;
 }
@@ -329,7 +329,7 @@ void GameplayState::draw()
 }
 
 
-void GameplayState::loadLevel(std::vector<Position> towerPositions)
+void GameplayState::loadLevel()
 {
 	// Makes sure no towers, enemies, or arrows remain
 	onExit();
@@ -349,12 +349,6 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 
 		if (m_CurrentMap.getLoaded())
 		{
-			// Creates the towers
-			for (const Position& position : m_CustomTowerPositions)
-			{
-				m_Towers.emplace_back(new Tower(s_Game, position));
-			}
-
 			// TODO: Make this a setting
 			m_NumberOfWavesToSpawn = 2;
 		}
@@ -373,9 +367,8 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 		// Loads the first map
 		m_CurrentMap.load(s_Game, "res/maps/Level_1.txt");
 
-		// Creates two towers
-		m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
-		m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position { 12,  9 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position { 12, 37 }));
 
 		m_NumberOfWavesToSpawn = 1;
 
@@ -386,8 +379,8 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 		m_CurrentMap = Map(s_Game, "res/maps/Level_2.txt");
 
 		// Creates two towers
-		m_Towers.emplace_back(new Tower(s_Game, Position { 19, 12 }));
-		m_Towers.emplace_back(new Tower(s_Game, Position {  6, 33 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position { 19, 12 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position {  6, 33 }));
 
 		m_NumberOfWavesToSpawn = 3;
 
@@ -398,10 +391,10 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 		m_CurrentMap = Map(s_Game, "res/maps/Level_3.txt");
 
 		// Creates four towers
-		m_Towers.emplace_back(new Tower(s_Game, Position { 12, 10 }));
-		m_Towers.emplace_back(new Tower(s_Game, Position {  4, 23 }));
-		m_Towers.emplace_back(new Tower(s_Game, Position { 13, 36 }));
-		m_Towers.emplace_back(new Tower(s_Game, Position { 22, 23 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position { 12, 10 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position {  4, 23 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position { 13, 36 }));
+		//m_Towers.emplace_back(new Tower(s_Game, Position { 22, 23 }));
 
 		m_NumberOfWavesToSpawn = 4;
 
@@ -409,6 +402,12 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 
 	case GameLevel::Custom:
 		break;
+	}
+
+	// Creates the towers
+	for (const Position& position : m_CurrentMap.getTowerCoords())
+	{
+		m_Towers.emplace_back(new Tower(s_Game, position));
 	}
 
 	// Highlights the first tower the user controls

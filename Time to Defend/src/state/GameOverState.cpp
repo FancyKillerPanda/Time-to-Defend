@@ -111,7 +111,7 @@ void GameOverState::handleEvent(SDL_Event& event)
 				mapFilepath += m_CustomMapName;
 				mapFilepath += ".txt";
 
-				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath, std::vector<Position> { Position { 0, 0 } });
+				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath);
 			}
 
 			// Pops this state off the Game's stack
@@ -143,7 +143,7 @@ void GameOverState::handleEvent(SDL_Event& event)
 				mapFilepath += m_CustomMapName;
 				mapFilepath += ".txt";
 
-				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath, std::vector<Position> { Position { 0, 0 } });
+				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath);
 			}
 
 			// Pops this state off the Game's stack

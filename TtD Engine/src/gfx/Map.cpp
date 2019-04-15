@@ -82,6 +82,11 @@ void Map::load(Application* const game, const char* filepath)
 
 			break;
 
+		case 'T':
+			// Top-left tower cell
+			m_TowerCoords.emplace_back(row, col);
+			break;
+
 		case 'S':
 			m_SpawnCoords.emplace_back(row, col);
 			// No break here, spawn coordinates are always also path coordinates
@@ -96,6 +101,12 @@ void Map::load(Application* const game, const char* filepath)
 
 			break;
 		}
+	}
+
+	if (m_TowerCoords.empty())
+	{
+		// Makes sure at least one tower
+		m_TowerCoords.emplace_back(0, 0);
 	}
 
 	m_Loaded = true;
