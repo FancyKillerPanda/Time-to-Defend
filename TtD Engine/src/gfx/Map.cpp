@@ -98,6 +98,7 @@ void Map::load(Application* const game, const char* filepath)
 		}
 	}
 
+	m_Loaded = true;
 	LOG_INFO("Created map (filepath: {0}).", filepath);
 }
 

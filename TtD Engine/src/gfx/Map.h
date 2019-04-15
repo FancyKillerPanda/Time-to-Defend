@@ -26,6 +26,9 @@ private:
 	Texture m_GrassTexture;
 	Texture m_TrackTexture;
 
+	// Whether the map is loaded
+	bool m_Loaded = false;
+
 #ifdef _DEBUG
 	const char* m_Filepath;
 #endif
@@ -45,4 +48,5 @@ public:
 	inline const std::vector<Position>& getPathCoords() const { return m_PathCoords; }
 	inline const std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() const { return m_Data; }
 	inline std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() { return m_Data; }
+	inline bool getLoaded() { return m_Loaded; }
 };

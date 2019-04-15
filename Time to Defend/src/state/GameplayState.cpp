@@ -342,6 +342,31 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 	m_Arrows.clear();
 	m_Towers.clear();
 
+	if (m_GameLevel == GameLevel::Custom)
+	{
+		// Loads the custom map
+		m_CurrentMap.load(s_Game, m_CustomMapFilepath.c_str());
+
+		if (m_CurrentMap.getLoaded())
+		{
+			// Creates the towers
+			for (const Position& position : m_CustomTowerPositions)
+			{
+				m_Towers.emplace_back(new Tower(s_Game, position));
+			}
+
+			// TODO: Make this a setting
+			m_NumberOfWavesToSpawn = 2;
+		}
+
+		// Couldn't load map
+		else
+		{
+			LOG_WARNING("Could not load custom map. Starting level 1.");
+			m_GameLevel = GameLevel::_1;
+		}
+	}
+
 	switch (m_GameLevel)
 	{
 	case GameLevel::_1:
@@ -383,18 +408,6 @@ void GameplayState::loadLevel(std::vector<Position> towerPositions)
 		break;
 
 	case GameLevel::Custom:
-		// Loads the custom map
-		m_CurrentMap.load(s_Game, m_CustomMapFilepath.c_str());
-
-		// Creates the towers
-		for (const Position& position : m_CustomTowerPositions)
-		{
-			m_Towers.emplace_back(new Tower(s_Game, position));
-		}
-
-		// TODO: Make this a setting
-		m_NumberOfWavesToSpawn = 2;
-
 		break;
 	}
 
