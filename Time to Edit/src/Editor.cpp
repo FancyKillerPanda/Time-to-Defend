@@ -29,8 +29,9 @@ Editor::Editor()
 		return;
 	}
 
-	// Sets the clear colour and starts keyboard text input
+	// Sets the clear colour, the blend mode, and starts keyboard text input
 	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 	SDL_StartTextInput();
 
 	// Initialises the settings

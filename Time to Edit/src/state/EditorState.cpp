@@ -141,6 +141,10 @@ void EditorState::draw()
 		// Draws the tower where the mouse is
 		m_TowerToDraw->setPosition(m_HoveringTowerLocation);
 		m_TowerToDraw->draw();
+
+		// Adds a dim over the tower
+		SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 170, 0, 100);
+		SDL_RenderFillRect(s_Game->getRenderer(), &m_TowerToDraw->getTexture()->getRect());
 	}
 }
 

@@ -43,4 +43,7 @@ public:
 
 	// Sets whether the tower is highlighted
 	void setHighlight(bool value) { m_Highlighted = value; }
+
+	// Gets the texture
+	Texture* getTexture() { return m_Texture; }
 };
