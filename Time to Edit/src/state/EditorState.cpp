@@ -16,10 +16,54 @@ void EditorState::onEnter()
 
 	// Creates the tower
 	m_TowerToDraw = new Tower(s_Game, m_HoveringTowerLocation);
+
+	// The save question
+	m_SaveQuestion.load(DEFAULT_FONT_PATH, "Do you want to save?", 48, SDL_Color { 0, 200, 200, 255 }, s_Game->getRenderer());
+
+	// Creates the options
+	m_OptionsMenu = new Menu(s_Game, {
+		"Yes",
+		"No",
+		"Cancel"
+	});
+
+	// Sets the colours for the text
+	for (Text* optionText : m_OptionsMenu->getItems())
+	{
+		optionText->setColour(SDL_Color { 0, 0, 0, 255 });
+	}
 }
 
 void EditorState::handleEvent(SDL_Event& event)
 {
+	if (m_ScreenState == ScreenState::SaveScreen)
+	{
+		switch (event.type)
+		{
+		case SDL_MOUSEBUTTONDOWN:
+			// Clicked "Yes"
+			if (m_OptionsMenu->itemClicked() == 0)
+			{
+				saveMap();
+				s_Game->end();
+			}
+
+			// Clicked "No"
+			else if (m_OptionsMenu->itemClicked() == 1)
+			{
+				s_Game->end();
+			}
+
+			// Clicked "Cancel"
+			else if (m_OptionsMenu->itemClicked() == 2)
+			{
+				m_ScreenState = ScreenState::Editor;
+			}
+		}
+
+		return;
+	}
+
 	switch (event.type)
 	{
 	case SDL_KEYDOWN:
@@ -97,6 +141,19 @@ void EditorState::handleEvent(SDL_Event& event)
 
 void EditorState::update()
 {
+	if (m_ScreenState == ScreenState::SaveScreen)
+	{
+		m_OptionsMenu->update();
+
+		// Sets the colours for the text
+		for (Text* optionText : m_OptionsMenu->getItems())
+		{
+			optionText->setColour(SDL_Color { 0, 0, 0, 255 });
+		}
+
+		return;
+	}
+
 	m_TowerConflictingWithObject = towerConflicts(m_TowerToDraw);
 
 	if (m_MouseButtonDown)
@@ -126,7 +183,16 @@ void EditorState::update()
 
 void EditorState::draw()
 {
+	// Draws the map even on the save screen
 	m_MapEditing.draw(true);
+
+	if (m_ScreenState == ScreenState::SaveScreen)
+	{
+		m_SaveQuestion.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);
+		m_OptionsMenu->drawHorizontal(s_Game->getWindowWidth() * 5 / 20, s_Game->getWindowHeight() * 11 / 20, s_Game->getWindowWidth() * 5 / 20);
+
+		return;
+	}
 
 	if (m_ShowGrid)
 	{
@@ -162,6 +228,17 @@ void EditorState::draw()
 		// Adds a dim over the tower
 		SDL_RenderFillRect(s_Game->getRenderer(), &m_TowerToDraw->getTexture()->getRect());
 	}
+}
+
+void EditorState::actionsOnExit()
+{
+	if (m_ScreenState == ScreenState::SaveScreen)
+	{
+		s_Game->end();
+		return;
+	}
+
+	m_ScreenState = ScreenState::SaveScreen;
 }
 
 

@@ -25,4 +25,7 @@ public:
 	virtual void handleEvent(SDL_Event&) {}
 	virtual void update() {}
 	virtual void draw() {}
+
+	// Actions when user tries to exit the application
+	virtual void actionsOnExit() {}
 };

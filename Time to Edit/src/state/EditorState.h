@@ -5,10 +5,17 @@
 #include "state/BaseGameState.h"
 
 #include "gfx/Map.h"
+#include "gfx/Menu.h"
 
 
 class EditorState : public GameState
 {
+	enum class ScreenState
+	{
+		Editor,
+		SaveScreen,
+	};
+
 private:
 	// Map currently being edited
 	Map m_MapEditing;
@@ -33,6 +40,15 @@ private:
 	// The name of the project
 	std::string m_ProjectName;
 
+	// The current state of the screen
+	ScreenState m_ScreenState;
+
+	// The options (Yes, No, Cancel)
+	Menu* m_OptionsMenu;
+
+	// The text asking if the user wants to save
+	Text m_SaveQuestion;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();
@@ -54,4 +70,6 @@ public:
 	void handleEvent(SDL_Event& event) override;
 	void update() override;
 	void draw() override;
+
+	void actionsOnExit() override;
 };
