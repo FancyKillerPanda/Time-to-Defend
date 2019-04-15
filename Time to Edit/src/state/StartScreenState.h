@@ -49,11 +49,6 @@ private:
 	InputText* m_ProjectName;
 	Text m_NewProjectLabel;
 
-	// Text input properties
-	char* m_Composition;
-	int m_Cursor;
-	int m_SelectionLength;
-
 public:
 	void onEnter() override;
 	void onExit() override;
