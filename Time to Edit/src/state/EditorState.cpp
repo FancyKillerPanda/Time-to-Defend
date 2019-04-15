@@ -249,5 +249,17 @@ bool EditorState::towerConflicts(Tower* tower)
 		}
 	}
 
+	for (const Position& otherTowerPos : m_MapEditing.getTowerCoords())
+	{
+		// Creates a rectangle for the other tower
+		SDL_Rect otherTowerRect = { otherTowerPos.col * CELL_SIZE, otherTowerPos.row * CELL_SIZE, CELL_SIZE * 2, CELL_SIZE * 2 };
+
+		// Checks for an intersection
+		if (SDL_HasIntersection(&towerRect, &otherTowerRect))
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
