@@ -27,6 +27,9 @@ private:
 	// The tower drawn when the user is deciding where to place it
 	Tower* m_TowerToDraw;
 
+	// Whether the tower is currently conflicting with an object
+	bool m_TowerConflictingWithObject = false;
+
 	// The name of the project
 	std::string m_ProjectName;
 

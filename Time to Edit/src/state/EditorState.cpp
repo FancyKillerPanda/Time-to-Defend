@@ -95,19 +95,24 @@ void EditorState::handleEvent(SDL_Event& event)
 
 void EditorState::update()
 {
+	m_TowerConflictingWithObject = towerConflicts(m_TowerToDraw);
+
 	if (m_MouseButtonDown)
 	{
 		if (m_CurrentlyPlacingTower)
 		{
-			Position cell = getCellUnderMouse();
-			m_MapEditing.getCoords()[cell.row][cell.col] = 'T';
-			m_MapEditing.getTowerCoords().push_back(cell);
+			if (!m_TowerConflictingWithObject)
+			{
+				Position cell = getCellUnderMouse();
+				m_MapEditing.getCoords()[cell.row][cell.col] = 'T';
+				m_MapEditing.getTowerCoords().push_back(cell);
 
-			m_CurrentlyPlacingTower = false;
+				m_CurrentlyPlacingTower = false;
 
-			// Needs to happen otherwise clickCell() will
-			// be called on the next frame
-			m_MouseButtonDown = false;
+				// Needs to happen otherwise clickCell() will
+				// be called on the next frame
+				m_MouseButtonDown = false;
+			}
 		}
 
 		else
@@ -142,7 +147,7 @@ void EditorState::draw()
 		m_TowerToDraw->setPosition(m_HoveringTowerLocation);
 		m_TowerToDraw->draw();
 
-		if (towerConflicts(m_TowerToDraw))
+		if (m_TowerConflictingWithObject)
 		{
 			SDL_SetRenderDrawColor(s_Game->getRenderer(), 170, 0, 0, 100);
 		}
