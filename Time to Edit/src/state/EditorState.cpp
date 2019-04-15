@@ -230,15 +230,16 @@ void EditorState::draw()
 	}
 }
 
-void EditorState::actionsOnExit()
+bool EditorState::actionsOnExit()
 {
 	if (m_ScreenState == ScreenState::SaveScreen)
 	{
 		s_Game->end();
-		return;
 	}
 
 	m_ScreenState = ScreenState::SaveScreen;
+
+	return true;
 }
 
 

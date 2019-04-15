@@ -75,7 +75,10 @@ void Editor::handleEvents()
 			else
 			{
 				// Lets the state take its actions
-				m_GameStates.back()->actionsOnExit();
+				if (!m_GameStates.back()->actionsOnExit())
+				{
+					end();
+				}
 			}
 
 			break;
@@ -92,7 +95,10 @@ void Editor::handleEvents()
 				else
 				{
 					// Lets the state take its actions
-					m_GameStates.back()->actionsOnExit();
+					if (!m_GameStates.back()->actionsOnExit())
+					{
+						end();
+					}
 				}
 
 				break;

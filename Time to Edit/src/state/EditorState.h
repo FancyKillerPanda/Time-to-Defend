@@ -71,5 +71,5 @@ public:
 	void update() override;
 	void draw() override;
 
-	void actionsOnExit() override;
+	bool actionsOnExit() override;
 };

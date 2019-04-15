@@ -27,5 +27,6 @@ public:
 	virtual void draw() {}
 
 	// Actions when user tries to exit the application
-	virtual void actionsOnExit() {}
+	// Returns false if no action needs to be taken
+	virtual bool actionsOnExit() { return false; }
 };
