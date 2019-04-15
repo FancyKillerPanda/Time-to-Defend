@@ -233,35 +233,17 @@ void EditorState::saveMap()
 
 bool EditorState::towerConflicts(Tower* tower)
 {
-	int towerRow = tower->getPosition().row;
-	int towerCol = tower->getPosition().col;
+	// Creates a rectangle for the tower
+	SDL_Rect towerRect = { tower->getPosition().col * CELL_SIZE, tower->getPosition().row * CELL_SIZE, CELL_SIZE * 2, CELL_SIZE * 2 };
 
 	// Checks if tower conflicts with path
 	for (const Position& pathCell : m_MapEditing.getPathCoords())
 	{
-		int pathRow = pathCell.row;
-		int pathCol = pathCell.col;
+		// Creates a rectangle for the path cell
+		SDL_Rect pathRect = { pathCell.col * CELL_SIZE, pathCell.row * CELL_SIZE, CELL_SIZE, CELL_SIZE };
 
-		// Top-left
-		if (towerRow == pathRow && towerCol == pathCol)
-		{
-			return true;
-		}
-
-		// Bottom-left
-		if (towerRow + 1 == pathRow && towerCol == pathCol)
-		{
-			return true;
-		}
-
-		// Top-right
-		if (towerRow == pathRow && towerCol + 1 == pathCol)
-		{
-			return true;
-		}
-
-		// Bottom-right
-		if (towerRow + 1 == pathRow && towerCol + 1 == pathCol)
+		// Checks for an intersection
+		if (SDL_HasIntersection(&towerRect, &pathRect))
 		{
 			return true;
 		}
