@@ -142,8 +142,17 @@ void EditorState::draw()
 		m_TowerToDraw->setPosition(m_HoveringTowerLocation);
 		m_TowerToDraw->draw();
 
+		if (towerConflicts(m_TowerToDraw))
+		{
+			SDL_SetRenderDrawColor(s_Game->getRenderer(), 170, 0, 0, 100);
+		}
+
+		else
+		{
+			SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 170, 0, 100);
+		}
+
 		// Adds a dim over the tower
-		SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 170, 0, 100);
 		SDL_RenderFillRect(s_Game->getRenderer(), &m_TowerToDraw->getTexture()->getRect());
 	}
 }
@@ -156,12 +165,15 @@ void EditorState::clickCell()
 	if (m_TurnToTrack)
 	{
 		m_MapEditing.getCoords()[cell.row][cell.col] = 'P';
+		m_MapEditing.getPathCoords().push_back(cell);
 	}
 
 	else
 	{
 		m_MapEditing.getCoords()[cell.row][cell.col] = '.';
+		m_MapEditing.getPathCoords().push_back(cell);
 	}
+
 };
 
 Position EditorState::getCellUnderMouse()
@@ -212,4 +224,43 @@ void EditorState::saveMap()
 	file.close();
 
 	LOG_INFO("Saved map.");
+}
+
+bool EditorState::towerConflicts(Tower* tower)
+{
+	int towerRow = tower->getPosition().row;
+	int towerCol = tower->getPosition().col;
+
+	// Checks if tower conflicts with path
+	for (const Position& pathCell : m_MapEditing.getPathCoords())
+	{
+		int pathRow = pathCell.row;
+		int pathCol = pathCell.col;
+
+		// Top-left
+		if (towerRow == pathRow && towerCol == pathCol)
+		{
+			return true;
+		}
+
+		// Bottom-left
+		if (towerRow + 1 == pathRow && towerCol == pathCol)
+		{
+			return true;
+		}
+
+		// Top-right
+		if (towerRow == pathRow && towerCol + 1 == pathCol)
+		{
+			return true;
+		}
+
+		// Bottom-right
+		if (towerRow + 1 == pathRow && towerCol + 1 == pathCol)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

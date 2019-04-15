@@ -40,6 +40,9 @@ private:
 	// Saves the map
 	void saveMap();
 
+	// Checks if the 2x2 area of the tower conflicts with an object
+	bool towerConflicts(Tower* tower);
+
 public:
 	EditorState(std::string projectName);
 

@@ -50,7 +50,7 @@ public:
 	void convertToPlayableFormat();
 
 	inline const std::vector<Position>& getSpawnCoords() const { return m_SpawnCoords; }
-	inline const std::vector<Position>& getPathCoords() const { return m_PathCoords; }
+	inline std::vector<Position>& getPathCoords() { return m_PathCoords; }
 	inline std::vector<Position>& getTowerCoords() { return m_TowerCoords; }
 	inline const std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() const { return m_Data; }
 	inline std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() { return m_Data; }
