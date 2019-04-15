@@ -80,6 +80,24 @@ void Editor::handleEvents()
 
 			break;
 
+		case SDL_KEYDOWN:
+			if (event.key.keysym.sym == SDLK_ESCAPE)
+			{
+				// Makes sure there is a state in the stack
+				if (m_GameStates.empty())
+				{
+					LOG_WARNING("Could not handle actions on exit for game state (empty stack).");
+				}
+
+				else
+				{
+					// Lets the state take its actions
+					m_GameStates.back()->actionsOnExit();
+				}
+
+				break;
+			}
+
 		default:
 			// Makes sure there is a state in the stack
 			if (m_GameStates.empty())
