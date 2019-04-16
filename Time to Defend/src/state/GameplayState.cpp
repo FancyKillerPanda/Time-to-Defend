@@ -183,13 +183,10 @@ void GameplayState::update()
 
 	if (m_NumberOfWavesToSpawn > 0 && m_WaveTimer.getElapsed() >= WAVE_SPAWN_TIME)
 	{
-		// Spawns the next wave
+		// Spawns the next wave and resets the timer
 		spawnEnemies();
-
-		// Reduces the number of waves still left to spawn
-		m_NumberOfWavesToSpawn -= 1;
-
 		m_WaveTimer.reset();
+
 		return;
 	}
 
@@ -421,6 +418,9 @@ void GameplayState::spawnEnemies()
 		m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, m_CurrentMap.getSpawnCoords()[index]));
 		usedIndices.push_back(index);
 	}
+
+	// Reduces the number of waves still left to spawn
+	m_NumberOfWavesToSpawn -= 1;
 }
 
 void GameplayState::endGame(bool won)
