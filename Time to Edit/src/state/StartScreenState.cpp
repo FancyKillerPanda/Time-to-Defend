@@ -53,6 +53,10 @@ void StartScreenState::onEnter()
 	m_ProjectName = new InputText(s_Game, "Untitled");
 	m_NewProjectLabel.load(DEFAULT_FONT_PATH, "Project Name:", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
+	// Initialises the number of waves to spawn input and its label
+	m_NumberOfWavesToSpawn = new InputText(s_Game, "2", true);
+	m_NumberOfWavesLabel.load(DEFAULT_FONT_PATH, "Number of Enemy Waves: ", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+
 	// Initialises the settings
 	s_Game->settings = new GameSettings();
 
@@ -70,6 +74,9 @@ void StartScreenState::onExit()
 
 	delete m_ProjectName;
 	m_ProjectName = nullptr;
+
+	delete m_NumberOfWavesToSpawn;
+	m_NumberOfWavesToSpawn = nullptr;
 
 	delete m_Instructions;
 	m_Instructions = nullptr;
@@ -128,6 +135,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::NewProject)
 			{
 				m_ProjectName->handleKeyEvent(event);
+				m_NumberOfWavesToSpawn->handleKeyEvent(event);
 			}
 
 			break;
@@ -230,6 +238,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		if (m_ScreenState == ScreenState::NewProject)
 		{
 			m_ProjectName->handleInputEvent(event);
+			m_NumberOfWavesToSpawn->handleInputEvent(event);
 		}
 
 		break;
@@ -278,6 +287,8 @@ void StartScreenState::draw()
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
 		m_NewProjectLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 9 / 20);
 		m_ProjectName->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_NumberOfWavesLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 11 / 20);
+		m_NumberOfWavesToSpawn->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 11 / 20);
 		m_NewProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 

@@ -49,6 +49,10 @@ private:
 	InputText* m_ProjectName;
 	Text m_NewProjectLabel;
 
+	// The number of waves to spawn (user input)
+	InputText* m_NumberOfWavesToSpawn;
+	Text m_NumberOfWavesLabel;
+
 public:
 	void onEnter() override;
 	void onExit() override;

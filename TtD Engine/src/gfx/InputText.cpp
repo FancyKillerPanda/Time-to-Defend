@@ -8,8 +8,8 @@
 Application* InputText::s_Game = nullptr;
 
 
-InputText::InputText(Application* const game, std::string defaultText)
-	: m_ZeroCharDefault(defaultText)
+InputText::InputText(Application* const game, std::string defaultText, bool numbersOnly)
+	: m_ZeroCharDefault(defaultText), m_NumbersOnly(numbersOnly)
 {
 	s_Game = game;
 
@@ -70,6 +70,11 @@ void InputText::handleInputEvent(SDL_Event& event)
 	{
 	case SDL_TEXTINPUT:
 		if (std::regex_match(event.text.text, s_Game->s_NonFilenameCharacters))
+		{
+			break;
+		}
+
+		if (m_NumbersOnly && !std::isdigit(event.text.text[0]))
 		{
 			break;
 		}
