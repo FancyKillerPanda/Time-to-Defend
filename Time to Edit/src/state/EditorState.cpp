@@ -4,8 +4,8 @@
 #include "GameSettings.h"
 
 
-EditorState::EditorState(std::string projectName)
-	: m_ProjectName(projectName)
+EditorState::EditorState(std::string projectName, unsigned int numberOfWavesToSpawn)
+	: m_ProjectName(projectName), m_NumberOfWavesToSpawn(numberOfWavesToSpawn)
 {
 }
 
@@ -305,6 +305,8 @@ void EditorState::saveMap()
 
 		file << '\n';
 	}
+
+	file << m_NumberOfWavesToSpawn << '\n';
 
 	file.close();
 

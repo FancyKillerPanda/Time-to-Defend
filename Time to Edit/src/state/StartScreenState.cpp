@@ -106,7 +106,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			case ScreenState::NewProject:
 			{
 				// Creates the new state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText());
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
@@ -215,7 +215,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_NewProjectMenu->itemClicked() == 0)
 			{
 				// Creates the new editor state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText());
+				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
 
 				// Pops this state off the Game's stack
 				s_Game->popState();
