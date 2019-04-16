@@ -57,6 +57,9 @@ void StartScreenState::onEnter()
 	m_NumberOfWavesToSpawn = new InputText(s_Game, "2", true);
 	m_NumberOfWavesLabel.load(DEFAULT_FONT_PATH, "Number of Enemy Waves: ", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
+	// Sets which InputText will be handling events first
+	m_InputCurrentlyHandling = m_ProjectName;
+
 	// Initialises the settings
 	s_Game->settings = new GameSettings();
 
@@ -134,8 +137,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		case SDLK_BACKSPACE:
 			if (m_ScreenState == ScreenState::NewProject)
 			{
-				m_ProjectName->handleKeyEvent(event);
-				m_NumberOfWavesToSpawn->handleKeyEvent(event);
+			#ifdef _DEBUG
+				if (m_InputCurrentlyHandling == nullptr)
+				{
+					LOG_WARNING("Handling input variable is null.");
+				}
+			#endif // _DEBUG
+
+				m_InputCurrentlyHandling->handleKeyEvent(event);
 			}
 
 			break;
@@ -177,6 +186,20 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 		case ScreenState::NewProject:
 		{
+			int mouseX;
+			int mouseY;
+			SDL_GetMouseState(&mouseX, &mouseY);
+
+			if (m_ProjectName->get().rectCollides(mouseX, mouseY) || m_NewProjectLabel.rectCollides(mouseX, mouseY))
+			{
+				m_InputCurrentlyHandling = m_ProjectName;
+			}
+
+			else if (m_NumberOfWavesToSpawn->get().rectCollides(mouseX, mouseY) || m_NumberOfWavesLabel.rectCollides(mouseX, mouseY))
+			{
+				m_InputCurrentlyHandling = m_NumberOfWavesToSpawn;
+			}
+
 			// Clicked "Next"
 			if (m_NewProjectMenu->itemClicked() == 0)
 			{
@@ -237,8 +260,14 @@ void StartScreenState::handleEvent(SDL_Event& event)
 	case SDL_TEXTINPUT:
 		if (m_ScreenState == ScreenState::NewProject)
 		{
-			m_ProjectName->handleInputEvent(event);
-			m_NumberOfWavesToSpawn->handleInputEvent(event);
+		#ifdef _DEBUG
+			if (m_InputCurrentlyHandling == nullptr)
+			{
+				LOG_WARNING("Handling input variable is null.");
+			}
+		#endif // _DEBUG
+
+			m_InputCurrentlyHandling->handleInputEvent(event);
 		}
 
 		break;

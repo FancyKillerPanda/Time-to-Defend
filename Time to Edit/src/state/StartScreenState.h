@@ -53,6 +53,9 @@ private:
 	InputText* m_NumberOfWavesToSpawn;
 	Text m_NumberOfWavesLabel;
 
+	// The input text currently taking input
+	InputText* m_InputCurrentlyHandling = nullptr;
+
 public:
 	void onEnter() override;
 	void onExit() override;
