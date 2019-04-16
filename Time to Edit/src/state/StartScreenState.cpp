@@ -59,6 +59,7 @@ void StartScreenState::onEnter()
 
 	// Sets which InputText will be handling events first
 	m_InputCurrentlyHandling = m_ProjectName;
+	m_InputCurrentlyHandling->get().setColour(SDL_Color { 255, 255, 0, 255 });
 
 	// Initialises the settings
 	s_Game->settings = new GameSettings();
@@ -192,12 +193,22 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			if (m_ProjectName->get().rectCollides(mouseX, mouseY) || m_NewProjectLabel.rectCollides(mouseX, mouseY))
 			{
+				// Resets the colour of the old text
+				m_InputCurrentlyHandling->get().setColour(SDL_Color { 160, 160, 160, 255 });
+
+				// Sets the new input handler and changes its colour
 				m_InputCurrentlyHandling = m_ProjectName;
+				m_InputCurrentlyHandling->get().setColour(SDL_Color { 255, 255, 0, 255 });
 			}
 
 			else if (m_NumberOfWavesToSpawn->get().rectCollides(mouseX, mouseY) || m_NumberOfWavesLabel.rectCollides(mouseX, mouseY))
 			{
+				// Resets the colour of the old text
+				m_InputCurrentlyHandling->get().setColour(SDL_Color { 160, 160, 160, 255 });
+
+				// Sets the new input handler and changes its colour
 				m_InputCurrentlyHandling = m_NumberOfWavesToSpawn;
+				m_InputCurrentlyHandling->get().setColour(SDL_Color { 255, 255, 0, 255 });
 			}
 
 			// Clicked "Next"
