@@ -296,6 +296,9 @@ void EditorState::saveMap()
 
 	m_MapEditing.convertToPlayableFormat();
 
+	// Puts the number of waves to spawn at the top of the map data
+	file << m_NumberOfWavesToSpawn << '\n';
+
 	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
 	{
 		for (int col = 0; col < NUM_OF_CELLS_X; col++)
@@ -305,8 +308,6 @@ void EditorState::saveMap()
 
 		file << '\n';
 	}
-
-	file << m_NumberOfWavesToSpawn << '\n';
 
 	file.close();
 

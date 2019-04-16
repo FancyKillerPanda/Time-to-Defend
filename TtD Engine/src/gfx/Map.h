@@ -32,6 +32,9 @@ private:
 	// Whether the map is loaded
 	bool m_Loaded = false;
 
+	// The number of waves to spawn in the map
+	unsigned int m_NumberOfWavesToSpawn;
+
 	Tower* m_TowerToDraw = nullptr;
 
 #ifdef _DEBUG
@@ -55,4 +58,5 @@ public:
 	inline const std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() const { return m_Data; }
 	inline std::array<std::array<char, NUM_OF_CELLS_X>, NUM_OF_CELLS_Y>& getCoords() { return m_Data; }
 	inline bool getLoaded() { return m_Loaded; }
+	inline unsigned int getNumberOfWavesToSpawn() { return m_NumberOfWavesToSpawn; }
 };

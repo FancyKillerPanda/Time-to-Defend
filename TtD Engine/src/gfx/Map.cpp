@@ -73,9 +73,34 @@ void Map::load(Application* const game, const char* filepath)
 	}
 
 	char c;
+	std::string numOfWaves;
 
 	// Does not skip whitespace
 	mapFile >> std::noskipws;
+
+	// Reads the number of waves to spawn
+	if (std::getline(mapFile, numOfWaves))
+	{
+		try
+		{
+			m_NumberOfWavesToSpawn = std::stoi(numOfWaves);
+		}
+
+		catch (const std::exception&)
+		{
+			LOG_WARNING("No number of waves to spawn. Defaulting to 2.");
+			m_NumberOfWavesToSpawn = 2;
+
+			// Returns to beginning of file
+			mapFile.seekg(0, std::ios::beg);
+		}
+	}
+
+	else
+	{
+		LOG_ERROR("No map data.");
+		return;
+	}
 
 	// Runs through each character
 	while (mapFile >> c)

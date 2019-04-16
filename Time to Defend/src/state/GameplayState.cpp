@@ -347,14 +347,8 @@ void GameplayState::loadLevel()
 		// Loads the custom map
 		m_CurrentMap.load(s_Game, m_CustomMapFilepath.c_str());
 
-		if (m_CurrentMap.getLoaded())
-		{
-			// TODO: Make this a setting
-			m_NumberOfWavesToSpawn = 2;
-		}
-
 		// Couldn't load map
-		else
+		if (!m_CurrentMap.getLoaded())
 		{
 			LOG_WARNING("Could not load custom map. Starting level 1.");
 			m_GameLevel = GameLevel::_1;
@@ -366,27 +360,24 @@ void GameplayState::loadLevel()
 	case GameLevel::_1:
 		// Loads the first map
 		m_CurrentMap.load(s_Game, "res/maps/Level_1.txt");
-		m_NumberOfWavesToSpawn = 1;
-
 		break;
 
 	case GameLevel::_2:
 		// Loads the second map
 		m_CurrentMap = Map(s_Game, "res/maps/Level_2.txt");
-		m_NumberOfWavesToSpawn = 3;
-
 		break;
 
 	case GameLevel::_3:
 		// Loads the third map
 		m_CurrentMap = Map(s_Game, "res/maps/Level_3.txt");
-		m_NumberOfWavesToSpawn = 4;
-
 		break;
 
 	case GameLevel::Custom:
 		break;
 	}
+
+	// Sets the number of waves to spawn
+	m_NumberOfWavesToSpawn = m_CurrentMap.getNumberOfWavesToSpawn();
 
 	// Creates the towers
 	for (const Position& position : m_CurrentMap.getTowerCoords())
