@@ -63,13 +63,13 @@ void EditorState::handleEvent(SDL_Event& event)
 			if (m_OptionsMenu->itemClicked() == 0)
 			{
 				saveMap();
-				s_Game->end();
+				s_Game->setRunning(false);
 			}
 
 			// Clicked "No"
 			else if (m_OptionsMenu->itemClicked() == 1)
 			{
-				s_Game->end();
+				s_Game->setRunning(false);
 			}
 
 			// Clicked "Cancel"
@@ -252,7 +252,7 @@ bool EditorState::actionsOnExit()
 {
 	if (m_ScreenState == ScreenState::SaveScreen || !needToSave())
 	{
-		s_Game->end();
+		// No action needed
 		return false;
 	}
 

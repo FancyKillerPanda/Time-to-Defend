@@ -85,9 +85,6 @@ public:
 	// Pops a state from the stack
 	void popState();
 
-	// Ends the application
-	inline void end() { m_Running = false; }
-
 	// Saves the current settings
 	virtual void saveSettings() {}
 

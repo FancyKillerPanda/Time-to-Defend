@@ -76,7 +76,7 @@ void Editor::handleEvents()
 				// Lets the state take its actions
 				if (!m_GameStates.back()->actionsOnExit())
 				{
-					end();
+					m_Running = false;
 				}
 			}
 
@@ -96,7 +96,7 @@ void Editor::handleEvents()
 					// Lets the state take its actions
 					if (!m_GameStates.back()->actionsOnExit())
 					{
-						end();
+						m_Running = false;
 					}
 				}
 
