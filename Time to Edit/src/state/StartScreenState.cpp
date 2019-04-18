@@ -105,15 +105,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			case ScreenState::NewProject:
 			{
-				// Creates the new state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the editor state onto the stack
-				s_Game->pushState(std::move(editorState));
-
+				// Replaces this state with the editor
+				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
 				break;
 			}
 
@@ -215,13 +208,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_NewProjectMenu->itemClicked() == 0)
 			{
 				// Creates the new editor state
-				std::unique_ptr<GameState> editorState = std::make_unique<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the editor state onto the stack
-				s_Game->pushState(std::move(editorState));
+				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
 			}
 
 			if (m_BackMenu->itemClicked() == 0)

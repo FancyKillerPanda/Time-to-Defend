@@ -38,8 +38,7 @@ Editor::Editor()
 	readSettings();
 
 	// Pushes the first state onto the stack
-	std::unique_ptr<GameState> startScreenState = std::make_unique<StartScreenState>();
-	pushState(std::move(startScreenState));
+	pushState<StartScreenState>();
 
 #ifdef _DEBUG
 	// Loads the information text
