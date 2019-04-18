@@ -23,16 +23,6 @@ void StartScreenState::onEnter()
 		"Settings"
 	});
 
-	// The new project page
-	m_NewProjectMenu = new Menu(s_Game, {
-		"Continue -->"
-	});
-
-	// The load project page
-	m_LoadProjectMenu = new Menu(s_Game, {
-		"Continue -->"
-	});
-
 	// The settings
 	m_SettingsMenu = new Menu(s_Game, {
 		s_Game->settings->ctrlClickToRemoveTrack ? "Use <Ctrl-Click> to Remove Track: True" : "Use <Ctrl-Click> to Remove Track: False"
@@ -52,6 +42,11 @@ void StartScreenState::onEnter()
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
 		"<-- Back"
+	});
+
+	// Creates the continue
+	m_ContinueMenu = new Menu(s_Game, {
+		"Continue -->"
 	});
 
 	// Initialises the project name and its label
@@ -79,11 +74,8 @@ void StartScreenState::onExit()
 	delete m_MainMenu;
 	m_MainMenu = nullptr;
 
-	delete m_NewProjectMenu;
-	m_NewProjectMenu = nullptr;
-
-	delete m_LoadProjectMenu;
-	m_LoadProjectMenu = nullptr;
+	delete m_ContinueMenu;
+	m_ContinueMenu = nullptr;
 
 	delete m_ProjectName;
 	m_ProjectName = nullptr;
@@ -226,8 +218,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				m_InputCurrentlyHandling->get().setColour(SDL_Color { 255, 255, 0, 255 });
 			}
 
-			// Clicked "Next"
-			if (m_NewProjectMenu->itemClicked() == 0)
+			// Clicked "Continue"
+			if (m_ContinueMenu->itemClicked() == 0)
 			{
 				// Creates the new editor state
 				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
@@ -244,8 +236,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 		case ScreenState::LoadProject:
 		{
-			// Clicked "Next"
-			if (m_LoadProjectMenu->itemClicked() == 0)
+			// Clicked "Continue"
+			if (m_ContinueMenu->itemClicked() == 0)
 			{
 				// Replaces this state with GameplayState
 				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText());
@@ -331,12 +323,12 @@ void StartScreenState::update()
 	}
 
 	case ScreenState::NewProject:
-		m_NewProjectMenu->update();
+		m_ContinueMenu->update();
 		m_BackMenu->update();
 		break;
 
 	case ScreenState::LoadProject:
-		m_LoadProjectMenu->update();
+		m_ContinueMenu->update();
 		m_BackMenu->update();
 
 		break;
@@ -370,7 +362,7 @@ void StartScreenState::draw()
 		m_ProjectName->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
 		m_NumberOfWavesLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 11 / 20);
 		m_NumberOfWavesToSpawn->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 11 / 20);
-		m_NewProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
+		m_ContinueMenu->draw(s_Game->getWindowHeight() * 16 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
@@ -380,7 +372,7 @@ void StartScreenState::draw()
 		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
 		m_LoadProjectLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 9 / 20);
 		m_ProjectName->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
-		m_LoadProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
+		m_ContinueMenu->draw(s_Game->getWindowHeight() * 16 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;

@@ -31,12 +31,6 @@ private:
 	// The settings menu
 	Menu* m_SettingsMenu;
 
-	// The new project next button
-	Menu* m_NewProjectMenu;
-
-	// The load project next button
-	Menu* m_LoadProjectMenu = nullptr;
-
 	// Whether the instruction page has already loaded
 	bool m_InstructionPageLoaded = false;
 
@@ -45,6 +39,9 @@ private:
 
 	// The back button
 	Menu* m_BackMenu;
+
+	// The next button
+	Menu* m_ContinueMenu;
 
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
