@@ -115,7 +115,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			case ScreenState::LoadProject:
 			{
 				// Replaces this state with GameplayState
-				s_Game->replaceTopState<EditorState>(std::string(m_ProjectName->get().getText()));
+				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText());
 				break;
 			}
 
@@ -247,7 +247,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_LoadProjectMenu->itemClicked() == 0)
 			{
 				// Replaces this state with GameplayState
-				s_Game->replaceTopState<EditorState>(std::string(m_ProjectName->get().getText()));
+				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText());
 				break;
 			}
 

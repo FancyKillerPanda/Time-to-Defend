@@ -71,8 +71,15 @@ public:
 	template<typename T, typename... Args>
 	void replaceTopState(Args&& ... args)
 	{
+		// Creates the next state
+		std::unique_ptr<GameState> nextState = std::make_unique<T>(std::forward<Args>(args)...);
+
+		// Pops the current state off
 		popState();
-		pushState<T>(std::forward<Args>(args)...);
+
+		// Pushes the next state onto the stack and starts it
+		m_GameStates.push_back(std::move(nextState));
+		m_GameStates.back()->onEnter();
 	}
 
 	// Pops a state from the stack
