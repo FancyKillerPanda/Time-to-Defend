@@ -156,6 +156,37 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			}
 
 			break;
+
+		case SDLK_TAB:
+			if (m_ScreenState == ScreenState::NewProject)
+			{
+				if (m_InputCurrentlyHandling == m_ProjectName)
+				{
+					// Resets the colour of the old text
+					m_InputCurrentlyHandling->get().setColour(SDL_Color { 160, 160, 160, 255 });
+
+					// Sets the new input handler and changes its colour
+					m_InputCurrentlyHandling = m_NumberOfWavesToSpawn;
+					m_InputCurrentlyHandling->get().setColour(SDL_Color { 255, 255, 0, 255 });
+				}
+
+				else if (m_InputCurrentlyHandling == m_NumberOfWavesToSpawn)
+				{
+					// Resets the colour of the old text
+					m_InputCurrentlyHandling->get().setColour(SDL_Color { 160, 160, 160, 255 });
+
+					// Sets the new input handler and changes its colour
+					m_InputCurrentlyHandling = m_ProjectName;
+					m_InputCurrentlyHandling->get().setColour(SDL_Color { 255, 255, 0, 255 });
+				}
+
+				else
+				{
+					LOG_WARNING("Invalid input handling variable.");
+				}
+			}
+
+			break;
 		}
 
 		break;
