@@ -18,7 +18,7 @@ void StartScreenState::onEnter()
 	// Creates the main menu
 	m_MainMenu = new Menu(s_Game, {
 		"Start New",
-		"Load (Coming Soon...)",
+		"Load",
 		"Instructions",
 		"Settings"
 	});
