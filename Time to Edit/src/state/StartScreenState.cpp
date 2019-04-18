@@ -231,6 +231,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			{
 				// Creates the new editor state
 				s_Game->replaceTopState<EditorState>(m_ProjectName->get().getText(), std::stoi(m_NumberOfWavesToSpawn->get().getText()));
+				return;
 			}
 
 			if (m_BackMenu->itemClicked() == 0)
