@@ -373,5 +373,10 @@ bool EditorState::needToSave()
 		return !(m_MapEditing.getCoords() == mapOnFile.getCoords() && m_NumberOfWavesToSpawn == mapOnFile.getNumberOfWavesToSpawn());
 	}
 
+	if (m_MapEditing.isEmpty())
+	{
+		return false;
+	}
+
 	return true;
 }

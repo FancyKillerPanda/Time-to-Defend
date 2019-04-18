@@ -52,6 +52,9 @@ public:
 	// Adds necessary information such as enemy spawn points
 	void convertToPlayableFormat();
 
+	// Checks if the map is empty
+	bool isEmpty();
+
 	inline const std::vector<Position>& getSpawnCoords() const { return m_SpawnCoords; }
 	inline std::vector<Position>& getPathCoords() { return m_PathCoords; }
 	inline std::vector<Position>& getTowerCoords() { return m_TowerCoords; }

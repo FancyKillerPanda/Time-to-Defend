@@ -231,3 +231,19 @@ void Map::convertToPlayableFormat()
 		}
 	}
 }
+
+bool Map::isEmpty()
+{
+	for (int row = 0; row < NUM_OF_CELLS_Y; row++)
+	{
+		for (int col = 0; col < NUM_OF_CELLS_X; col++)
+		{
+			if (m_Data[row][col] != '.')
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
