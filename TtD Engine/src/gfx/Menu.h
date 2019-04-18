@@ -19,6 +19,10 @@ private:
 	// The item currently being highlighted
 	int m_CurrentlyHighlighting = -1;
 
+	// The default and highlighted colour of the text
+	SDL_Color m_DefaultTextColour = { 90, 160, 30, 255 };
+	SDL_Color m_HighlightedTextColour = { 255, 255, 0, 255 };
+
 public:
 	Menu(Application* const game, std::initializer_list<const char*> texts);
 	~Menu();
@@ -40,4 +44,9 @@ public:
 
 	// Gets the items in the menu
 	std::vector<Text*>& getItems() { return m_Texts; }
+
+	// Sets the default colour of the text
+	void setTextColour(SDL_Color colour) { m_DefaultTextColour = colour; }
+	// Sets the highlight colour of the text
+	void setHighlightedTextColour(SDL_Color colour) { m_HighlightedTextColour = colour; }
 };

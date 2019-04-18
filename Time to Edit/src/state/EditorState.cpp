@@ -38,18 +38,18 @@ void EditorState::onEnter()
 	// The save question
 	m_SaveQuestion.load(DEFAULT_FONT_PATH, "Do you want to save?", 48, SDL_Color { 0, 200, 200, 255 }, s_Game->getRenderer());
 
-	// Creates the options
-	m_OptionsMenu = new Menu(s_Game, {
+	// Creates the options menu
+	m_OptionsMenu = new Menu(s_Game, {});
+
+	// Sets the base text colour
+	m_OptionsMenu->setTextColour(SDL_Color { 0, 0, 0, 255 });
+
+	// Adds the options
+	m_OptionsMenu->addItems({
 		"Yes",
 		"No",
 		"Cancel"
 	});
-
-	// Sets the colours for the text
-	for (Text* optionText : m_OptionsMenu->getItems())
-	{
-		optionText->setColour(SDL_Color { 0, 0, 0, 255 });
-	}
 }
 
 void EditorState::handleEvent(SDL_Event& event)
@@ -162,13 +162,6 @@ void EditorState::update()
 	if (m_ScreenState == ScreenState::SaveScreen)
 	{
 		m_OptionsMenu->update();
-
-		// Sets the colours for the text
-		for (Text* optionText : m_OptionsMenu->getItems())
-		{
-			optionText->setColour(SDL_Color { 0, 0, 0, 255 });
-		}
-
 		return;
 	}
 

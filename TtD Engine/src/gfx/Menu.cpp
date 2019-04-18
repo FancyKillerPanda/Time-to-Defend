@@ -77,14 +77,14 @@ void Menu::update()
 				{
 					// Resets the old menu item highlighting
 					m_Texts[m_CurrentlyHighlighting]->setStyle(TTF_STYLE_NORMAL, false);
-					m_Texts[m_CurrentlyHighlighting]->setColour(SDL_Color { 90, 160, 30, 255 });
+					m_Texts[m_CurrentlyHighlighting]->setColour(m_DefaultTextColour);
 				}
 
 				m_CurrentlyHighlighting = i;
 
 				// Sets the new item to highlight
 				text->setStyle(TTF_STYLE_BOLD, false);
-				text->setColour(SDL_Color { 255, 255, 0, 255 });
+				text->setColour(m_HighlightedTextColour);
 			}
 
 			break;
@@ -97,7 +97,7 @@ void Menu::update()
 		if (!m_Texts[m_CurrentlyHighlighting]->rectCollides(mouseX, mouseY))
 		{
 			m_Texts[m_CurrentlyHighlighting]->setStyle(TTF_STYLE_NORMAL, false);
-			m_Texts[m_CurrentlyHighlighting]->setColour(SDL_Color { 90, 160, 30, 255 });
+			m_Texts[m_CurrentlyHighlighting]->setColour(m_DefaultTextColour);
 
 			m_CurrentlyHighlighting = -1;
 		}
@@ -115,7 +115,7 @@ void Menu::addItems(std::initializer_list<const char*> texts)
 
 		else
 		{
-			m_Texts.emplace_back(new Text(DEFAULT_FONT_PATH, text, 28, SDL_Color { 90, 160, 30 , 255 }, s_Game->getRenderer()));
+			m_Texts.emplace_back(new Text(DEFAULT_FONT_PATH, text, 28, m_DefaultTextColour, s_Game->getRenderer()));
 		}
 	}
 }
