@@ -55,6 +55,9 @@ private:
 	// Whether the map is being loaded from file
 	bool m_Load = false;
 
+	// The filepath for the map
+	std::string m_MapFilepath;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();

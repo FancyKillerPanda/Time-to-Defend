@@ -114,13 +114,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 
 			case ScreenState::LoadProject:
 			{
-				// Creates the map filepath
-				std::string mapFilepath = "res/maps/custom/";
-				mapFilepath += m_ProjectName->get().getText() + ".txt";
-
 				// Replaces this state with GameplayState
-				s_Game->replaceTopState<EditorState>(mapFilepath.c_str());
-
+				s_Game->replaceTopState<EditorState>(std::string(m_ProjectName->get().getText()));
 				break;
 			}
 
@@ -251,13 +246,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Next"
 			if (m_LoadProjectMenu->itemClicked() == 0)
 			{
-				// Creates the map
-				std::string mapFilepath = "res/maps/custom/";
-				mapFilepath += m_ProjectName->get().getText() + ".txt";
-
 				// Replaces this state with GameplayState
-				s_Game->replaceTopState<EditorState>(mapFilepath.c_str());
-
+				s_Game->replaceTopState<EditorState>(std::string(m_ProjectName->get().getText()));
 				break;
 			}
 

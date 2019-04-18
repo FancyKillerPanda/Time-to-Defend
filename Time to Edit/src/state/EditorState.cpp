@@ -17,9 +17,13 @@ EditorState::EditorState(std::string projectName, unsigned int numberOfWavesToSp
 
 void EditorState::onEnter()
 {
+	// Creates the map filepath
+	m_MapFilepath = "res/maps/custom/";
+	m_MapFilepath += m_ProjectName + ".txt";
+
 	if (m_Load)
 	{
-		m_MapEditing.load(s_Game, m_ProjectName.c_str());
+		m_MapEditing.load(s_Game, m_MapFilepath.c_str());
 		m_NumberOfWavesToSpawn = m_MapEditing.getNumberOfWavesToSpawn();
 	}
 
@@ -295,12 +299,8 @@ void EditorState::saveMap()
 	}
 #endif // WIN32
 
-	std::string filename = "res/maps/custom/";
-	filename += m_ProjectName;
-	filename += ".txt";
-
 	std::fstream file;
-	file.open(filename.c_str(), std::fstream::out | std::fstream::trunc);
+	file.open(m_MapFilepath.c_str(), std::fstream::out | std::fstream::trunc);
 
 	if (!file)
 	{
