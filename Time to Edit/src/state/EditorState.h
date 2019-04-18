@@ -71,6 +71,9 @@ private:
 	// Checks if the 2x2 area of the tower conflicts with an object
 	bool towerConflicts(Tower* tower);
 
+	// Checks if the map currently needs saving
+	bool needToSave();
+
 public:
 	EditorState(std::string projectName);
 	EditorState(std::string projectName, unsigned int numberOfWavesToSpawn);

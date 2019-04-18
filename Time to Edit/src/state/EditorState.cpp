@@ -250,9 +250,10 @@ void EditorState::draw()
 
 bool EditorState::actionsOnExit()
 {
-	if (m_ScreenState == ScreenState::SaveScreen)
+	if (m_ScreenState == ScreenState::SaveScreen || !needToSave())
 	{
 		s_Game->end();
+		return false;
 	}
 
 	m_ScreenState = ScreenState::SaveScreen;
@@ -359,4 +360,18 @@ bool EditorState::towerConflicts(Tower* tower)
 	}
 
 	return false;
+}
+
+bool EditorState::needToSave()
+{
+	// Only if it's a loaded map
+	if (m_Load)
+	{
+		Map mapOnFile;
+		mapOnFile.load(s_Game, m_MapFilepath.c_str());
+
+		return !(m_MapEditing.getCoords() == mapOnFile.getCoords() && m_NumberOfWavesToSpawn == mapOnFile.getNumberOfWavesToSpawn());
+	}
+
+	return true;
 }
