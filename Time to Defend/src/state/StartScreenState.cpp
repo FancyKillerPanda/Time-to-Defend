@@ -158,13 +158,13 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			}
 
 			// Clicked "Instructions"
-			else if (m_MainMenu->itemClicked() == 1)
+			else if (m_MainMenu->itemClicked() == 2)
 			{
 				m_ScreenState = ScreenState::Instructions;
 			}
 
 			// Clicked "Level Editor"
-			else if (m_MainMenu->itemClicked() == 2)
+			else if (m_MainMenu->itemClicked() == 3)
 			{
 			#ifdef _WIN32
 
@@ -181,7 +181,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			}
 
 			// Clicked "Settings"
-			else if (m_MainMenu->itemClicked() == 3)
+			else if (m_MainMenu->itemClicked() == 4)
 			{
 				m_ScreenState = ScreenState::Settings;
 			}
@@ -202,6 +202,11 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				s_Game->replaceTopState<GameplayState>(m_ProjectName->get().getText(), mapFilepath);
 
 				break;
+			}
+
+			if (m_BackMenu->itemClicked() == 0)
+			{
+				m_ScreenState = ScreenState::MainScreen;
 			}
 
 			break;
