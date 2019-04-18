@@ -59,13 +59,11 @@ void LevelPassedState::handleEvent(SDL_Event& event)
 		// Clicked "Restart"
 		else if (m_OptionsMenu->itemClicked() == 1)
 		{
-			// Pops both this and the gameplay state off the stack
-			s_Game->popState();
+			// Pops both this state off the stack
 			s_Game->popState();
 
-			// Pushes new gameplay state onto stack
-			std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
-			s_Game->pushState(std::move(gameplayState));
+			// Replaces the top state (GameplayState) with a new copy
+			s_Game->replaceTopState<GameplayState>();
 		}
 
 		// Clicked "Exit"

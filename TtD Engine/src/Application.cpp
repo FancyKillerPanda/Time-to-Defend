@@ -58,13 +58,6 @@ void Application::run()
 	}
 }
 
-void Application::pushState(std::unique_ptr<GameState> state)
-{
-	m_GameStates.emplace_back(std::move(state));
-	// Sets up the state
-	m_GameStates.back()->onEnter();
-}
-
 void Application::popState()
 {
 	// Makes sure there is a state in the stack

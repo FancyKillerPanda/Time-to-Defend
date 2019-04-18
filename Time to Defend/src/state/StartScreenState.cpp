@@ -90,32 +90,20 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			{
 			case ScreenState::MainScreen:
 			{
-				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the gameplay state onto the stack
-				s_Game->pushState(std::move(gameplayState));
+				// Replaces this state with GameplayState
+				s_Game->replaceTopState<GameplayState>();
 
 				break;
 			}
 
 			case ScreenState::LoadProject:
 			{
-				// Creates the map
+				// Creates the map filepath
 				std::string mapFilepath = "res/maps/custom/";
 				mapFilepath += m_ProjectName->get().getText() + ".txt";
 
-				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ProjectName->get().getText(), mapFilepath);
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the gameplay state onto the stack
-				s_Game->pushState(std::move(gameplayState));
+				// Replaces this state with GameplayState
+				s_Game->replaceTopState<GameplayState>(m_ProjectName->get().getText(), mapFilepath);
 
 				break;
 			}
@@ -157,14 +145,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Play"
 			if (m_MainMenu->itemClicked() == 0)
 			{
-				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>();
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the gameplay state onto the stack
-				s_Game->pushState(std::move(gameplayState));
+				// Replaces this state with GameplayState
+				s_Game->replaceTopState<GameplayState>();
 
 				break;
 			}
@@ -216,14 +198,8 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				std::string mapFilepath = "res/maps/custom/";
 				mapFilepath += m_ProjectName->get().getText() + ".txt";
 
-				// Creates the next state
-				std::unique_ptr<GameState> gameplayState = std::make_unique<GameplayState>(m_ProjectName->get().getText(), mapFilepath);
-
-				// Pops this state off the Game's stack
-				s_Game->popState();
-
-				// Pushes the gameplay state onto the stack
-				s_Game->pushState(std::move(gameplayState));
+				// Replaces this state with GameplayState
+				s_Game->replaceTopState<GameplayState>(m_ProjectName->get().getText(), mapFilepath);
 
 				break;
 			}

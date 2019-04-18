@@ -72,9 +72,6 @@ private:
 	// Spawns a set of enemies
 	void spawnEnemies();
 
-	// Ends the game
-	void endGame(bool won);
-
 	// Changes the tower if possible
 	void changeToTower(int towerNumber);
 

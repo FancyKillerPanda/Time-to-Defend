@@ -198,7 +198,7 @@ void GameplayState::update()
 		if (!enemy->move())
 		{
 			m_GameOver = true;
-			endGame(false);
+			s_Game->replaceTopState<GameOverState>(false, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
 
 			return;
 		}
@@ -273,19 +273,18 @@ void GameplayState::update()
 
 		case GameLevel::_3:
 			// Ends the game with a win
-			endGame(true);
+			s_Game->replaceTopState<GameOverState>(true, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
 			return;
 
 		case GameLevel::Custom:
-			endGame(true);
+			s_Game->replaceTopState<GameOverState>(true, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
 			return;
 		}
 
 		m_NeedToLoadLevel = true;
 
 		// Pushes the level passed state onto the stack
-		std::unique_ptr<GameState> levelPassedState = std::make_unique<LevelPassedState>((int) m_GameLevel);
-		s_Game->pushState(std::move(levelPassedState));
+		s_Game->pushState<LevelPassedState>((int) m_GameLevel);
 
 		return;
 	}
@@ -421,18 +420,6 @@ void GameplayState::spawnEnemies()
 
 	// Reduces the number of waves still left to spawn
 	m_NumberOfWavesToSpawn -= 1;
-}
-
-void GameplayState::endGame(bool won)
-{
-	// Creates the next state
-	std::unique_ptr<GameState> gameOverState = std::make_unique<GameOverState>(won, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
-
-	// Pops this state off the Game's stack
-	s_Game->popState();
-
-	// Pushes the first state onto the stack
-	s_Game->pushState(std::move(gameOverState));
 }
 
 void GameplayState::changeToTower(int towerNumber)

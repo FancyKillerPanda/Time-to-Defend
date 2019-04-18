@@ -59,7 +59,22 @@ public:
 	void run();
 
 	// Pushes a state onto the stack
-	void pushState(std::unique_ptr<GameState> state);
+	template<typename T, typename... Args>
+	void pushState(Args&&... args)
+	{
+		m_GameStates.push_back(std::make_unique<T>(std::forward<Args>(args)...));
+		// Sets up the state
+		m_GameStates.back()->onEnter();
+	}
+
+	// Replaces the top state with another
+	template<typename T, typename... Args>
+	void replaceTopState(Args&& ... args)
+	{
+		popState();
+		pushState<T>(std::forward<Args>(args)...);
+	}
+
 	// Pops a state from the stack
 	void popState();
 

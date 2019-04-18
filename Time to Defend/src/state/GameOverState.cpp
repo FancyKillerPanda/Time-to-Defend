@@ -98,27 +98,20 @@ void GameOverState::handleEvent(SDL_Event& event)
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_r:
-			std::unique_ptr<GameplayState> gameplayState;
-
 			if (m_CustomMapName == "")
 			{
-				gameplayState = std::make_unique<GameplayState>();
+				s_Game->replaceTopState<GameplayState>();
 			}
 
 			else
 			{
+				// Creates the filepath for the map
 				std::string mapFilepath = "res/maps/custom/";
 				mapFilepath += m_CustomMapName;
 				mapFilepath += ".txt";
 
-				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath);
+				s_Game->replaceTopState<GameplayState>(m_CustomMapName, mapFilepath);
 			}
-
-			// Pops this state off the Game's stack
-			s_Game->popState();
-
-			// Pushes the gameplay state onto the stack
-			s_Game->pushState(std::move(gameplayState));
 
 			break;
 		}
@@ -130,27 +123,20 @@ void GameOverState::handleEvent(SDL_Event& event)
 		// Clicked "Restart"
 		if (m_OptionsMenu->itemClicked() == 0)
 		{
-			std::unique_ptr<GameplayState> gameplayState;
-
 			if (m_CustomMapName == "")
 			{
-				gameplayState = std::make_unique<GameplayState>();
+				s_Game->replaceTopState<GameplayState>();
 			}
 
 			else
 			{
+				// Creates the filepath for the map
 				std::string mapFilepath = "res/maps/custom/";
 				mapFilepath += m_CustomMapName;
 				mapFilepath += ".txt";
 
-				gameplayState = std::make_unique<GameplayState>(m_CustomMapName, mapFilepath);
+				s_Game->replaceTopState<GameplayState>(m_CustomMapName, mapFilepath);
 			}
-
-			// Pops this state off the Game's stack
-			s_Game->popState();
-
-			// Pushes the gameplay state onto the stack
-			s_Game->pushState(std::move(gameplayState));
 		}
 
 		// Clicked "Exit"
