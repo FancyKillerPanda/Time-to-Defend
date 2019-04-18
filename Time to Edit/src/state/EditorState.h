@@ -52,6 +52,9 @@ private:
 	// The number of waves that need to be spawned
 	unsigned int m_NumberOfWavesToSpawn;
 
+	// Whether the map is being loaded from file
+	bool m_Load = false;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();
@@ -66,6 +69,7 @@ private:
 	bool towerConflicts(Tower* tower);
 
 public:
+	EditorState(std::string projectName);
 	EditorState(std::string projectName, unsigned int numberOfWavesToSpawn);
 
 	void onEnter() override;

@@ -28,6 +28,11 @@ void StartScreenState::onEnter()
 		"Continue -->"
 	});
 
+	// The load project page
+	m_LoadProjectMenu = new Menu(s_Game, {
+		"Continue -->"
+	});
+
 	// The settings
 	m_SettingsMenu = new Menu(s_Game, {
 		s_Game->settings->ctrlClickToRemoveTrack ? "Use <Ctrl-Click> to Remove Track: True" : "Use <Ctrl-Click> to Remove Track: False"
@@ -52,6 +57,7 @@ void StartScreenState::onEnter()
 	// Initialises the project name and its label
 	m_ProjectName = new InputText(s_Game, "Untitled");
 	m_NewProjectLabel.load(DEFAULT_FONT_PATH, "Project Name:", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
+	m_LoadProjectLabel.load(DEFAULT_FONT_PATH, "Load Project:", 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer());
 
 	// Initialises the number of waves to spawn input and its label
 	m_NumberOfWavesToSpawn = new InputText(s_Game, "2", true);
@@ -75,6 +81,9 @@ void StartScreenState::onExit()
 
 	delete m_NewProjectMenu;
 	m_NewProjectMenu = nullptr;
+
+	delete m_LoadProjectMenu;
+	m_LoadProjectMenu = nullptr;
 
 	delete m_ProjectName;
 	m_ProjectName = nullptr;
@@ -103,6 +112,18 @@ void StartScreenState::handleEvent(SDL_Event& event)
 				m_ScreenState = ScreenState::NewProject;
 				break;
 
+			case ScreenState::LoadProject:
+			{
+				// Creates the map filepath
+				std::string mapFilepath = "res/maps/custom/";
+				mapFilepath += m_ProjectName->get().getText() + ".txt";
+
+				// Replaces this state with GameplayState
+				s_Game->replaceTopState<EditorState>(mapFilepath.c_str());
+
+				break;
+			}
+
 			case ScreenState::NewProject:
 			{
 				// Replaces this state with the editor
@@ -129,8 +150,9 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			break;
 
 		case SDLK_BACKSPACE:
-			if (m_ScreenState == ScreenState::NewProject)
+			switch (m_ScreenState)
 			{
+			case ScreenState::NewProject:
 			#ifdef _DEBUG
 				if (m_InputCurrentlyHandling == nullptr)
 				{
@@ -139,6 +161,11 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			#endif // _DEBUG
 
 				m_InputCurrentlyHandling->handleKeyEvent(event);
+
+				break;
+
+			case ScreenState::LoadProject:
+				m_ProjectName->handleKeyEvent(event);
 			}
 
 			break;
@@ -160,7 +187,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			// Clicked "Load"
 			else if (m_MainMenu->itemClicked() == 1)
 			{
-				// TODO: Load previous map
+				m_ScreenState = ScreenState::LoadProject;
 			}
 
 			// Clicked "Instructions"
@@ -219,6 +246,29 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			break;
 		}
 
+		case ScreenState::LoadProject:
+		{
+			// Clicked "Next"
+			if (m_LoadProjectMenu->itemClicked() == 0)
+			{
+				// Creates the map
+				std::string mapFilepath = "res/maps/custom/";
+				mapFilepath += m_ProjectName->get().getText() + ".txt";
+
+				// Replaces this state with GameplayState
+				s_Game->replaceTopState<EditorState>(mapFilepath.c_str());
+
+				break;
+			}
+
+			if (m_BackMenu->itemClicked() == 0)
+			{
+				m_ScreenState = ScreenState::MainScreen;
+			}
+
+			break;
+		}
+
 		case ScreenState::Instructions:
 		{
 			if (m_BackMenu->itemClicked() == 0)
@@ -256,8 +306,9 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		break;
 
 	case SDL_TEXTINPUT:
-		if (m_ScreenState == ScreenState::NewProject)
+		switch (m_ScreenState)
 		{
+		case ScreenState::NewProject:
 		#ifdef _DEBUG
 			if (m_InputCurrentlyHandling == nullptr)
 			{
@@ -266,6 +317,12 @@ void StartScreenState::handleEvent(SDL_Event& event)
 		#endif // _DEBUG
 
 			m_InputCurrentlyHandling->handleInputEvent(event);
+
+			break;
+
+		case ScreenState::LoadProject:
+			m_ProjectName->handleInputEvent(event);;
+			break;
 		}
 
 		break;
@@ -285,6 +342,12 @@ void StartScreenState::update()
 	case ScreenState::NewProject:
 		m_NewProjectMenu->update();
 		m_BackMenu->update();
+		break;
+
+	case ScreenState::LoadProject:
+		m_LoadProjectMenu->update();
+		m_BackMenu->update();
+
 		break;
 
 	case ScreenState::Instructions:
@@ -317,6 +380,16 @@ void StartScreenState::draw()
 		m_NumberOfWavesLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 11 / 20);
 		m_NumberOfWavesToSpawn->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 11 / 20);
 		m_NewProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
+		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
+
+		break;
+
+	case ScreenState::LoadProject:
+		// Draws text
+		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
+		m_LoadProjectLabel.draw(s_Game->getWindowWidth() * 1 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_ProjectName->get().draw(s_Game->getWindowWidth() * 2 / 3, s_Game->getWindowHeight() * 9 / 20);
+		m_LoadProjectMenu->draw(s_Game->getWindowHeight() * 16 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;

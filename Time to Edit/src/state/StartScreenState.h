@@ -18,6 +18,7 @@ class StartScreenState : public GameState
 		Instructions,
 		Settings,
 		NewProject,
+		LoadProject,
 	};
 
 private:
@@ -33,6 +34,9 @@ private:
 	// The new project next button
 	Menu* m_NewProjectMenu;
 
+	// The load project next button
+	Menu* m_LoadProjectMenu = nullptr;
+
 	// Whether the instruction page has already loaded
 	bool m_InstructionPageLoaded = false;
 
@@ -45,9 +49,10 @@ private:
 	// The current screen
 	ScreenState m_ScreenState = ScreenState::MainScreen;
 
-	// The currently inputted project name
+	// The currently inputted project name and its labels
 	InputText* m_ProjectName;
 	Text m_NewProjectLabel;
+	Text m_LoadProjectLabel;
 
 	// The number of waves to spawn (user input)
 	InputText* m_NumberOfWavesToSpawn;

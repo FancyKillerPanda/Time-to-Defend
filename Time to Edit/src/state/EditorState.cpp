@@ -4,6 +4,11 @@
 #include "GameSettings.h"
 
 
+EditorState::EditorState(std::string projectName)
+	: m_ProjectName(projectName), m_Load(true)
+{
+}
+
 EditorState::EditorState(std::string projectName, unsigned int numberOfWavesToSpawn)
 	: m_ProjectName(projectName), m_NumberOfWavesToSpawn(numberOfWavesToSpawn)
 {
@@ -12,7 +17,16 @@ EditorState::EditorState(std::string projectName, unsigned int numberOfWavesToSp
 
 void EditorState::onEnter()
 {
-	m_MapEditing.load(s_Game, nullptr);
+	if (m_Load)
+	{
+		m_MapEditing.load(s_Game, m_ProjectName.c_str());
+		m_NumberOfWavesToSpawn = m_MapEditing.getNumberOfWavesToSpawn();
+	}
+
+	else
+	{
+		m_MapEditing.load(s_Game, nullptr);
+	}
 
 	// Creates the tower
 	m_TowerToDraw = new Tower(s_Game, m_HoveringTowerLocation);
