@@ -187,7 +187,27 @@ void EditorState::update()
 
 		else
 		{
-			clickCell();
+			if (SDL_GetModState() & KMOD_CTRL)
+			{
+				Position cell = getCellUnderMouse();
+
+				for (const Position& towerPos : m_MapEditing.getTowerCoords())
+				{
+					if (towerPos == cell ||						// Top-left clicked
+						towerPos == cell - Position(1, 0) ||	// Bottom-left clicked
+						towerPos == cell - Position(0, 1) ||	// Top-right clicked
+						towerPos == cell - Position(1, 1))		// Bottom-right clicked
+					{
+						m_MapEditing.getCoords()[towerPos.row][towerPos.col] = '.';
+						break;
+					}
+				}
+			}
+
+			else
+			{
+				clickCell();
+			}
 		}
 	}
 }
