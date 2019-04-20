@@ -16,6 +16,7 @@ enum class GameLevel
 	_1,
 	_2,
 	_3,
+	_4,
 	Custom,
 };
 
