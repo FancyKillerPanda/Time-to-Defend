@@ -54,20 +54,18 @@ void Tower::rotate(double amountDeg)
 
 void Tower::draw()
 {
-	SDL_Texture* texture;
-
 	if (m_Highlighted)
 	{
-		texture = m_HighlightedTexture->getTexture();
+		// Renders the tower with the highlighted texture, rotating by the current direction
+		SDL_RenderCopyEx(s_Game->getRenderer(), m_HighlightedTexture->getTexture(), nullptr, &m_HighlightedTexture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
 	}
 
 	else
 	{
-		texture = m_Texture->getTexture();
+		// Renders the tower with the regular texture, rotating by the current direction
+		SDL_RenderCopyEx(s_Game->getRenderer(), m_Texture->getTexture(), nullptr, &m_Texture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
 	}
 
-	// Renders the tower, rotating by the current direction
-	SDL_RenderCopyEx(s_Game->getRenderer(), texture, nullptr, &m_Texture->getRect(), m_Direction, nullptr, SDL_FLIP_NONE);
 }
 
 Arrow* Tower::shoot()

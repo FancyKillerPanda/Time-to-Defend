@@ -114,12 +114,13 @@ void Map::load(Application* const game, const char* filepath)
 			break;
 
 		case 'T':
+			// Top-left tower cell
+			m_TowerCoords.emplace_back(row, col);
+
 			// Default case
 			m_Data[row][col] = c;
 			col += 1;
 
-			// Top-left tower cell
-			m_TowerCoords.emplace_back(row, col);
 			break;
 
 		case 'S':
