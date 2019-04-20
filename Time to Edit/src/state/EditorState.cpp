@@ -259,6 +259,17 @@ void EditorState::clickCell()
 {
 	Position cell = getCellUnderMouse();
 
+	for (const Position& towerPos : m_MapEditing.getTowerCoords())
+	{
+		if (towerPos == cell ||						// Top-left clicked
+			towerPos == cell - Position(1, 0) ||	// Bottom-left clicked
+			towerPos == cell - Position(0, 1) ||	// Top-right clicked
+			towerPos == cell - Position(1, 1))		// Bottom-right clicked
+		{
+			return;
+		}
+	}
+
 	if (m_TurnToTrack)
 	{
 		m_MapEditing.getCoords()[cell.row][cell.col] = 'P';
