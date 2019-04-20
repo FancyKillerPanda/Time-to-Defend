@@ -270,6 +270,8 @@ void EditorState::draw()
 		// Adds a dim over the tower
 		SDL_RenderFillRect(s_Game->getRenderer(), &m_TowerToDraw->getTexture()->getRect());
 	}
+
+	SDL_SetRenderDrawColor(s_Game->getRenderer(), 0, 0, 0, 255);
 }
 
 bool EditorState::actionsOnExit()
