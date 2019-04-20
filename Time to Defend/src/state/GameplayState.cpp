@@ -403,7 +403,14 @@ void GameplayState::loadLevel()
 void GameplayState::spawnEnemies()
 {
 	// Calculates the colour
-	EnemyColour colour = EnemyColour((int) std::floor((double) m_NumberOfWavesAlreadySpawned / 2.0));
+	unsigned int colourIndex = (unsigned int) std::floor((double) m_NumberOfWavesAlreadySpawned / 2.0);
+
+	if (colourIndex >= (unsigned int) EnemyColour::COUNT)
+	{
+		colourIndex = (unsigned int) EnemyColour::COUNT - 1;
+	}
+
+	EnemyColour colour = EnemyColour(colourIndex);
 
 	// Stores which spawn positions have already been used
 	std::vector<int> usedIndices;

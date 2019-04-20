@@ -17,6 +17,7 @@ enum class EnemyColour
 	Lime,
 	Yellow,
 	Black,
+	COUNT,
 };
 
 
