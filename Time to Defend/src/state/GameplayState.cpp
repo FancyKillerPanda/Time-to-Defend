@@ -266,10 +266,11 @@ void GameplayState::update()
 		case GameLevel::_1:
 		case GameLevel::_2:
 		case GameLevel::_3:
+		case GameLevel::_4:
 			m_GameLevel = GameLevel((int) m_GameLevel + 1);
 			break;
 
-		case GameLevel::_4:
+		case GameLevel::_5:
 			// Ends the game with a win
 			s_Game->replaceTopState<GameOverState>(true, "");
 			return;
@@ -367,8 +368,13 @@ void GameplayState::loadLevel()
 		break;
 
 	case GameLevel::_4:
-		// Loads the third map
+		// Loads the fourth map
 		m_CurrentMap = Map(s_Game, "res/maps/Level_4.txt");
+		break;
+
+	case GameLevel::_5:
+		// Loads the fifth map
+		m_CurrentMap = Map(s_Game, "res/maps/Level_5.txt");
 		break;
 
 	case GameLevel::Custom:
