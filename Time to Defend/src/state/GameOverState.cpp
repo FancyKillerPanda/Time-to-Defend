@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "Settings.h"
 #include "GameplayState.h"
+#include "StartScreenState.h"
 
 
 GameOverState::GameOverState(bool won, std::string customMapName)
@@ -77,6 +78,7 @@ void GameOverState::onEnter()
 	m_GameOverText.setStyle(TTF_STYLE_BOLD);
 
 	m_OptionsMenu = new Menu(s_Game, {
+		"Menu",
 		"Restart",
 		"Exit"
 	});
@@ -120,8 +122,14 @@ void GameOverState::handleEvent(SDL_Event& event)
 
 	case SDL_MOUSEBUTTONDOWN:
 	{
-		// Clicked "Restart"
+		// Clicked "Menu"
 		if (m_OptionsMenu->itemClicked() == 0)
+		{
+			s_Game->replaceTopState<StartScreenState>();
+		}
+
+		// Clicked "Restart"
+		else if (m_OptionsMenu->itemClicked() == 1)
 		{
 			if (m_CustomMapName == "")
 			{
@@ -140,7 +148,7 @@ void GameOverState::handleEvent(SDL_Event& event)
 		}
 
 		// Clicked "Exit"
-		else if (m_OptionsMenu->itemClicked() == 1)
+		else if (m_OptionsMenu->itemClicked() == 2)
 		{
 			// Stops the game from running
 			s_Game->setRunning(false);
@@ -160,5 +168,5 @@ void GameOverState::draw()
 {
 	// Draws text
 	m_GameOverText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);
-	m_OptionsMenu->drawHorizontal(s_Game->getWindowWidth() * 8 / 20, s_Game->getWindowHeight() * 11 / 20, s_Game->getWindowWidth() * 4 / 20);
+	m_OptionsMenu->drawHorizontal(s_Game->getWindowWidth() * 7 / 20, s_Game->getWindowHeight() * 11 / 20, s_Game->getWindowWidth() * 3 / 20);
 }
