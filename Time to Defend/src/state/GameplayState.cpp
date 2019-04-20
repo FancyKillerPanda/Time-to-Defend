@@ -383,6 +383,8 @@ void GameplayState::loadLevel()
 
 	// Sets the number of waves to spawn
 	m_NumberOfWavesToSpawn = m_CurrentMap.getNumberOfWavesToSpawn();
+	// Resets number of waves already spawned
+	m_NumberOfWavesAlreadySpawned = 0;
 
 	// Creates the towers
 	for (const Position& position : m_CurrentMap.getTowerCoords())
@@ -400,6 +402,9 @@ void GameplayState::loadLevel()
 
 void GameplayState::spawnEnemies()
 {
+	// Calculates the colour
+	EnemyColour colour = EnemyColour((int) std::floor((double) m_NumberOfWavesAlreadySpawned / 2.0));
+
 	// Stores which spawn positions have already been used
 	std::vector<int> usedIndices;
 
@@ -423,12 +428,13 @@ void GameplayState::spawnEnemies()
 		// Suppresses conversion warning
 	#pragma warning(suppress: 4267)
 		// Creates the enemy
-		m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, m_CurrentMap.getSpawnCoords()[index]));
+		m_Enemies.emplace_back(new Enemy(s_Game, &m_CurrentMap, m_CurrentMap.getSpawnCoords()[index], colour));
 		usedIndices.push_back(index);
 	}
 
-	// Reduces the number of waves still left to spawn
+	// Adjusts the wave spawn counters
 	m_NumberOfWavesToSpawn -= 1;
+	m_NumberOfWavesAlreadySpawned += 1;
 }
 
 void GameplayState::changeToTower(int towerNumber)

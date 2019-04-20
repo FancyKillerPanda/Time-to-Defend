@@ -10,6 +10,16 @@
 #include "utils/Timer.h"
 
 
+enum class EnemyColour
+{
+	Red,
+	Blue,
+	Lime,
+	Yellow,
+	Black,
+};
+
+
 class Enemy
 {
 private:
@@ -17,6 +27,11 @@ private:
 	static Application* s_Game;
 	static const Map* s_Map;
 
+	// The names of the colours
+	static const std::array<std::string, 5> s_ColourStrings;
+
+	// The filepath of the texture
+	std::string m_TextureFilepath;
 	// Texture
 	Texture* m_Texture;
 
@@ -31,9 +46,11 @@ private:
 	// Time it takes for enemy to update
 	unsigned int m_MoveTime;
 
+	// The colour of the enemy
+	EnemyColour m_Colour;
+
 public:
-	Enemy() = default;
-	Enemy(Application* const game, const Map* map, Position position);
+	Enemy(Application* const game, const Map* map, Position position, EnemyColour colour);
 	~Enemy();
 
 	void draw();

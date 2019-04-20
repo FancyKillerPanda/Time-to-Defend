@@ -8,16 +8,28 @@
 
 Application* Enemy::s_Game = nullptr;
 const Map* Enemy::s_Map = nullptr;
+const std::array<std::string, 5> Enemy::s_ColourStrings = {
+	"Red",
+	"Blue",
+	"Lime",
+	"Yellow",
+	"Black",
+};
 
 
-Enemy::Enemy(Application* const game, const Map* map, Position position)
-	: m_Position(position), m_MoveTime((unsigned int) Random::randint(MIN_ENEMY_MOVE_TIME, MAX_ENEMY_MOVE_TIME))
+Enemy::Enemy(Application* const game, const Map* map, Position position, EnemyColour colour)
+	: m_Position(position), m_MoveTime((unsigned int) Random::randint(MIN_ENEMY_MOVE_TIME, MAX_ENEMY_MOVE_TIME)), m_Colour(colour)
 {
 	s_Game = game;
 	s_Map = map;
 
+	// Calculates the filepath of the enemy texture
+	m_TextureFilepath = "res/txrs/Enemy - ";
+	m_TextureFilepath += s_ColourStrings[(int) colour];
+	m_TextureFilepath += ".png";
+
 	// Creates the texture and sets its rect
-	m_Texture = new Texture("res/txrs/Enemy.png", s_Game->getRenderer());
+	m_Texture = new Texture(m_TextureFilepath.c_str(), s_Game->getRenderer());
 	m_Texture->setRect(m_Position.col * CELL_SIZE, m_Position.row * CELL_SIZE);
 
 	LOG_INFO("Created enemy.");

@@ -49,6 +49,8 @@ private:
 
 	// The number of waves of enemies still to spawn
 	unsigned int m_NumberOfWavesToSpawn = 0;
+	// The number of waves of enemies already spawned
+	unsigned int m_NumberOfWavesAlreadySpawned = 0;
 
 	// Timer for when to spawn the next wave
 	Timer m_WaveTimer;
