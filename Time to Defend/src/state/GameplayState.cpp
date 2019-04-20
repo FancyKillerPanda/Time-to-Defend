@@ -14,6 +14,16 @@
 	break;
 
 
+const std::array<std::string, 6> GameplayState::s_GameLevelStrings = {
+	"_1",
+	"_2",
+	"_3",
+	"_4",
+	"_5",
+	"_6",
+};
+
+
 GameplayState::GameplayState(std::string customMapName, std::string customMapFilepath)
 	: m_CustomMapName(customMapName), m_CustomMapFilepath(customMapFilepath)
 {
@@ -353,37 +363,23 @@ void GameplayState::loadLevel()
 
 	switch (m_GameLevel)
 	{
+	case GameLevel::Custom:
+		break;
+
 	case GameLevel::_1:
-		// Loads the first map
+		// I don't know why level 1 doesn't like to load properly
 		m_CurrentMap.load(s_Game, "res/maps/Level_1.txt");
 		break;
 
-	case GameLevel::_2:
-		// Loads the second map
-		m_CurrentMap = Map(s_Game, "res/maps/Level_2.txt");
-		break;
+	default:
+		// Calculates the map's filepath
+		m_CurrentMapFilepath = "res/maps/Level";
+		m_CurrentMapFilepath += s_GameLevelStrings[(unsigned int) m_GameLevel];
+		m_CurrentMapFilepath += ".txt";
 
-	case GameLevel::_3:
-		// Loads the third map
-		m_CurrentMap = Map(s_Game, "res/maps/Level_3.txt");
-		break;
+		// Creates the map
+		m_CurrentMap = Map(s_Game, m_CurrentMapFilepath.c_str());
 
-	case GameLevel::_4:
-		// Loads the fourth map
-		m_CurrentMap = Map(s_Game, "res/maps/Level_4.txt");
-		break;
-
-	case GameLevel::_5:
-		// Loads the fifth map
-		m_CurrentMap = Map(s_Game, "res/maps/Level_5.txt");
-		break;
-
-	case GameLevel::_6:
-		// Loads the sixth map
-		m_CurrentMap = Map(s_Game, "res/maps/Level_6.txt");
-		break;
-
-	case GameLevel::Custom:
 		break;
 	}
 

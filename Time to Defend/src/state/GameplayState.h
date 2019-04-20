@@ -26,9 +26,13 @@ enum class GameLevel
 class GameplayState : public GameState
 {
 private:
+	static const std::array<std::string, 6> s_GameLevelStrings;
+
 	// Current game level
 	GameLevel m_GameLevel;
 
+	// Filepath for the current map
+	std::string m_CurrentMapFilepath;
 	// Current map being used
 	Map m_CurrentMap;
 
