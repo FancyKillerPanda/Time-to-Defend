@@ -264,24 +264,18 @@ void GameplayState::update()
 		switch (m_GameLevel)
 		{
 		case GameLevel::_1:
-			m_GameLevel = GameLevel::_2;
-			break;
-
 		case GameLevel::_2:
-			m_GameLevel = GameLevel::_3;
-			break;
-
 		case GameLevel::_3:
-			m_GameLevel = GameLevel::_4;
+			m_GameLevel = GameLevel((int) m_GameLevel + 1);
 			break;
 
 		case GameLevel::_4:
 			// Ends the game with a win
-			s_Game->replaceTopState<GameOverState>(true, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
+			s_Game->replaceTopState<GameOverState>(true, "");
 			return;
 
 		case GameLevel::Custom:
-			s_Game->replaceTopState<GameOverState>(true, m_GameLevel == GameLevel::Custom ? m_CustomMapName : "");
+			s_Game->replaceTopState<GameOverState>(true, m_CustomMapName);
 			return;
 		}
 
