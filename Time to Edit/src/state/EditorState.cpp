@@ -190,6 +190,7 @@ void EditorState::update()
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
 				Position cell = getCellUnderMouse();
+				bool reached = false;
 
 				for (unsigned int i = 0; i < m_MapEditing.getTowerCoords().size(); i++)
 				{
@@ -205,6 +206,12 @@ void EditorState::update()
 
 						break;
 					}
+				}
+
+				// No tower was clicked
+				if (!reached)
+				{
+					clickCell();
 				}
 			}
 
