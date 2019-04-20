@@ -86,5 +86,5 @@ void LevelPassedState::update()
 void LevelPassedState::draw()
 {
 	m_LevelPassedText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);
-	m_OptionsMenu->drawHorizontal(s_Game->getWindowWidth() * 5 / 20, s_Game->getWindowHeight() * 11 / 20, s_Game->getWindowWidth() * 5 / 20);
+	m_OptionsMenu->drawHorizontal(s_Game->getWindowWidth() * 6 / 20, s_Game->getWindowHeight() * 11 / 20, s_Game->getWindowWidth() * 4 / 20);
 }
