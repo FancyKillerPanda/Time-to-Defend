@@ -23,13 +23,13 @@ void EditorState::onEnter()
 
 	if (m_Load)
 	{
-		m_MapEditing.load(s_Game, m_MapFilepath.c_str());
+		m_MapEditing.load(s_Game, m_MapFilepath.c_str(), true);
 		m_NumberOfWavesToSpawn = m_MapEditing.getNumberOfWavesToSpawn();
 	}
 
 	else
 	{
-		m_MapEditing.load(s_Game, nullptr);
+		m_MapEditing.load(s_Game, nullptr, true);
 	}
 
 	// Creates the tower

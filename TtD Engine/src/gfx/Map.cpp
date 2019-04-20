@@ -9,9 +9,9 @@
 Application* Map::s_Game = nullptr;
 
 
-Map::Map(Application* const game, const char* filepath)
+Map::Map(Application* const game, const char* filepath, bool editing)
 {
-	load(game, filepath);
+	load(game, filepath, editing);
 }
 
 Map::~Map()
@@ -23,7 +23,7 @@ Map::~Map()
 }
 
 
-void Map::load(Application* const game, const char* filepath)
+void Map::load(Application* const game, const char* filepath, bool editing)
 {
 #ifdef _DEBUG
 	m_Filepath = filepath;
@@ -139,7 +139,7 @@ void Map::load(Application* const game, const char* filepath)
 		}
 	}
 
-	if (m_TowerCoords.empty())
+	if (m_TowerCoords.empty() && !editing)
 	{
 		// Makes sure at least one tower
 		m_TowerCoords.emplace_back(0, 0);

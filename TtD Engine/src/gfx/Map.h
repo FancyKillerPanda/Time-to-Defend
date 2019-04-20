@@ -43,10 +43,10 @@ private:
 
 public:
 	Map() = default;
-	Map(Application* const game, const char* filepath);
+	Map(Application* const game, const char* filepath, bool editing = false);
 	~Map();
 
-	void load(Application* const game, const char* filepath);
+	void load(Application* const game, const char* filepath, bool editing = false);
 	void draw(bool drawTowers = false);
 
 	// Adds necessary information such as enemy spawn points
