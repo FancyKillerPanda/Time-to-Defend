@@ -191,14 +191,18 @@ void EditorState::update()
 			{
 				Position cell = getCellUnderMouse();
 
-				for (const Position& towerPos : m_MapEditing.getTowerCoords())
+				for (unsigned int i = 0; i < m_MapEditing.getTowerCoords().size(); i++)
 				{
+					const Position& towerPos = m_MapEditing.getTowerCoords()[i];
+
 					if (towerPos == cell ||						// Top-left clicked
 						towerPos == cell - Position(1, 0) ||	// Bottom-left clicked
 						towerPos == cell - Position(0, 1) ||	// Top-right clicked
 						towerPos == cell - Position(1, 1))		// Bottom-right clicked
 					{
 						m_MapEditing.getCoords()[towerPos.row][towerPos.col] = '.';
+						m_MapEditing.getTowerCoords().erase(m_MapEditing.getTowerCoords().begin() + i);
+
 						break;
 					}
 				}
