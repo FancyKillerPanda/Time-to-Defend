@@ -10,7 +10,7 @@
 
 
 Game::Game()
-	: Application(960, 540, "Time to Defend!")
+	: Application(960, 540, "Time to Defend")
 {
 	// Initialises other parts of the game
 	Log::init("TTDLOG");

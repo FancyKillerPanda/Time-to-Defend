@@ -11,7 +11,7 @@
 
 
 Editor::Editor()
-	: Application(960, 540, "Time to Edit!")
+	: Application(960, 540, "Time to Edit")
 {
 	// Initialises other parts of the editor
 	Log::init("TTELOG");
