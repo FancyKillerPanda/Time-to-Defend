@@ -30,9 +30,6 @@ private:
 	// The load project next button
 	Menu* m_LoadProjectMenu = nullptr;
 
-	// Whether the instruction page has already loaded
-	bool m_InstructionPageLoaded = false;
-
 	// The instructions on how to play
 	Paragraph* m_Instructions;
 

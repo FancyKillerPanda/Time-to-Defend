@@ -31,9 +31,6 @@ private:
 	// The settings menu
 	Menu* m_SettingsMenu;
 
-	// Whether the instruction page has already loaded
-	bool m_InstructionPageLoaded = false;
-
 	// The instructions on how to use the editor
 	Paragraph* m_Instructions;
 
