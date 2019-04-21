@@ -33,7 +33,7 @@ Game::Game()
 	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
 	// Sets the window icon
-	SDL_Surface* iconSurface = IMG_Load("res/txrs/TtD Icon.png");
+	SDL_Surface* iconSurface = IMG_Load("res/icons/TtD Icon.png");
 
 	if (iconSurface)
 	{

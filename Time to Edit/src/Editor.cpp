@@ -35,7 +35,7 @@ Editor::Editor()
 	SDL_StartTextInput();
 
 	// Sets the window icon
-	SDL_Surface* iconSurface = IMG_Load("res/txrs/TtE Icon.png");
+	SDL_Surface* iconSurface = IMG_Load("res/icons/TtE Icon.png");
 
 	if (iconSurface)
 	{
