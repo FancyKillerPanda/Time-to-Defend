@@ -49,6 +49,9 @@ private:
 	InputText* m_ProjectName;
 	Text m_LoadProjectLabel;
 
+private:
+	void loadInstructions();
+
 public:
 	void onEnter() override;
 	void onExit() override;

@@ -36,28 +36,6 @@ void StartScreenState::onEnter()
 		s_Game->settings->towerShootCooldown ? "Tower Shoot Cooldown: True" : "Tower Shoot Cooldown: False"
 	});
 
-	// The instructions
-	m_Instructions = new Paragraph(s_Game, {
-		"Welcome to Time to Defend! Your goal is to try",
-		"to defeat all the enemies that will be trying",
-		"to invade your land.",
-		"",
-		"To rotate your tower, press <Left> or <Right>.",
-		"To shoot, press <Space>. To switch which",
-		"tower you are controlling, press <T>."
-	});
-
-	m_Instructions = new Paragraph(s_Game, {
-		"Welcome to Time to Defend! Your goal is to try",
-		"to defeat all the enemies that will be trying",
-		"to invade your land.",
-		"",
-		s_Game->settings->arrowKeysToRotateTower ? "<Left> / <Right>: Rotate tower." : "<Mouse>: Rotate tower.",
-		s_Game->settings->spaceToShoot ? "<Space>: Shoot." : "<Click>: Shoot.",
-		"<T> / <Numbers>: Switch tower.",
-		"<P>: Pause",
-	}, 24);
-
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
 		"<-- Back"
@@ -133,6 +111,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::MainScreen)
 			{
 				m_ScreenState = ScreenState::Instructions;
+				loadInstructions();
 			}
 
 			break;
@@ -172,6 +151,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_MainMenu->itemClicked() == 2)
 			{
 				m_ScreenState = ScreenState::Instructions;
+				loadInstructions();
 			}
 
 			// Clicked "Level Editor"
@@ -363,4 +343,23 @@ void StartScreenState::draw()
 		m_SettingsMenu->draw(s_Game->getWindowHeight() * 9 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 	}
+}
+
+
+void StartScreenState::loadInstructions()
+{
+	delete m_Instructions;
+
+	// The instructions
+	m_Instructions = new Paragraph(s_Game, {
+		"Welcome to Time to Defend! Your goal is to try",
+		"to defeat all the enemies that will be trying",
+		"to invade your land.",
+		"",
+		s_Game->settings->arrowKeysToRotateTower ? "<Left> / <Right>: Rotate tower." : "<Mouse>: Rotate tower.",
+		s_Game->settings->spaceToShoot ? "<Space>: Shoot." : "<Click>: Shoot.",
+		"<T> / <Numbers>: Switch tower.",
+		"<P>: Pause",
+	}, 24);
+
 }
