@@ -59,6 +59,9 @@
     <ClInclude Include="src\GameSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\maps\Level_1.txt" />
@@ -75,5 +78,13 @@
     <Image Include="res\txrs\Arrow.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\bin\x64-Debug\res\icons\TtD-Icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Time to Defend.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
