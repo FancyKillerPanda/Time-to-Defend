@@ -7,6 +7,12 @@ Welcome to *Time to Defend*! This is a small tower-defence type game made using 
 ### Current Limits
 - Instantiating the editor from the in-game menu is only available on Windows
 ### Building
+##### Dependencies
+- SDL2 (v2.0.8)
+- SDL_ttf (v2.0.14)
+- SDL_image (v2.0.3)
+- spdlog (v1.3.1)
+
 To build projects, use MSBuild/Visual Studio to build the VS-solution file. You can also build directly from the source code using a compiler from the command-line. Once built, the DLLs for SDL2 (including SDL_ttf and SDL_image) need to be placed in the output directory.
 The `res/` directory should also be in the output directory. This folder contains resources such as maps, textures, fonts, and settings.
 
