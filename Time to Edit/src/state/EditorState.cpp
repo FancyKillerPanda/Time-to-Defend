@@ -50,6 +50,16 @@ void EditorState::onEnter()
 		"No",
 		"Cancel"
 	});
+
+	// Initialises the number of waves to spawn input and its label
+	m_NumberOfWavesToSpawnText = new InputText(s_Game, std::to_string(m_NumberOfWavesToSpawn), true);
+	m_NumberOfWavesLabel.load(DEFAULT_FONT_PATH, "Number of Enemy Waves: ", 28, SDL_Color { 0, 200, 200, 255 }, s_Game->getRenderer());
+}
+
+void EditorState::onExit()
+{
+	delete m_NumberOfWavesToSpawnText;
+	m_NumberOfWavesToSpawnText = nullptr;
 }
 
 void EditorState::handleEvent(SDL_Event& event)
@@ -82,6 +92,36 @@ void EditorState::handleEvent(SDL_Event& event)
 		return;
 	}
 
+	else if (m_ScreenState == ScreenState::ChangeWavesToSpawnScreen)
+	{
+		switch (event.type)
+		{
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_BACKSPACE:
+				if (m_ScreenState == ScreenState::ChangeWavesToSpawnScreen)
+				{
+					m_NumberOfWavesToSpawnText->handleKeyEvent(event);
+				}
+
+				break;
+			}
+
+			break;
+
+		case SDL_TEXTINPUT:
+			if (m_ScreenState == ScreenState::ChangeWavesToSpawnScreen)
+			{
+				m_NumberOfWavesToSpawnText->handleInputEvent(event);
+			}
+
+			break;
+		}
+
+		return;
+	}
+
 	switch (event.type)
 	{
 	case SDL_KEYDOWN:
@@ -102,6 +142,20 @@ void EditorState::handleEvent(SDL_Event& event)
 		case SDLK_t:
 			m_CurrentlyPlacingTower = !m_CurrentlyPlacingTower;
 			m_HoveringTowerLocation = getCellUnderMouse();
+
+			break;
+
+		case SDLK_n:
+			// Toggles between editor and number of waves menu
+			if (m_ScreenState == ScreenState::Editor)
+			{
+				m_ScreenState = ScreenState::ChangeWavesToSpawnScreen;
+			}
+
+			else if (m_ScreenState == ScreenState::ChangeWavesToSpawnScreen)
+			{
+				m_ScreenState = ScreenState::Editor;
+			}
 
 			break;
 		}
@@ -232,6 +286,14 @@ void EditorState::draw()
 	{
 		m_SaveQuestion.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 9 / 20);
 		m_OptionsMenu->drawHorizontal(s_Game->getWindowWidth() * 6 / 20, s_Game->getWindowHeight() * 11 / 20, s_Game->getWindowWidth() * 4 / 20);
+
+		return;
+	}
+
+	else if (m_ScreenState == ScreenState::ChangeWavesToSpawnScreen)
+	{
+		m_NumberOfWavesLabel.draw(s_Game->getWindowWidth() * 7 / 20, s_Game->getWindowHeight() * 10 / 20);
+		m_NumberOfWavesToSpawnText->get().draw(s_Game->getWindowWidth() * 13 / 20, s_Game->getWindowHeight() * 10 / 20);
 
 		return;
 	}

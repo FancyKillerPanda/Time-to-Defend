@@ -6,6 +6,7 @@
 
 #include "gfx/Map.h"
 #include "gfx/Menu.h"
+#include "gfx/InputText.h"
 
 
 class EditorState : public GameState
@@ -14,6 +15,7 @@ class EditorState : public GameState
 	{
 		Editor,
 		SaveScreen,
+		ChangeWavesToSpawnScreen,
 	};
 
 private:
@@ -58,6 +60,10 @@ private:
 	// The filepath for the map
 	std::string m_MapFilepath;
 
+	// The number of waves to spawn (user input)
+	InputText* m_NumberOfWavesToSpawnText;
+	Text m_NumberOfWavesLabel;
+
 private:
 	// Handles when a cell is clicked
 	void clickCell();
@@ -79,6 +85,7 @@ public:
 	EditorState(std::string projectName, unsigned int numberOfWavesToSpawn);
 
 	void onEnter() override;
+	void onExit() override;
 
 	void handleEvent(SDL_Event& event) override;
 	void update() override;
