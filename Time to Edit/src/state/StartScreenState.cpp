@@ -28,18 +28,6 @@ void StartScreenState::onEnter()
 		s_Game->settings->ctrlClickToRemoveTrack ? "Use <Ctrl-Click> to Remove Track: True" : "Use <Ctrl-Click> to Remove Track: False"
 	});
 
-	// The instructions
-	m_Instructions = new Paragraph(s_Game, {
-		"Welcome to Time to Edit! This is a level editor",
-		"for Time to Defend!",
-		"",
-		s_Game->settings->ctrlClickToRemoveTrack ? "<Click> / <Ctrl+Click>: Switch between track and grass." : "<Click>: Switch between track and grass.",
-		"<T>: Place or stop placing a tower.",
-		"<G>: Toggle grid lines.",
-		"<N>: Change the number of enemy waves to spawn.",
-		"<Ctrl+S>: Save."
-	}, 24);
-
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
 		"<-- Back"
@@ -133,6 +121,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			if (m_ScreenState == ScreenState::MainScreen)
 			{
 				m_ScreenState = ScreenState::Instructions;
+				loadInstructions();
 			}
 
 			break;
@@ -213,6 +202,7 @@ void StartScreenState::handleEvent(SDL_Event& event)
 			else if (m_MainMenu->itemClicked() == 2)
 			{
 				m_ScreenState = ScreenState::Instructions;
+				loadInstructions();
 			}
 
 			// Clicked "Settings
@@ -425,4 +415,22 @@ void StartScreenState::draw()
 
 		break;
 	}
+}
+
+
+void StartScreenState::loadInstructions()
+{
+	delete m_Instructions;
+
+	// The instructions
+	m_Instructions = new Paragraph(s_Game, {
+		"Welcome to Time to Edit! This is a level editor",
+		"for Time to Defend!",
+		"",
+		s_Game->settings->ctrlClickToRemoveTrack ? "<Click> / <Ctrl+Click>: Switch between track and grass." : "<Click>: Switch between track and grass.",
+		"<T>: Place or stop placing a tower.",
+		"<G>: Toggle grid lines.",
+		"<N>: Change the number of enemy waves to spawn.",
+		"<Ctrl+S>: Save."
+	}, 24);
 }

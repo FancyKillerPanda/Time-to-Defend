@@ -58,6 +58,9 @@ private:
 	// The input text currently taking input
 	InputText* m_InputCurrentlyHandling = nullptr;
 
+private:
+	void loadInstructions();
+
 public:
 	void onEnter() override;
 	void onExit() override;
