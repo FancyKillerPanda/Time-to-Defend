@@ -9,9 +9,9 @@
 Application* Paragraph::s_Game = nullptr;
 
 
-Paragraph::Paragraph(Application* const game, std::initializer_list<const char*> texts)
+Paragraph::Paragraph(Application* const game, std::initializer_list<const char*> texts, unsigned int fontSize, SDL_Color textColour)
 {
-	load(game, texts);
+	load(game, texts, fontSize, textColour);
 }
 
 Paragraph::~Paragraph()
@@ -27,7 +27,7 @@ Paragraph::~Paragraph()
 }
 
 
-void Paragraph::load(Application* const game, std::initializer_list<const char*> texts)
+void Paragraph::load(Application* const game, std::initializer_list<const char*> texts, unsigned int fontSize, SDL_Color textColour)
 {
 	s_Game = game;
 
@@ -40,7 +40,7 @@ void Paragraph::load(Application* const game, std::initializer_list<const char*>
 
 		else
 		{
-			m_Texts.emplace_back(new Text(DEFAULT_FONT_PATH, text, 28, SDL_Color { 90, 160, 30, 255 }, s_Game->getRenderer()));
+			m_Texts.emplace_back(new Text(DEFAULT_FONT_PATH, text, fontSize, textColour, s_Game->getRenderer()));
 		}
 	}
 }

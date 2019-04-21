@@ -33,11 +33,12 @@ void StartScreenState::onEnter()
 		"Welcome to Time to Edit! This is a level editor",
 		"for Time to Defend!",
 		"",
-		"To change a tile between grass and track,",
-		"simply click on it (or click and drag for",
-		"multiple tiles). If you want to see grid",
-		"lines, press <G>."
-	});
+		s_Game->settings->ctrlClickToRemoveTrack ? "<Click> / <Ctrl+Click>: Switch between track and grass." : "<Click>: Switch between track and grass.",
+		"<T>: Place or stop placing a tower.",
+		"<G>: Toggle grid lines.",
+		"<N>: Change the number of enemy waves to spawn.",
+		"<Ctrl+S>: Save."
+	}, 24);
 
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
@@ -410,8 +411,8 @@ void StartScreenState::draw()
 
 	case ScreenState::Instructions:
 		// Draws text
-		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
-		m_Instructions->draw(s_Game->getWindowHeight() * 8 / 20);
+		m_TtEText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 4 / 20);
+		m_Instructions->draw(s_Game->getWindowHeight() * 7 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;

@@ -17,11 +17,11 @@ private:
 	std::vector<Text*> m_Texts;
 
 public:
-	Paragraph(Application* const game, std::initializer_list<const char*> texts);
+	Paragraph(Application* const game, std::initializer_list<const char*> texts, unsigned int fontSize = 28, SDL_Color textColour = { 90, 160, 30, 255 });
 	~Paragraph();
 
 	// Loads the paragraph text
-	void load(Application* const game, std::initializer_list<const char*> texts);
+	void load(Application* const game, std::initializer_list<const char*> texts, unsigned int fontSize = 28, SDL_Color textColour = { 90, 160, 30, 255 });
 
 	// Draws the paragraph
 	void draw(unsigned int yTop);
