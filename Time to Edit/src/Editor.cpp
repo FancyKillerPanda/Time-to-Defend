@@ -34,6 +34,20 @@ Editor::Editor()
 	SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 	SDL_StartTextInput();
 
+	// Sets the window icon
+	SDL_Surface* iconSurface = IMG_Load("res/txrs/TtE Icon.png");
+
+	if (iconSurface)
+	{
+		SDL_SetWindowIcon(m_Window, iconSurface);
+		LOG_INFO("Set window icon.");
+	}
+
+	else
+	{
+		LOG_ERROR("Could not set window icon.");
+	}
+
 	// Initialises the settings
 	readSettings();
 
