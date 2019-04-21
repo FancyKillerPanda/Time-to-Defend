@@ -47,6 +47,17 @@ void StartScreenState::onEnter()
 		"tower you are controlling, press <T>."
 	});
 
+	m_Instructions = new Paragraph(s_Game, {
+		"Welcome to Time to Defend! Your goal is to try",
+		"to defeat all the enemies that will be trying",
+		"to invade your land.",
+		"",
+		s_Game->settings->arrowKeysToRotateTower ? "<Left> / <Right>: Rotate tower." : "<Mouse>: Rotate tower.",
+		s_Game->settings->spaceToShoot ? "<Space>: Shoot." : "<Click>: Shoot.",
+		"<T> / <Numbers>: Switch tower.",
+		"<P>: Pause",
+	}, 24);
+
 	// Creates the back button
 	m_BackMenu = new Menu(s_Game, {
 		"<-- Back"
@@ -340,8 +351,8 @@ void StartScreenState::draw()
 
 	case ScreenState::Instructions:
 		// Draws text
-		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 5 / 20);
-		m_Instructions->draw(s_Game->getWindowHeight() * 8 / 20);
+		m_TtDText.draw(s_Game->getWindowWidth() / 2, s_Game->getWindowHeight() * 4 / 20);
+		m_Instructions->draw(s_Game->getWindowHeight() * 7 / 20);
 		m_BackMenu->draw(s_Game->getWindowHeight() * 18 / 20);
 
 		break;
