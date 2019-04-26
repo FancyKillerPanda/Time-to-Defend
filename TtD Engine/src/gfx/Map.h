@@ -37,9 +37,7 @@ private:
 
 	Tower* m_TowerToDraw = nullptr;
 
-#ifdef _DEBUG
 	const char* m_Filepath;
-#endif
 
 public:
 	Map() = default;

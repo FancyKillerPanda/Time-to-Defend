@@ -55,11 +55,11 @@ Game::Game()
 #ifdef _DEBUG
 	// Loads the information text
 	m_InfoText.load(DEFAULT_FONT_PATH, "Time to Defend V0.1.0 | 0 FPS", 10, SDL_Color { 180, 180, 180, 255 }, m_Renderer);
-#endif // _DEBUG
 
 	// Resets the frame timer
 	m_FrameTimer.reset();
 	m_FrameCount = 0;
+#endif // _DEBUG
 }
 
 Game::~Game()

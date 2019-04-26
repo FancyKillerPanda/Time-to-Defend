@@ -137,8 +137,8 @@ void GameplayState::handleEvent(SDL_Event& event)
 			m_Enemies.clear();
 
 			break;
-		}
 		#endif // _DEBUG
+		}
 
 		break;
 

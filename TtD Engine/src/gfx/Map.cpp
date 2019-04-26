@@ -25,9 +25,7 @@ Map::~Map()
 
 void Map::load(Application* const game, const char* filepath, bool editing)
 {
-#ifdef _DEBUG
 	m_Filepath = filepath;
-#endif
 
 	// Sets the game instance
 	s_Game = game;

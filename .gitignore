@@ -7,5 +7,7 @@ bin-int/
 # Debugging Files
 *.ilk
 *.pdb
+*.iobj
+*.ipdb
 
 *.aps
